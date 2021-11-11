@@ -1,19 +1,14 @@
 import type { NextPage } from 'next';
-import { SetStateAction, useState } from 'react';
 import Head from 'next/head';
+import { HiCode } from 'react-icons/hi';
 
-import { BiCodeAlt } from 'react-icons/bi';
-import { LoginSection } from '../components/PagesComponents/Index/LoginSection';
+import { ButtonsSection } from '../components/PagesComponents/Index/ButtonsSection';
 import { FooterSection } from '../components/PagesComponents/Index/FooterSection';
-import { Modal } from '../components/Modal';
-import { LoginForm } from '../components/Forms/LoginForm';
 
 import { colors } from '../styles/theme';
 import styles from './styles';
 
 const Home: NextPage = () => {
-
-  const [isSigninModalOpen, setSigninModalOpen] = useState(false);
 
   return (
     <>
@@ -23,18 +18,12 @@ const Home: NextPage = () => {
         
       <div>
         <header>
-          <BiCodeAlt size={56} color={colors.primary} />
+          <HiCode size={56} color={colors.primary} />
           <h1>Happening now</h1>
         </header>
-        <LoginSection 
-          setSigninModalOpen={setSigninModalOpen}
-        />
+        <ButtonsSection />
         <FooterSection />
       </div>
-
-      <Modal>
-        <LoginForm />
-      </Modal>
 
       <style jsx>{styles}</style>
     </>

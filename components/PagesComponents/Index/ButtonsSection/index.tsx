@@ -1,15 +1,11 @@
-import { FC, SetStateAction } from 'react';
+import Link from 'next/link';
 
 import { BsGithub } from 'react-icons/bs';
 import { HiOutlineMail } from 'react-icons/hi';
 
 import styles from './styles';
 
-export const LoginSection: FC = ({ setSigninModalOpen }) => {
-
-  const openSigninModal = (): void => {
-    setSigninModalOpen((prev: boolean) => !prev);
-  };
+export const ButtonsSection = () => {
 
   return (
     <>
@@ -22,12 +18,14 @@ export const LoginSection: FC = ({ setSigninModalOpen }) => {
             </picture>
               Sign up with Github
           </button>
-          <button onClick={openSigninModal}>
-            <picture>
-              <HiOutlineMail size={26} />
-            </picture>
+          <Link href="/login" passHref>
+            <button>
+              <picture>
+                <HiOutlineMail size={26} />
+              </picture>
               Sign up with Email
-          </button>
+            </button>
+          </Link>
         </section>
       </div>
       <style jsx>{styles}</style>

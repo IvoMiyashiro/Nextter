@@ -1,11 +1,16 @@
-import { FC, useRef } from "react";
+import { Dispatch, ReactChild, SetStateAction, useRef } from 'react';
 
-export const Modal: FC = ({ children, setModalOpen }) => {
+interface IModal {
+  children: ReactChild,
+  setSigninModalOpen: Dispatch<SetStateAction<boolean>>
+}
+
+export const Modal = ({ children, setSigninModalOpen }: IModal) => {
 
   const modalRef = useRef(null);
 
   const handleModalOpen = () => {
-    setModalOpen(false);
+    setSigninModalOpen(false);
   };
 
   return (

@@ -21,7 +21,6 @@ export default css`
   }
 
   @media (min-width: ${breakpoints.mobile}) {
-
     div {
       margin: 0 auto;
       max-width: 500px;

@@ -43,6 +43,6 @@ export default css`
   picture {
     position: absolute;
     left: 10px;
-    top: 5px;
+    top: 6px;
   }
 `;
