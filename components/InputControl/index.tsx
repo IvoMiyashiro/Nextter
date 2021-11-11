@@ -3,7 +3,8 @@ import styles from "./styles";
 
 interface IState {
   value: string; 
-  error: string
+  error: string;
+  ok: boolean;
 }
 
 interface IInput {
@@ -32,11 +33,11 @@ export const InputControl = ({
 
     if (!regEx.test(value)) {
       setValue((prev: IState) => (
-        {...prev, error: `${label} is not valid.`}
+        {...prev, error: `${label} is not valid.`, ok: false}
       ));
     } else {
       setValue((prev: IState) => (
-        {...prev, error: ''}
+        {...prev, error: '', ok: true}
       ));
     }
   };
@@ -44,7 +45,6 @@ export const InputControl = ({
   return (
     <>
       <div>
-        <label htmlFor="name">{label}</label>
         <input 
           type="text"
           name="name" 
@@ -53,7 +53,17 @@ export const InputControl = ({
           onKeyUp={handleInputError}
           value={value}
           autoComplete="off"
+          className={`${error.length > 0 ? 'input-error' : ''}`}
         />
+        <label 
+          htmlFor="name" 
+          className={`
+            ${value.length > 0 ? 'active-input ' : ''} 
+            ${error.length > 0 ? 'label-error' : ''}`
+          }
+        >
+          {label}
+        </label>
         <small>{error}</small>
       </div>
       <style jsx>{styles}</style>

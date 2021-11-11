@@ -3,8 +3,7 @@
   "rules": {
     "eol-last": ["error", "always"],
     "semi": ["error", "always"],
-    "indent": [
-      "error",2
-   ]
+    "indent": ["error", 2],
+    "quotes": ["error", "single"]
  }
 }

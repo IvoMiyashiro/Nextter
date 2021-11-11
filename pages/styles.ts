@@ -20,7 +20,7 @@ export default css`
     margin-top: .75em;
   }
 
-  @media (min-width: ${breakpoints.mobile}) {
+  @media (min-width: ${breakpoints.desktop}) {
     div {
       margin: 0 auto;
       max-width: 500px;

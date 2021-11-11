@@ -4,28 +4,46 @@ import { breakpoints } from '../../styles/breakpoints';
 
 export default css`
   div {
-    margin: 0 auto;
-    max-width: 500px;
-    width: 85%;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    padding-top: .5em;
+    height: 100vh;
+    padding: 2em 0;
   }
 
-  h3 {
-    color: ${colors.title};
-    font-size: 1.5rem;
-    margin-top: 0.75em;
+  section {
+    background: ${colors.background};
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+    margin: 0 auto;
+    max-width: 500px;
+    position: relative;
+    width: 85%;
   }
 
   a {
+    cursor: pointer;
     position: absolute;
+    right: 20px;
     top: 20px;
-    left: -18px;
+  }
+
+  picture {
+    cursor: pointer;
   }
 
   header {
     align-self: center;
+  }
+
+  @media (min-width: ${breakpoints.desktop}) {
+
+    div {
+      background: rgba(0, 0, 0, 0.2)
+    }
+
+    section {
+      border-radius: 18px;
+      padding: 2em;
+    }
   }
 `;

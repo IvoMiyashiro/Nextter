@@ -12,19 +12,21 @@ const Login: NextPage = () => {
   return (
     <>
       <div>
-        <header>
-          <Link href="/">
-            <a>
-              <FaTimes size="24px" color={colors.title} />
-            </a>
-          </Link>
-          <picture>
-            <Link href="/" passHref>
-              <HiCode size={48} color={colors.primary} />
+        <section>
+          <header>
+            <Link href="/">
+              <a>
+                <FaTimes size="24px" color={colors.title} />
+              </a>
             </Link>
-          </picture>
-        </header>
-        <SignupForm />
+            <Link href="/" passHref>
+              <picture>
+                <HiCode size={48} color={colors.primary} />
+              </picture>
+            </Link>
+          </header>
+          <SignupForm />
+        </section>
       </div>
       <style jsx>{styles}</style>
     </>
