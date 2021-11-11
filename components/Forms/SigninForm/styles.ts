@@ -14,7 +14,7 @@ export default css`
     display: flex;
     flex-direction: column;
     gap: 2.5em;
-    margin-top: 1em;
+    margin-top: 2em;
   }
 
   h3 {

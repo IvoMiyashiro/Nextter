@@ -5,25 +5,46 @@ import { HiOutlineMail } from 'react-icons/hi';
 
 import styles from './styles';
 
-export const ButtonsSection = () => {
+interface IProps {
+  layout: boolean;
+}
 
+export const ButtonsSection = ({ layout }: IProps) => {
+  
   return (
     <>
       <div>
-        <h3>Join Nextter today.</h3>
+        <h3>
+          {
+            layout
+              ? 'Join Nextter today.'
+              : 'Sign in to Nextter.'
+          }
+        </h3>
         <section>
           <button>
             <picture>
               <BsGithub size={26} />
             </picture>
-              Sign up with Github
+            {
+              layout
+                ? 'Sign up with Github'
+                : 'Sign in with Github'
+            }
           </button>
-          <Link href="/login" passHref>
+          <Link 
+            href={`${layout ? '/signup' : '/signin'}`} 
+            passHref
+          >
             <button>
               <picture>
                 <HiOutlineMail size={26} />
               </picture>
-              Sign up with Email
+              {
+                layout
+                  ? 'Sign up with Email'
+                  : 'Sign in with Email'
+              }
             </button>
           </Link>
         </section>

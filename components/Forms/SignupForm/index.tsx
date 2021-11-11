@@ -44,14 +44,16 @@ export const SignupForm = () => {
           <h3>Create your account</h3>
           <section>
             <InputControl
-              label="Name"
+              type="text"
+              placeholder="Name"
               error={nameInputState.error}
               regEx={regEx.name}
               value={nameInputState.value}
               setValue={setNameInputState}
             />
             <InputControl
-              label="Email"
+              type="email"
+              placeholder="Email"
               error={emailInputState.error}
               regEx={regEx.email}
               value={emailInputState.value}

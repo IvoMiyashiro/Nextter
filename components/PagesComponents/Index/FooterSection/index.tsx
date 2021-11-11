@@ -1,31 +1,48 @@
-import { FC } from "react";
-import Link from 'next/link';
-
 import styles from './styles';
 
-export const FooterSection: FC = () => {
+interface IProps {
+  layout: boolean,
+  setValue: (value: boolean | ((prev: boolean) => boolean)) => void
+}
+
+export const FooterSection = ({ layout, setValue }: IProps) => {
+
+  const handleLayout = ():void => {
+    setValue((prev: boolean) => !prev);
+  };
+  
+
   return (
     <>
       <footer>
         <section>
-          <p>
+          {
+            layout
+            &&
+            <p>
             By signing up, you agree to the 
-            <span> Terms of Service </span>
+              <span> Terms of Service </span>
             and 
-            <span> Privacy Policy</span>
+              <span> Privacy Policy</span>
             , including
-            <span> Cookie Use.</span>
-          </p>
+              <span> Cookie Use.</span>
+            </p>
+          }
         </section>
         <section>
           <p>
             Already have an account?
           </p>
-          <Link href="/sign-in">
-            <a>Sign in</a>
-          </Link>
+          <button onClick={handleLayout}>
+            {
+              layout
+                ? 'Sign in'
+                : 'Sign up'
+            }
+          </button>
         </section>
       </footer>
+
       <style jsx>{styles}</style>
     </>
   );

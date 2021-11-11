@@ -1,5 +1,5 @@
-import { ChangeEvent } from "react";
-import styles from "./styles";
+import { ChangeEvent } from 'react';
+import styles from './styles';
 
 interface IState {
   value: string; 
@@ -8,15 +8,17 @@ interface IState {
 }
 
 interface IInput {
-  label: string,
+  type: string,
+  placeholder: string,
   regEx: RegExp,
   error: string,
   value: string,
-  setValue: (value: IState| ((prev: IState) => IState)) => void
+  setValue: (value: IState | ((prev: IState) => IState)) => void
 }
 
 export const InputControl = ({
-  label,
+  type,
+  placeholder,
   regEx,
   error,
   value,
@@ -32,11 +34,17 @@ export const InputControl = ({
   const handleInputError = ():void => {
 
     if (!regEx.test(value)) {
-      setValue((prev: IState) => (
-        {...prev, error: `${label} is not valid.`, ok: false}
+      if (type === 'password') {
+        return setValue((prev: IState) => (
+          {...prev, error: 'Password length must be greater than 8 and have at least one capital letter.', ok: false}
+        ));
+      }
+
+      return setValue((prev: IState) => (
+        {...prev, error: `${placeholder} not valid.`, ok: false}
       ));
     } else {
-      setValue((prev: IState) => (
+      return setValue((prev: IState) => (
         {...prev, error: '', ok: true}
       ));
     }
@@ -46,7 +54,7 @@ export const InputControl = ({
     <>
       <div>
         <input 
-          type="text"
+          type={type}
           name="name" 
           onChange={handleInputChange}
           onBlur={handleInputError}
@@ -62,7 +70,7 @@ export const InputControl = ({
             ${error.length > 0 ? 'label-error' : ''}`
           }
         >
-          {label}
+          {placeholder}
         </label>
         <small>{error}</small>
       </div>

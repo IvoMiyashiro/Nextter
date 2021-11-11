@@ -4,8 +4,13 @@ import { breakpoints } from '../styles/breakpoints';
 
 export default css`
   div {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: space-between;
     margin: 0 auto;
     max-width: 500px;
+    padding-bottom: 2em;
     width: 85%;
   }
 

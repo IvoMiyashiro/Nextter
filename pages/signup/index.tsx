@@ -1,4 +1,5 @@
 import type { NextPage } from 'next';
+import Head from 'next/head';
 import Link from 'next/link';
 import styles from './styles';
 
@@ -8,9 +9,13 @@ import { FaTimes } from 'react-icons/fa';
 import { HiCode } from 'react-icons/hi';
 import { colors } from '../../styles/theme';
 
-const Login: NextPage = () => {
+const Signup: NextPage = () => {
   return (
     <>
+      <Head>
+        <title>Sign up for Nextter / Nextter</title>
+      </Head>
+
       <div>
         <section>
           <header>
@@ -28,9 +33,10 @@ const Login: NextPage = () => {
           <SignupForm />
         </section>
       </div>
+      
       <style jsx>{styles}</style>
     </>
   );
 };
 
-export default Login;
+export default Signup;

@@ -23,8 +23,8 @@ export default css`
   a {
     cursor: pointer;
     position: absolute;
-    right: 20px;
-    top: 20px;
+    right: -5px;
+    top: -10px;
   }
 
   picture {
@@ -44,6 +44,13 @@ export default css`
     section {
       border-radius: 18px;
       padding: 2em;
+    }
+
+    a {
+      cursor: pointer;
+      position: absolute;
+      right: 20px;
+      top: 20px;
     }
   }
 `;

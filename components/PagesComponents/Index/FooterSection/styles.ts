@@ -15,8 +15,8 @@ export default css`
   }
 
   section:last-child {
-    display: flex;
     align-items: center;
+    display: flex;
     margin-top: 1rem;
   }
 
@@ -27,13 +27,17 @@ export default css`
 
   span {
     color: ${colors.primary};
-    opacity: .7;
     font-size: 0.85rem;
+    opacity: .7;
   }
 
-  a {
-    font-size: .85rem;
+  button {
+    background: transparent;
+    border: none;
     color: ${colors.primary};
+    cursor: pointer;
+    font-size: .85rem;
     margin-left: .5em;
+    padding: 0;
   }
 `;
