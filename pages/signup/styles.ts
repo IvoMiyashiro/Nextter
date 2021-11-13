@@ -4,6 +4,8 @@ import { breakpoints } from '../../styles/breakpoints';
 
 export default css`
   div {
+    display: flex;
+    align-items: center;
     height: 100vh;
     padding: 2em 0;
   }
@@ -18,6 +20,7 @@ export default css`
     max-width: 500px;
     position: relative;
     width: 85%;
+    max-height: 700px;
   }
 
   a {

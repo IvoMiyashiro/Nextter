@@ -3,15 +3,11 @@ import { colors } from '../styles/theme';
 import { breakpoints } from '../styles/breakpoints';
 
 export default css`
+
   div {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr;
     height: 100vh;
-    justify-content: space-between;
-    margin: 0 auto;
-    max-width: 500px;
-    padding-bottom: 2em;
-    width: 85%;
   }
 
   header {
@@ -27,10 +23,9 @@ export default css`
 
   @media (min-width: ${breakpoints.desktop}) {
     div {
-      margin: 0 auto;
-      max-width: 500px;
+      display: grid;
+      grid-template-columns: 55% 1fr;
     }
-
     h1 {
       font-size: 4.75rem;
       line-height: 1.05em;
