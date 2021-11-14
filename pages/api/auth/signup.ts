@@ -1,19 +1,18 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { validateSignupBody } from '../../../middlewares/validateSignupBody';
-import User from '../../../models/User';
 import dbConnection from '../../../utils/database';
+import User from '../../../models/User';
 
 const signup = async(req: NextApiRequest, res: NextApiResponse) => {
 
-  const { name, email, password, birthDate } = req.body;
+  const { email, password } = req.body;
 
   try {
     dbConnection();
     await validateSignupBody(req, res);
-    const user = await User();
-    console.log(user);
 
-    // await user.save();
+    const user = await User.create(req.body);
+    user.save();
 
     return res.json({
       success: true,
