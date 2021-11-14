@@ -1,7 +1,6 @@
 import { validationResult, check } from 'express-validator';
 import initMiddleware from '../helpers/init-middleware';
 import validateMiddleware from '../helpers/validate-middleware';
-import User from '../models/User';
 
 const regEx = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
 
@@ -11,7 +10,7 @@ export const validateSignupBody = initMiddleware(
     check('email', 'Email is required.').not().isEmpty(),
     check('email', 'Email is not valid.').isEmail(),
     check('password', 'Password length must be greater than 8 and have at least one capital letter')
-      .custom((value) => {
+      .custom(value => {
         if (!regEx.test(value)) {
           return false;
         } 

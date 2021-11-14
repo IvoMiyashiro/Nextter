@@ -20,4 +20,10 @@ const UserSchema = new Schema({
   }
 });
 
+UserSchema.method('toJSON', function () {
+  const { __v, _id, ...object } = this.toObject();
+  object.id = _id;
+  return object;
+});
+
 export default models.User || model('User', UserSchema);

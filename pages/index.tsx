@@ -7,7 +7,6 @@ import styles from './styles';
 import { VideoSection } from '../components/PagesComponents/Index/VideoSection';
 
 const Home: NextPage = () => {
-  console.log(process.env.DB_CNN);
   return (
     <>
       <Head>
