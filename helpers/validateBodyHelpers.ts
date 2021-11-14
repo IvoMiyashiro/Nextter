@@ -11,3 +11,5 @@ export const saltPassword = (user: ISalt, password: string) => {
   const salt = bcrypt.genSaltSync();
   user.password = bcrypt.hashSync(password, salt);
 };
+
+export const isValidPassword = ()

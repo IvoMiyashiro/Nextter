@@ -10,6 +10,8 @@ const signin =  async(req: NextApiRequest, res: NextApiResponse) => {
     dbConnection();
     const user = await User.findOne({ email });
 
+    const validPassword = bcrypt.compareSync(password, user.password);
+
     return res.json({
       success: true
     });
