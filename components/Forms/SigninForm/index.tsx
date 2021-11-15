@@ -1,16 +1,31 @@
 import { FormEvent, useState } from 'react';
+import { useRouter } from 'next/router';
+
+import { fetchWithoutToken } from '../../../services/fetchWithoutToken';
+
 import { InputControl } from '../../InputControl';
+import { Spinner } from '../../Spinner';
+
 import styles from './styles';
 
+interface IState {
+  isOpen: boolean,
+  error: boolean,
+  msg: string,
+}
 
-export const SigninForm = () => {
+interface IProps {
+  setValue: (value: IState | ((prev: IState) => IState)) => void
+}
+
+export const SigninForm = ({ setValue }: IProps) => {
 
   const regEx = {
     email: /^\S+@\S+\.\S+$/,
     password: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/
   };
 
-  const NAME_INPUT_INIT_STATE = {
+  const EMAIL_INPUT_INIT_STATE = {
     value: '',
     error: '',
     ok: false,
@@ -22,11 +37,42 @@ export const SigninForm = () => {
     ok: false,
   };
 
-  const [nameInputState, setNameInputState] = useState(NAME_INPUT_INIT_STATE);
+  const [emailInputState, setEmailInputState] = useState(EMAIL_INPUT_INIT_STATE);
   const [passwordInputState, setPasswordInputState] = useState(PASSWORD_INPUT_INIT_STATE);
+  const [isLoading, setLoading] = useState(false);
+  const router = useRouter();
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>):void => {
+  const handleSubmit = async(e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    setLoading(true);
+
+    const resp = await fetchWithoutToken('auth/signin', {
+      email: emailInputState.value,
+      password: passwordInputState.value,
+    }, 'POST');
+    const body = await resp.json();
+
+    setLoading(false);
+
+    if (body.success) {
+      localStorage.setItem('token', body.token);
+      router.push('./home');
+    } else {
+      setValue((prev: IState) => ({
+        ...prev,
+        isOpen: true,
+        msg: body.msg
+      }));
+
+      setTimeout(() => {
+        setValue((prev: IState) => ({
+          ...prev,
+          isOpen: false,
+          msg: body.msg
+        }));
+      }, 4000);
+    }
   };
 
   return (
@@ -38,16 +84,15 @@ export const SigninForm = () => {
             <InputControl
               type="text"
               placeholder="Email"
-              error={nameInputState.error}
+              error={emailInputState.error}
               regEx={regEx.email}
-              value={nameInputState.value}
-              setValue={setNameInputState}
+              value={emailInputState.value}
+              setValue={setEmailInputState}
             />
             <InputControl
               type="password"
               placeholder="Password"
               error={passwordInputState.error}
-              regEx={regEx.password}
               value={passwordInputState.value}
               setValue={setPasswordInputState}
             />
@@ -56,13 +101,17 @@ export const SigninForm = () => {
         <div>
           <button
             className={`${
-              nameInputState.ok && passwordInputState.ok
+              emailInputState.ok
                 ? 'create-account-btn'
                 : ''
             }`}
-            disabled={!nameInputState.ok}
+            disabled={!emailInputState.ok}
           >
-            Sign in
+            {
+              isLoading
+                ? <Spinner />
+                : 'Sign in'
+            }
           </button>
         </div>
       </form>

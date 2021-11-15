@@ -10,6 +10,7 @@ import { SelectDate } from '../../SelectDate';
 import styles from './styles';
 
 interface IState {
+  isOpen: boolean,
   error: boolean,
   msg: string,
 }
@@ -78,7 +79,7 @@ export const SignupForm = ({ setValue }: IProps) => {
     } else {
       setValue((prev: IState) => ({
         ...prev,
-        error: true,
+        isOpen: true,
         msg: body.msg
       }));
     }

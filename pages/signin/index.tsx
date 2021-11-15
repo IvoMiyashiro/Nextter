@@ -1,40 +1,45 @@
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import { NextPage } from 'next';
 import Head from 'next/head';
-import Link from 'next/link';
 
-import { SigninForm } from '../../components/Forms/SigninForm';
-
-import { HiCode } from 'react-icons/hi';
-import { colors } from '../../styles/theme';
-import { FaTimes } from 'react-icons/fa';
-import styles from '../signup/styles';
+import { fetchWithToken } from '../../services/fetchWithToken';
+import { Spinner } from '../../components/Spinner';
+import { PageBody } from './PageBody';
 
 const Sigin: NextPage = () => {
+
+  const [isCheckingAuth, setCheckingAuth] = useState(true);
+  const router = useRouter();
+
+  useEffect(() => {
+    const handleIsLoggedin = async() => {
+      const token = window.localStorage.getItem('token');
+
+      if (token) {
+        const resp = await fetchWithToken('/auth/renew');
+
+        if (resp.ok) {
+          router.push('/home');
+        }
+      }
+      setCheckingAuth(false);
+    };
+
+    handleIsLoggedin();
+  }, [router]);
+
   return (
     <>
       <Head>
         <title>Nextter. It&lsquo;s what&lsquo;s happening / Nextter</title>
       </Head>
         
-      <div>
-        <section>
-          <header>
-            <Link href="/">
-              <a>
-                <FaTimes size="24px" color={colors.title} />
-              </a>
-            </Link>
-            <Link href="/" passHref>
-              <picture>
-                <HiCode size={48} color={colors.primary} />
-              </picture>
-            </Link>
-          </header>
-          <SigninForm />
-        </section>
-      </div>
-
-      <style jsx>{styles}</style>
+      {
+        isCheckingAuth
+          ? <Spinner color="white" />
+          : <PageBody />
+      }
     </>
   );
 };

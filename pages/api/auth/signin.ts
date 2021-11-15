@@ -14,7 +14,7 @@ const signin =  async(req: NextApiRequest, res: NextApiResponse) => {
     const validPassword = isValidPassword(user, password);
 
     if (!validPassword) {
-      throw new Error('Email or password are incorrect!!');
+      throw new Error('Email or password are incorrect');
     }
 
     const token = await generateJWT(user.id, user.name);
@@ -33,14 +33,14 @@ const signin =  async(req: NextApiRequest, res: NextApiResponse) => {
     if (!user) {
       return res.status(400).json({
         success: false,
-        msg: 'Email or password are incorrect.'
+        msg: 'Incorrect email or password.'
       });
     }
 
     if (!isValidPassword(user, password)) {
       return res.status(400).json({
         success: false,
-        msg: 'Email or password are incorrect.'
+        msg: 'Incorrect email or password.'
       });
     }
 

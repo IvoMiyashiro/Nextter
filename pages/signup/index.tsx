@@ -1,23 +1,34 @@
+import { useEffect, useState } from 'react';
 import type { NextPage } from 'next';
+import { useRouter } from 'next/router';
 import Head from 'next/head';
-import Link from 'next/link';
-import styles from './styles';
 
-import { SignupForm } from '../../components/Forms/SignupForm';
+import { fetchWithToken } from '../../services/fetchWithToken';
 
-import { FaTimes } from 'react-icons/fa';
-import { colors } from '../../styles/theme';
-import { useState } from 'react';
-import { Message } from '../../components/Message';
+import { Spinner } from '../../components/Spinner';
+import { PageBody } from './PageBody';
 
 const Signup: NextPage = () => {
 
-  const FORM_ERROR_INIT_STATE = {
-    error: false,
-    msg: 'Email is already taken.'
-  };
+  const [isCheckingAuth, setCheckingAuth] = useState(true);
+  const router = useRouter();
 
-  const [formError, setFormError] = useState(FORM_ERROR_INIT_STATE);
+  useEffect(() => {
+    const handleIsLoggedin = async() => {
+      const token = window.localStorage.getItem('token');
+
+      if (token) {
+        const resp = await fetchWithToken('/auth/renew');
+
+        if (resp.ok) {
+          router.push('/home');
+        }
+      }
+      setCheckingAuth(false);
+    };
+
+    handleIsLoggedin();
+  }, [router]);
 
   return (
     <>
@@ -25,29 +36,11 @@ const Signup: NextPage = () => {
         <title>Sign up for Nextter / Nextter</title>
       </Head>
 
-      <div>
-        <Message 
-          msg={formError.msg} 
-          error={false} 
-        />
-        {/* {
-          formError.error && <FormError msg={formError.msg} />
-        } */}
-        <section>
-          <header>
-            <Link href="/">
-              <a>
-                <FaTimes size="24px" color={colors.title} />
-              </a>
-            </Link>
-          </header>
-          <SignupForm 
-            setValue={setFormError}
-          />
-        </section>
-      </div>
-      
-      <style jsx>{styles}</style>
+      {
+        isCheckingAuth
+          ? <Spinner color="white" />
+          : <PageBody />
+      }
     </>
   );
 };

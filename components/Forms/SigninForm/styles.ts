@@ -36,15 +36,18 @@ export default css`
   }
 
   button {
+    align-items: center;
     background: ${colors.text};
     border-radius: 99px;
     border: none;
     color: white;
     cursor: pointer;
+    display: flex;
     font-family: ${fonts.base};
     font-size: 1rem;
     font-weight: 700;
     height: 48px;
+    justify-content: center;
     width: 100%;
   }
 

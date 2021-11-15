@@ -2,19 +2,25 @@ import { FaTimes } from 'react-icons/fa';
 import { breakpoints } from '../../styles/breakpoints';
 import { colors } from '../../styles/theme';
 
-interface IProps {
+interface IState {
+  isOpen: boolean,
   msg: string,
   error: boolean
 }
 
-export const Message = ({ msg, error }: IProps) => {
+interface IProps {
+  setValue: (value: IState | ((prev: IState) => IState)) => void,
+  isOpen: boolean,
+  msg: string,
+  error: boolean
+}
+
+export const Toast = ({ msg, error, setValue }: IProps) => {
+
   return (
     <>
       <div>
         <section>
-          <button>
-            <FaTimes />
-          </button>
           <p>{ msg }</p>
         </section>
       </div>
@@ -38,19 +44,10 @@ export const Message = ({ msg, error }: IProps) => {
           max-width: 400px;
           z-index: 10;
         }
-        /* #e1a7a7 */
+
         section {
           position: relative;
 
-        }
-
-        button {
-          border: none;
-          background: none;
-          position: absolute;
-          left: -10px;
-          top: -6px;
-          color: ${error ? colors.red : colors.green};
         }
 
         @media (min-width: ${breakpoints.desktop}) {
