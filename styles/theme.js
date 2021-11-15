@@ -7,6 +7,8 @@ export const colors = {
   backgroundAlt: '#112240',
   primary: '#64ffda',
   red: '#F5323E',
+  green: '#07da63',
+  lightGreen: '#b7ec9c',
   title: '#CCD6F6',
   text: '#838DAA',
 };

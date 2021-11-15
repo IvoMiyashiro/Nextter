@@ -6,10 +6,19 @@ import styles from './styles';
 import { SignupForm } from '../../components/Forms/SignupForm';
 
 import { FaTimes } from 'react-icons/fa';
-import { HiCode } from 'react-icons/hi';
 import { colors } from '../../styles/theme';
+import { useState } from 'react';
+import { Message } from '../../components/Message';
 
 const Signup: NextPage = () => {
+
+  const FORM_ERROR_INIT_STATE = {
+    error: false,
+    msg: 'Email is already taken.'
+  };
+
+  const [formError, setFormError] = useState(FORM_ERROR_INIT_STATE);
+
   return (
     <>
       <Head>
@@ -17,6 +26,13 @@ const Signup: NextPage = () => {
       </Head>
 
       <div>
+        <Message 
+          msg={formError.msg} 
+          error={false} 
+        />
+        {/* {
+          formError.error && <FormError msg={formError.msg} />
+        } */}
         <section>
           <header>
             <Link href="/">
@@ -24,13 +40,10 @@ const Signup: NextPage = () => {
                 <FaTimes size="24px" color={colors.title} />
               </a>
             </Link>
-            <Link href="/" passHref>
-              <picture>
-                <HiCode size={48} color={colors.primary} />
-              </picture>
-            </Link>
           </header>
-          <SignupForm />
+          <SignupForm 
+            setValue={setFormError}
+          />
         </section>
       </div>
       

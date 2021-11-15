@@ -32,6 +32,13 @@ export default css`
 
   picture {
     cursor: pointer;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    top: -25px;
+    text-align: center;
   }
 
   header {

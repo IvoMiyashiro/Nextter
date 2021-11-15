@@ -1,5 +1,6 @@
 import css from 'styled-jsx/css';
 import { colors, fonts } from '../../../styles/theme';
+import { breakpoints } from '../../../styles/breakpoints';
 
 export default css`
 
@@ -26,7 +27,7 @@ export default css`
   h5 {
     color: ${colors.title};
     font-size: 1rem;
-    margin-top: 3em;
+    margin-top: 4.65em;
   }
 
   p {
@@ -36,21 +37,31 @@ export default css`
   }
 
   button {
+    align-items: center;
     background: ${colors.text};
     border-radius: 99px;
     border: none;
     color: white;
     cursor: pointer;
+    display: flex;
     font-family: ${fonts.base};
     font-size: 1rem;
     font-weight: 700;
     height: 48px;
+    justify-content: center;
+    margin-top: 3em;
     width: 100%;
   }
 
   .create-account-btn {
     background: ${colors.primary};
     color: ${colors.background};
+  }
+
+  @media (min-width: ${breakpoints.desktop}) {
+    h5 {
+      margin-top: 3.55em;
+    }
   }
 
 `;

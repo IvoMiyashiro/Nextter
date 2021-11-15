@@ -13,7 +13,16 @@ const signup = async(req: NextApiRequest, res: NextApiResponse) => {
     dbConnection();
     await validateSignupBody(req, res);
 
-    const user = await User.create(req.body);
+    let user = await User.findOne({ email });
+
+    if (user) {
+      return res.status(400).json({
+        success: false,
+        msg: 'Email is already in use.'
+      });
+    };
+
+    user = await User.create(req.body);
     saltPassword(user, password);
 
     await user.save();
@@ -29,16 +38,9 @@ const signup = async(req: NextApiRequest, res: NextApiResponse) => {
   } catch (error) {
     console.log(error);
 
-    if (User.findOne({email})) {
-      return res.status(400).json({
-        success: false,
-        msg: 'Email is already in use.'
-      });
-    };
-
     res.status(500).json({
       success: false,
-      msg: 'DB Error'
+      msg: 'Internal database error'
     });
   }
 };

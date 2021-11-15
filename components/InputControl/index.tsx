@@ -26,27 +26,33 @@ export const InputControl = ({
 }: IInput) => {
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>):void => {
-    setValue((prev: IState) => (
-      {...prev, value: e.target.value}
-    ));
+    setValue((prev: IState) => ({...prev, 
+      value: e.target.value
+    }));
   };
 
   const handleInputError = ():void => {
 
     if (!regEx.test(value)) {
       if (type === 'password') {
-        return setValue((prev: IState) => (
-          {...prev, error: 'Password length must be greater than 8 and have at least one capital letter.', ok: false}
-        ));
+        return setValue((prev: IState) => ({
+          ...prev,
+          error: 'Password length must be greater than 8 and have at least one capital letter.',
+          ok: false
+        }));
       }
 
-      return setValue((prev: IState) => (
-        {...prev, error: `${placeholder} not valid.`, ok: false}
-      ));
+      return setValue((prev: IState) => ({
+        ...prev,
+        error: `${placeholder} not valid.`,
+        ok: false
+      }));
     } else {
-      return setValue((prev: IState) => (
-        {...prev, error: '', ok: true}
-      ));
+      return setValue((prev: IState) => ({
+        ...prev, 
+        error: '', 
+        ok: true
+      }));
     }
   };
 

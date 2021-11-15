@@ -1,14 +1,29 @@
 import { useState, FormEvent } from 'react';
+import { useRouter } from 'next/router';
 
+import { fetchWithoutToken } from '../../../services/fetchWithoutToken';
+
+import { Spinner } from '../../Spinner';
 import { InputControl } from '../../InputControl';
 import { SelectDate } from '../../SelectDate';
+
 import styles from './styles';
 
-export const SignupForm = () => {
+interface IState {
+  error: boolean,
+  msg: string,
+}
+
+interface IProps {
+  setValue: (value: IState | ((prev: IState) => IState)) => void
+}
+
+export const SignupForm = ({ setValue }: IProps) => {
 
   const regEx = {
     name: /^[a-zA-Z0-9\_\-]{1,50}$/,
-    email: /^\S+@\S+\.\S+$/
+    email: /^\S+@\S+\.\S+$/,
+    password: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/,
   };
 
   const NAME_INPUT_INIT_STATE = {
@@ -23,6 +38,12 @@ export const SignupForm = () => {
     ok: false,
   };
 
+  const PASSWORD_INPUT_INIT_STATE = {
+    value: '',
+    error: '',
+    ok: false,
+  };
+
   const BIRTH_INPUT_INIT_STATE = {
     value: '',
     error: '',
@@ -31,10 +52,36 @@ export const SignupForm = () => {
 
   const [nameInputState, setNameInputState] = useState(NAME_INPUT_INIT_STATE);
   const [emailInputState, setEmailInputState] = useState(EMAIL_INPUT_INIT_STATE);
+  const [passwordInputState, setPasswordInputState] = useState(PASSWORD_INPUT_INIT_STATE);
   const [birthInputState, setBirthInputState] = useState(BIRTH_INPUT_INIT_STATE);
+  const [isLoading, setLoading] = useState(false);
+  const router = useRouter();
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>):void => {
+  const handleSubmit = async(e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    setLoading(true);
+
+    const resp = await fetchWithoutToken('auth/signup', {
+      name: nameInputState.value,
+      email: emailInputState.value,
+      password: passwordInputState.value,
+      birthDate: new Date(birthInputState.value),
+    }, 'POST');
+    const body = await resp.json();
+
+    setLoading(false);
+
+    if (body.success) {
+      localStorage.setItem('token', body.token);
+      router.push('./home');
+    } else {
+      setValue((prev: IState) => ({
+        ...prev,
+        error: true,
+        msg: body.msg
+      }));
+    }
   };
 
   return (
@@ -59,9 +106,16 @@ export const SignupForm = () => {
               value={emailInputState.value}
               setValue={setEmailInputState}
             />
+            <InputControl
+              type="password"
+              placeholder="Password"
+              error={passwordInputState.error}
+              regEx={regEx.password}
+              value={passwordInputState.value}
+              setValue={setPasswordInputState}
+            />
           </section>
           <h5>Date of Birth</h5>
-          <p>This will not be shown publicly. Confirm your own age, even if this account is for a business, a pet, or something else.</p>
           <SelectDate 
             error={birthInputState.error}
             value={birthInputState.value}
@@ -71,13 +125,17 @@ export const SignupForm = () => {
         <div>
           <button
             className={`${
-              nameInputState.ok && emailInputState.ok && birthInputState.ok
+              nameInputState.ok && emailInputState.ok && passwordInputState.ok && birthInputState.ok
                 ? 'create-account-btn'
                 : ''
             }`}
-            disabled={!nameInputState.ok && !emailInputState.ok && !birthInputState.ok}
+            disabled={!nameInputState.ok && !emailInputState.ok && !passwordInputState.ok && !birthInputState.ok}
           >
-            Create account
+            {
+              isLoading
+                ? <Spinner />
+                : 'Create account'
+            }
           </button>
         </div>
       </form>
