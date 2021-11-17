@@ -14,9 +14,29 @@ const UserSchema = new Schema({
     type: String,
     require: true,
   },
+  bio: {
+    type: String,
+    default: ''
+  },
+  profilePicture: {
+    type: String,
+    default: ''
+  },
+  coverPicture: {
+    type: String,
+    default: ''
+  },
   birthDate: {
     type: Date,
     require: true,
+  },
+  followers: {
+    type: Array,
+    default: []
+  },
+  followins: {
+    type: Array,
+    default: []
   }
 });
 
