@@ -38,7 +38,7 @@ const UserSchema = new Schema({
     type: Array,
     default: []
   }
-});
+}, {timestamps: true});
 
 UserSchema.method('toJSON', function () {
   const { __v, _id, ...object } = this.toObject();

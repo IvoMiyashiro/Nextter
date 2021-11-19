@@ -1,6 +1,12 @@
 const baseURL = process.env.NEXT_APP_API_URL;
 
-export const fetchWithToken = (endpoint: string, data = undefined, method = 'GET') => {
+interface IData {
+  uid: string,
+  content?: string,
+  img?: string,
+}
+
+export const fetchWithToken = (endpoint: string, data: IData, method = 'GET') => {
 
   const url = `${baseURL}/${endpoint}`;
   const token = localStorage.getItem('token') || '';

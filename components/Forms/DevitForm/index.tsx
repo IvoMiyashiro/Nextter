@@ -6,6 +6,7 @@ import { MediaButtons } from './MediaButtons';
 
 import { FaTimes } from 'react-icons/fa';
 import styles from './styles';
+import { fetchWithToken } from '../../../services/fetchWithToken';
 
 interface IProp {
   handleOpenModal: (value: boolean) => void
@@ -15,6 +16,7 @@ export const DevitForm = ({handleOpenModal}: IProp) => {
 
   const [isSubmitButtonDisabled, setSubmitButtonDisabled] = useState(true);
   const [textAreaValue, setTextAreaValue] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
 
   useEffect(() => {
     if (textAreaValue.length > 0) {
@@ -30,6 +32,11 @@ export const DevitForm = ({handleOpenModal}: IProp) => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    const resp = fetchWithToken('devit/create', {
+      content: textAreaValue,
+      img: imageUrl
+    });
   };
 
   return (
