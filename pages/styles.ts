@@ -26,6 +26,7 @@ export default css`
       display: grid;
       grid-template-columns: 55% 1fr;
     }
+    
     h1 {
       font-size: 4.75rem;
       line-height: 1.05em;

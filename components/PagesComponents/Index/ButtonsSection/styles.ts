@@ -14,24 +14,23 @@ export default css`
   section {
     display: flex;
     flex-direction: column;
-    margin-top: 2em;
     gap: 1em;
+    margin-top: 2em;
   }
 
   button {
-    position: relative;
-    display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 1em;
-    border-radius: 99px;
-    height: 40px;
-    font-size: 1rem;
     background: transparent;
-    color: ${colors.primary};
+    border-radius: 99px;
     border: 1px solid ${colors.primary};
+    color: ${colors.primary};
+    display: flex;
     font-family: ${fonts.base};
-    cursor: pointer;
+    font-size: 1rem;
+    gap: 1em;
+    height: 40px;
+    justify-content: center;
+    position: relative;
     transition: background .2s ease-in-out;
   }
 
@@ -41,8 +40,8 @@ export default css`
   }
 
   picture {
-    position: absolute;
     left: 10px;
+    position: absolute;
     top: 6px;
   }
 `;

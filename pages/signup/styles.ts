@@ -24,14 +24,12 @@ export default css`
   }
 
   a {
-    cursor: pointer;
     position: absolute;
     right: -5px;
     top: -10px;
   }
 
   picture {
-    cursor: pointer;
     text-align: center;
   }
 
@@ -51,7 +49,6 @@ export default css`
     }
 
     a {
-      cursor: pointer;
       position: absolute;
       right: 20px;
       top: 20px;

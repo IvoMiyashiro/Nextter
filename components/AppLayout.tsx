@@ -32,6 +32,11 @@ export const AppLayout: NextPage = ({ children }) => {
           text-decoration: none;
           color: white;
         }
+
+        button {
+          cursor: pointer;
+          border: none;
+        }
          `}
       </style>
     </>

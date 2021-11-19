@@ -1,3 +1,3 @@
 export const breakpoints = {
-  desktop: '500px',
+  desktop: '680px'
 };

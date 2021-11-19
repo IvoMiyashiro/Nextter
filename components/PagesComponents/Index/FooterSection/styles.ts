@@ -35,7 +35,6 @@ export default css`
     background: transparent;
     border: none;
     color: ${colors.primary};
-    cursor: pointer;
     font-size: .85rem;
     margin-left: .5em;
     padding: 0;

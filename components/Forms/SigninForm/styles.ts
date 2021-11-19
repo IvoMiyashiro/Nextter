@@ -41,7 +41,6 @@ export default css`
     border-radius: 99px;
     border: none;
     color: white;
-    cursor: pointer;
     display: flex;
     font-family: ${fonts.base};
     font-size: 1rem;

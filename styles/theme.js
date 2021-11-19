@@ -11,4 +11,5 @@ export const colors = {
   lightGreen: '#CBF5E3',
   title: '#CCD6F6',
   text: '#838DAA',
+  gray: '#3f3f4e',
 };
