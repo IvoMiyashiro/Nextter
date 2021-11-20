@@ -1,9 +1,9 @@
 const baseURL = process.env.NEXT_APP_API_URL;
 
 interface IData {
-  uid: string,
-  content?: string,
-  img?: string,
+  uid: String,
+  content?: String,
+  img?: String,
 }
 
 export const fetchWithToken = (endpoint: string, data: IData, method = 'GET') => {

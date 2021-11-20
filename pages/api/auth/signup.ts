@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import User from '../../../models/User';
-import { dbConnection, dbDisconn } from '../../../utils/database';
+import dbConnection from '../../../utils/database';
 import generateJWT from '../../../helpers/generateJwt';
 import { validateSignupBody } from '../../../middlewares/validateSignupBody';
 import { saltPassword } from '../../../helpers/validateBodyHelpers';
@@ -26,8 +26,6 @@ const signup = async(req: NextApiRequest, res: NextApiResponse) => {
     saltPassword(user, password);
 
     await user.save();
-
-    dbDisconn();
 
     const token = await generateJWT(user.id, user.name);
 

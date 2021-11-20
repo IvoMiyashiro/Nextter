@@ -3,12 +3,13 @@ import { useRouter } from 'next/router';
 
 import { fetchWithoutToken } from '../../../services/fetchWithoutToken';
 import { AppContext } from '../../../context/userContext';
+import { signin } from '../../../actions/auth';
 
 import { InputControl } from '../../InputControl';
 import { Spinner } from '../../Spinner';
 
+import { colors } from '../../../styles/theme';
 import styles from './styles';
-import { signin } from '../../../actions/auth';
 
 interface IState {
   isOpen: boolean,
@@ -120,11 +121,11 @@ export const SigninForm = ({ setValue }: IProps) => {
                 ? 'create-account-btn'
                 : ''
             }`}
-            disabled={!emailInputState.ok}
+            disabled={!emailInputState.ok || isLoading}
           >
             {
               isLoading
-                ? <Spinner />
+                ? <Spinner color={colors.background} size={'16px'} />
                 : 'Sign in'
             }
           </button>

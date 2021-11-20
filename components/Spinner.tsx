@@ -1,6 +1,11 @@
 import { colors } from '../styles/theme';
 
-export const Spinner = ({ color = 'blue' }) => {
+interface props {
+  color: String,
+  size: String
+}
+
+export const Spinner = ({ color = 'blue', size = '24px' }: props) => {
   return (
     <>
       <div className="sk-chase">
@@ -37,8 +42,8 @@ export const Spinner = ({ color = 'blue' }) => {
         }
       
         .sk-chase {
-          width: 25px;
-          height: 25px;
+          width: ${size};
+          height: ${size};
           position: relative;
           animation: sk-chase 2.5s infinite linear both;
         }

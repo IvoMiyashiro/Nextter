@@ -1,21 +1,15 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
-export const dbConnection = async () => {
+const dbConnection = async () => {
+
+  if (mongoose.connection.readyState === 0) return;
 
   try {
-    await mongoose.connect(process.env.DB_CNN);
+    await mongoose.connect(process.env.DB_CNN as string);
   } catch (error) {
     console.log(error);
     throw new Error('Database connection error.');
   }
 };
 
-export const dbDisconn = async () => {
-  
-  try {
-    await mongoose.connection.close();
-  } catch (error) {
-    console.log(error);
-    throw new Error('Database disconnection error.');
-  }
-};
+export default dbConnection;

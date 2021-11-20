@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import User from '../../../models/User';
 import generateJWT from '../../../helpers/generateJwt';
-import { dbConnection, dbDisconn } from '../../../utils/database';
+import dbConnection from '../../../utils/database';
 import { isValidPassword } from '../../../helpers/validateBodyHelpers';
 
 const signin =  async(req: NextApiRequest, res: NextApiResponse) => {
@@ -18,8 +18,6 @@ const signin =  async(req: NextApiRequest, res: NextApiResponse) => {
     }
 
     const token = await generateJWT(user.id, user.name);
-
-    dbDisconn();
 
     return res.status(200).json({
       success: true,

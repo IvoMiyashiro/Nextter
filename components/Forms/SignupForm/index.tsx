@@ -8,6 +8,7 @@ import { InputControl } from '../../InputControl';
 import { SelectDate } from '../../SelectDate';
 
 import styles from './styles';
+import { colors } from '../../../styles/theme';
 
 interface IState {
   isOpen: boolean,
@@ -76,13 +77,21 @@ export const SignupForm = ({ setValue }: IProps) => {
     if (body.success) {
       localStorage.setItem('token', body.token);
       router.push('./home');
-    } else {
+    }
+    
+    setValue((prev: IState) => ({
+      ...prev,
+      isOpen: true,
+      msg: body.msg
+    }));
+
+    setTimeout(() => {
       setValue((prev: IState) => ({
         ...prev,
-        isOpen: true,
+        isOpen: false,
         msg: body.msg
       }));
-    }
+    }, 4000);
   };
 
   return (
@@ -134,7 +143,7 @@ export const SignupForm = ({ setValue }: IProps) => {
           >
             {
               isLoading
-                ? <Spinner />
+                ? <Spinner color={colors.background} size={'24px'} />
                 : 'Create account'
             }
           </button>
