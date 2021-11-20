@@ -1,4 +1,4 @@
-import { useState, ChangeEvent, useEffect, FormEvent } from 'react';
+import { useState, ChangeEvent, useEffect, FormEvent, useContext } from 'react';
 import Image from 'next/image';
 
 import { PrimaryButton } from '../../Buttons/PrimaryButton';
@@ -7,6 +7,7 @@ import { MediaButtons } from './MediaButtons';
 import { FaTimes } from 'react-icons/fa';
 import styles from './styles';
 import { fetchWithToken } from '../../../services/fetchWithToken';
+import { AppContext } from '../../../context/userContext';
 
 interface IProp {
   handleOpenModal: (value: boolean) => void
@@ -14,10 +15,11 @@ interface IProp {
 
 export const DevitForm = ({handleOpenModal}: IProp) => {
 
+  const { state } = useContext(AppContext);
   const [isSubmitButtonDisabled, setSubmitButtonDisabled] = useState(true);
   const [textAreaValue, setTextAreaValue] = useState('');
   const [imageUrl, setImageUrl] = useState('');
-
+  console.log(state);
   useEffect(() => {
     if (textAreaValue.length > 0) {
       return setSubmitButtonDisabled(false);
@@ -33,10 +35,10 @@ export const DevitForm = ({handleOpenModal}: IProp) => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const resp = fetchWithToken('devit/create', {
-      content: textAreaValue,
-      img: imageUrl
-    });
+    // const resp = fetchWithToken('devit/create', {
+    //   content: textAreaValue,
+    //   img: imageUrl,
+    // });
   };
 
   return (

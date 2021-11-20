@@ -1,24 +1,17 @@
-interface IReducer {
-    uid: String,
-    name: String,
-    img: String
+import { USER_INIT_STATE } from './../context/userContext';
+import { UserContextInterface } from './../interfaces/index';
+
+export type ActionType = {
+  type: 'UPDATE',
+  payload: UserContextInterface
 }
 
-type userType = {
-  uid: String,
-  name: String,
-  img: String
-}
-
-const initialState = {
-  uid: '',
-  name: '',
-  img: ''
-};
-
-export const userReducer = (state: userType, action: any) => {
+export const userReducer = (state = USER_INIT_STATE, action: ActionType) => {
   switch (action.type) {
+  case 'UPDATE':
+    return action.payload;
+
   default:
-    return initialState;
+    return state;
   }
 };

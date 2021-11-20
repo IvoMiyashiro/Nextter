@@ -1,12 +1,14 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useContext, useState } from 'react';
 import { useRouter } from 'next/router';
 
 import { fetchWithoutToken } from '../../../services/fetchWithoutToken';
+import { AppContext } from '../../../context/userContext';
 
 import { InputControl } from '../../InputControl';
 import { Spinner } from '../../Spinner';
 
 import styles from './styles';
+import { signin } from '../../../actions/auth';
 
 interface IState {
   isOpen: boolean,
@@ -19,6 +21,8 @@ interface IProps {
 }
 
 export const SigninForm = ({ setValue }: IProps) => {
+
+  const { dispatch } = useContext(AppContext);
 
   const regEx = {
     email: /^\S+@\S+\.\S+$/,
@@ -47,24 +51,30 @@ export const SigninForm = ({ setValue }: IProps) => {
 
     setLoading(true);
 
-    const resp = await fetchWithoutToken('auth/signin', {
-      email: emailInputState.value,
-      password: passwordInputState.value,
-    }, 'POST');
-    const body = await resp.json();
+    try {
+      const resp = await fetchWithoutToken('auth/signin', {
+        email: emailInputState.value,
+        password: passwordInputState.value,
+      }, 'POST');
+      const body = await resp.json();
 
-    setLoading(false);
+      if (body.success) {
+        const { uid, name, img } = body;
+        dispatch(signin({
+          uid,
+          name,
+          img
+        }));
+        localStorage.setItem('token', body.token);
+        router.push('./home');
+      }
 
-    if (body.success) {
-      localStorage.setItem('token', body.token);
-      router.push('./home');
-    } else {
       setValue((prev: IState) => ({
         ...prev,
         isOpen: true,
         msg: body.msg
       }));
-
+  
       setTimeout(() => {
         setValue((prev: IState) => ({
           ...prev,
@@ -72,7 +82,12 @@ export const SigninForm = ({ setValue }: IProps) => {
           msg: body.msg
         }));
       }, 4000);
+
+    } catch (error) {
+      console.log(error);
     }
+
+    setLoading(false);
   };
 
   return (
