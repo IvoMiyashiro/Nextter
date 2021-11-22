@@ -12,7 +12,7 @@ const createDevit = async(req: NextApiRequest, res: NextApiResponse) => {
     dbConnection();
 
     const { uid: tokenUid }: any = await jwtValidator(req, res);
-
+    console.log(tokenUid, uid);
     if (!uid === tokenUid) {
       return res.status(405).json({
         success: false,

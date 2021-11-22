@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import Link from 'next/link';
 
-import { ButtonsSection } from '../../Index/ButtonsSection';
-import { FooterSection } from '../../Index/FooterSection';
+import { ButtonsSection } from '../ButtonsSection';
+import { FooterSection } from '../FooterSection';
 
 import { HiCode } from 'react-icons/hi';
 import { colors } from '../../../../styles/theme';

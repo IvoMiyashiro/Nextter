@@ -1,14 +1,20 @@
-import { useRef } from 'react';
+import { ChangeEvent, useRef } from 'react';
 import { AiOutlinePicture, AiOutlineFileGif } from 'react-icons/ai';
 import { breakpoints } from '../../../styles/breakpoints';
 import { colors } from '../../../styles/theme';
 import { PrimaryButton } from '../../Buttons/PrimaryButton';
 
-interface IProps {
-  isDisabled: boolean
+type fileState = {
+  file: File,
+  fileUrl: string
 }
 
-export const MediaButtons = ({ isDisabled }: IProps) => {
+interface IProps {
+  isDisabled: boolean,
+  handleImageUrl: (value: fileState | ((prev: fileState) => fileState)) => void
+}
+
+export const MediaButtons = ({ isDisabled, handleImageUrl }: IProps) => {
 
   const inputFileRef = useRef<HTMLInputElement>(null);
 
@@ -18,15 +24,24 @@ export const MediaButtons = ({ isDisabled }: IProps) => {
     }
   };
 
+  const handleImageChange = async(e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      handleImageUrl({
+        file: e.target.files[0],
+        fileUrl: URL.createObjectURL(e.target.files[0])
+      });
+    }
+  };
+
   return (
     <>
       <div>
         <section>
-          <input type="file" ref={inputFileRef} />
-          <button onClick={handleSelectPicture}>
+          <input type="file" ref={inputFileRef} onChange={(e) => handleImageChange(e)}/>
+          <button type="button" onClick={handleSelectPicture}>
             <AiOutlinePicture size={24} color={colors.primary} />
           </button>
-          <button>
+          <button type="button">
             <AiOutlineFileGif size={24} color={colors.primary} />
           </button>
         </section>

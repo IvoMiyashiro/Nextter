@@ -3,10 +3,10 @@ import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 
-import { fetchWithToken } from '../services/fetchWithToken';
+import { fetchWithToken } from '../helpers/fetchWithToken';
 
-import { MainSection } from '../components/PagesComponents/Index/MainSection';
-import { VideoSection } from '../components/PagesComponents/Index/VideoSection';
+import { MainSection } from '../components/PagesComponents/index/MainSection';
+import { VideoSection } from '../components/PagesComponents/index/VideoSection';
 
 import styles from './styles';
 import { LoadingPage } from '../components/LoadingPage';

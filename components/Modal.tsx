@@ -29,7 +29,7 @@ export const ResponsiveModal = ({children, handleOpenModal}: IProps) => {
           width: 100%;
           z-index: 9;
           top: 0;
-          background: rgba(0, 0, 0, 0.2)
+          background: rgba(91, 112, 131, 0.4);
         }
       `}</style>
     </>

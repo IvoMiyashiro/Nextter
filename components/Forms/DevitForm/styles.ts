@@ -60,6 +60,7 @@ export default css`
     padding: .5em 0;
     resize: none;
     width: 100%;
+    border-radius: 10px;
   }
 
   textarea::placeholder {
@@ -79,6 +80,7 @@ export default css`
       position: absolute;
       top: 5%;
       border-radius: 16px;
+      overflow-y: auto;
     }
 
   .submit-button-container {

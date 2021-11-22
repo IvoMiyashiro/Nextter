@@ -1,7 +1,7 @@
 import { FormEvent, useContext, useState } from 'react';
 import { useRouter } from 'next/router';
 
-import { fetchWithoutToken } from '../../../services/fetchWithoutToken';
+import { fetchWithoutToken } from '../../../helpers/fetchWithoutToken';
 import { AppContext } from '../../../context/userContext';
 import { signin } from '../../../actions/auth';
 
@@ -67,7 +67,7 @@ export const SigninForm = ({ setValue }: IProps) => {
           img
         }));
         localStorage.setItem('token', body.token);
-        router.push('./home');
+        return router.push('./home');
       }
 
       setValue((prev: IState) => ({

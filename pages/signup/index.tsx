@@ -3,7 +3,7 @@ import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 
-import { fetchWithToken } from '../../services/fetchWithToken';
+import { fetchWithToken } from '../../helpers/fetchWithToken';
 
 import { Spinner } from '../../components/Spinner';
 import { PageBody } from './PageBody';
@@ -15,7 +15,7 @@ const Signup: NextPage = () => {
 
   useEffect(() => {
     const handleIsLoggedin = async() => {
-      const token = window.localStorage.getItem('token');
+      const token = localStorage.getItem('token');
 
       if (token) {
         const resp = await fetchWithToken('/auth/renew');
@@ -38,7 +38,7 @@ const Signup: NextPage = () => {
 
       {
         isCheckingAuth
-          ? <Spinner color="white" />
+          ? <Spinner color="white" size={'24px'} />
           : <PageBody />
       }
     </>

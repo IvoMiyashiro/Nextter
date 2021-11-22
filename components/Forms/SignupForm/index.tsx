@@ -1,7 +1,7 @@
 import { useState, FormEvent } from 'react';
 import { useRouter } from 'next/router';
 
-import { fetchWithoutToken } from '../../../services/fetchWithoutToken';
+import { fetchWithoutToken } from '../../../helpers/fetchWithoutToken';
 
 import { Spinner } from '../../Spinner';
 import { InputControl } from '../../InputControl';

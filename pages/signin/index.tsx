@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { NextPage } from 'next';
 import Head from 'next/head';
 
-import { fetchWithToken } from '../../services/fetchWithToken';
+import { fetchWithToken } from '../../helpers/fetchWithToken';
 import { Spinner } from '../../components/Spinner';
 import { PageBody } from './PageBody';
 
