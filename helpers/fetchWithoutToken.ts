@@ -7,10 +7,10 @@ interface IData {
   birthDate?: Date | undefined,
 }
 
-export const fetchWithoutToken = (endpoint: string, data: IData, method = 'GET') => {
+export const fetchWithoutToken = (endpoint: string, data?: IData, method = 'GET') => {
 
   const url = `${baseURL}/${endpoint}`;
-  console.log(url);
+
   if (method === 'GET') {
     return fetch(url);
   } else {

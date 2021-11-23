@@ -12,6 +12,10 @@ const DevitSchema = new Schema({
   img: {
     type: String,
   },
+  comments: {
+    type: Array,
+    default: []
+  },
   revits: {
     type: Array,
     default: []

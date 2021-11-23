@@ -56,17 +56,18 @@ export const DevitForm = ({handleOpenModal}: IProp) => {
 
     try {
       const newFileUrl = await fileUpload(imageUrl.file);
-      setImageUrl(prev => ({
-        ...prev,
-        file: newFileUrl
-      }));
-  
+      
   
       await fetchWithToken('devit/create', {
         uid: state.uid,
         content: textAreaValue,
-        img: imageUrl.fileUrl,
+        img: newFileUrl,
       }, 'POST');
+
+      setImageUrl(prev => ({
+        ...prev,
+        fileUrl: newFileUrl
+      }));
     } catch (error) {
       console.log(error);
     }

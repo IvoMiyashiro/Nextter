@@ -5,7 +5,7 @@ export const LoadingPage = () => {
   return (
     <>
       <section>
-        <Spinner color={'white'} />
+        <Spinner color="white" size="32px" />
       </section>
 
       <style jsx>{`

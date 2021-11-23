@@ -1,39 +1,26 @@
 import { useEffect, useState } from 'react';
-import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
+import type { NextPage } from 'next';
 import Head from 'next/head';
+import { useIsLoggedin } from '../hooks/useIsLoggedin';
 
-import { fetchWithToken } from '../helpers/fetchWithToken';
-
+import { LoadingPage } from '../components/LoadingPage';
 import { MainSection } from '../components/PagesComponents/index/MainSection';
 import { VideoSection } from '../components/PagesComponents/index/VideoSection';
 
 import styles from './styles';
-import { LoadingPage } from '../components/LoadingPage';
 
 const Home: NextPage = () => {
 
   const [isCheckingAuth, setCheckingAuth] = useState(true);
+  const { isLoggedin } = useIsLoggedin();
   const router = useRouter();
-
+  
   useEffect(() => {
-    const handleIsLoggedin = async() => {
-      const token = window.localStorage.getItem('token');
-
-      if (token) {
-        const resp = await fetchWithToken('/auth/renew');
-
-        if (resp.ok) {
-          router.push('/home');
-        }
-      }
-
-      setCheckingAuth(false);
-    };
-
-    handleIsLoggedin();
-  }, [router]);
-
+    if (isLoggedin === true) router.push('/home');
+    setCheckingAuth(false);
+  }, [isLoggedin, router]);
+  
   return (
     <>
       <Head>

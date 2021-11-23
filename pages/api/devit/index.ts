@@ -1,10 +1,9 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { jwtValidator } from '../../../helpers/jwtValidator';
-import { validateCreateDevitBody } from '../../../middlewares/validateCreateDevitBody';
 import Devit from '../../../models/Devit';
 import dbConnection from '../../../utils/database';
 
-const createDevit = async(req: NextApiRequest, res: NextApiResponse) => {
+const getDevits = async(req: NextApiRequest, res: NextApiResponse) => {
 
   const { uid } = req.body;
 
@@ -20,14 +19,11 @@ const createDevit = async(req: NextApiRequest, res: NextApiResponse) => {
       });
     }
 
-    await validateCreateDevitBody(req, res);
-
-    const devit = await Devit.create(req.body);
-    await devit.save();
+    const devits = await Devit.find();
 
     return res.status(200).json({
       sucess: true,
-      devit
+      devits
     });
   } catch (error) {
     console.log(error);
@@ -39,4 +35,4 @@ const createDevit = async(req: NextApiRequest, res: NextApiResponse) => {
   }
 };
 
-export default createDevit;
+export default getDevits;

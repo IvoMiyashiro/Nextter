@@ -1,19 +1,26 @@
-import { useState } from 'react';
+import {  useState } from 'react';
+import { useFetchDevits } from '../../../hooks/useFetchDevits';
+
 import { DevitForm } from '../../../components/Forms/DevitForm';
 import { Navbar } from '../../../components/Navbar';
 import { ResponsiveModal } from '../../../components/Modal';
 import { TopBar } from '../../../components/TopBar';
-import { TweetButton } from '../../../components/Buttons/TweetButton';
+import { DevitButton } from '../../Buttons/DevitButton';
+import { Devit } from '../../Devit';
+import { IDevit } from '../../../interfaces';
+
+interface IDevitsArray {
+  devits: IDevit[]
+}
 
 export const MainSection = () => {
 
   const [isDevitFormOpen, setDevitFormOpen] = useState(false);
+  const { devits }: IDevitsArray = useFetchDevits();
 
   return (
     <div>
-
       <TopBar />
-    
       {
         isDevitFormOpen
         &&
@@ -24,9 +31,13 @@ export const MainSection = () => {
       </ResponsiveModal>
       }
       <section>
-      
+        {
+          devits.map(devit => {
+            return <Devit key={devit.id} devit={devit}/>;
+          })
+        }
       </section>
-      <TweetButton handleOpenModal={setDevitFormOpen}/>
+      <DevitButton handleOpenModal={setDevitFormOpen}/>
       <Navbar />
     </div>
   );

@@ -1,4 +1,5 @@
 import css from 'styled-jsx/css';
+import { colors } from '../../styles/theme';
 
 export default css`
   footer {
@@ -13,8 +14,9 @@ export default css`
     bottom: 0;
     display: flex;
     height: 53px;
-    position: absolute;
+    position: fixed;
     width: 100%;
+    background: ${colors.background};
   }
 
   ul {

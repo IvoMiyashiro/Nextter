@@ -5,7 +5,7 @@ interface IProps {
   handleOpenModal: (value: boolean) => void
 }
 
-export const TweetButton = ({handleOpenModal}: IProps) => {
+export const DevitButton = ({handleOpenModal}: IProps) => {
   return (
     <>      
       <button onClick={() => handleOpenModal(true)}>
@@ -13,7 +13,7 @@ export const TweetButton = ({handleOpenModal}: IProps) => {
       </button>
       <style jsx>{`
         button {
-          position: absolute;
+          position: fixed;
           bottom: 74px;
           right: 22px;
           height: 56px;
