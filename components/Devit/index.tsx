@@ -52,7 +52,15 @@ export const Devit = ({ devit }: IProps) => {
           gap: .75em;
           width: 100%;
           padding: 1em;
-          border-bottom: 1px solid ${colors.gray}
+          border-bottom: 1px solid ${colors.gray};
+          background: ${colors.background};
+          transition: background .2s ease-in-out;
+          cursor: pointer;
+        }
+
+        div:hover {
+          transition: background .2s ease-in-out;
+          background: rgba(17, 34, 64, 0.4)
         }
       `}</style>
     </>

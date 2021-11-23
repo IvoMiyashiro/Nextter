@@ -12,4 +12,7 @@ export const colors = {
   title: '#CCD6F6',
   text: '#838DAA',
   gray: '#3f3f4e',
+  fav: 'rgb(249, 24, 128)',
+  comments: 'rgb(29, 155, 240)',
+  revits: 'rgb(0, 186, 124)'
 };

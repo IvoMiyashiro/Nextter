@@ -1,5 +1,4 @@
-import Image from 'next/image';
-
+/* eslint-disable @next/next/no-img-element */
 interface IProps {
   imgUrl: string
 }
@@ -10,7 +9,7 @@ export const ImageSection = ({ imgUrl } : IProps) => {
 
     <>
       <div>
-        <img src={imgUrl} alt="hola" />
+        <img src={imgUrl} alt="hola" loading="lazy" />
       </div>
 
       <style jsx>{`

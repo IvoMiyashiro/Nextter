@@ -1,10 +1,14 @@
+import { useState } from 'react';
+
+import { IUser } from '../../interfaces';
+import { ImageSection } from './ImageSection';
+
 import { AiOutlineRetweet } from 'react-icons/ai';
 import { BsThreeDots } from 'react-icons/bs';
 import { FiMessageCircle } from 'react-icons/fi';
-import { MdFavoriteBorder } from 'react-icons/md';
-import { IUser } from '../../interfaces';
+import { MdFavorite, MdFavoriteBorder } from 'react-icons/md';
+import styles from './styles/imageSectionStyles';
 import { colors } from '../../styles/theme';
-import { ImageSection } from './ImageSection';
 
 interface IProps {
   user: IUser,
@@ -28,6 +32,42 @@ export const ContentSection = ({
   img
 }: IProps) => {
 
+  const [isFav, setFav] = useState<boolean>(false);
+  const [isFavHover, setFavHover] = useState<boolean>(false);
+  const [isCommentsHover, setCommentsHover] = useState<boolean>(false);
+  const [isRevitHover, setRevitHover] = useState<boolean>(false);
+  const [favLenght, setFavLenght] = useState<number>(favs.length);
+
+  const handleOnMouseOverFavIcon = () => {
+    setFavHover(true);
+  };
+
+  const handleOnMouseLeaveFavIcon = () => {
+    setFavHover(false);
+  };
+
+  const handleOnMouseOverCommentsIcon = () => {
+    setCommentsHover(true);
+  };
+  const handleOnMouseLeaveCommentsIcon = () => {
+    setCommentsHover(false);
+  };
+  const handleOnMouseOverRevitIcon = () => {
+    setRevitHover(true);
+  };
+  const handleOnMouseLeaveRevitIcon = () => {
+    setRevitHover(false);
+  };
+
+  const handleFavDevit = () => {
+    setFav(prev => !prev);
+    if (favs.length === favLenght) {
+      return setFavLenght(prev => (prev + 1));
+    }
+    
+    setFavLenght(prev => (prev - 1));
+  };
+  
   return (
     <>
       <div>
@@ -51,78 +91,39 @@ export const ContentSection = ({
         </main>
         <footer>
           <ul>
-            <li>
-              <FiMessageCircle size="20px" />
-              <p>{comments.length}</p>
+            <li 
+              onMouseOver={handleOnMouseOverCommentsIcon}
+              onMouseLeave={handleOnMouseLeaveCommentsIcon}
+              className="list-item-comments"
+            >
+              <button className="button-comment"><FiMessageCircle size="16px" color={isCommentsHover ? colors.comments : ''} /></button>
+              <span>{comments.length}</span>
             </li>
-            <li>
-              <AiOutlineRetweet size="20px" />
-              <p>{revits.length}</p>
+            <li
+              onMouseOver={handleOnMouseOverRevitIcon}
+              onMouseLeave={handleOnMouseLeaveRevitIcon}
+              className="list-item-revits"
+            >
+              <button className="button-revit"><AiOutlineRetweet size="16px" color={isRevitHover ? colors.revits : ''} /></button>
+              <span>{revits.length}</span>
             </li>
-            <li>
-              <MdFavoriteBorder size="20px" />
-              <p>{favs.length}</p>
+            <li 
+              onClick={handleFavDevit}
+              onMouseOver={handleOnMouseOverFavIcon}
+              onMouseLeave={handleOnMouseLeaveFavIcon}
+              className="list-item-fav"
+            >
+              {
+                !isFav
+                  ? <button className="button-fav"><MdFavoriteBorder size="16px" color={isFavHover ? colors.fav : ''}/></button>
+                  : <button className="button-fav"><MdFavorite size="16px" color={colors.fav} /></button>
+              } 
+              <span>{favLenght}</span>
             </li>
           </ul>
         </footer>
       </div>
-      <style jsx>{`
-
-        div {
-          width: 100%;
-        }
-
-        header {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          
-        }
-
-        section {
-          display: flex;
-          align-items: center;
-          gap: .5em;
-        }
-
-        h2 {
-          font-size: 1rem;
-          color: ${colors.title};
-          font-weight: 600;
-        }
-
-        p {
-          color: ${colors.text};
-          font-size: .85rem;
-        }
-
-        button {
-          padding: 0;
-          background: transparent;
-          color: ${colors.text};
-        }
-
-        main {
-          margin: .25em 0;
-          margin-bottom: .75em;
-          color: ${colors.title};
-          font-size: .9rem;
-        }
-
-        ul {
-          list-style: none;
-          margin: 0;
-          padding: 0;
-          display: flex;
-          gap: 3em;
-        }
-
-        li {
-          display: flex;
-          gap: .5em;
-          color: ${colors.text};
-        }
-      `}</style>
+      <style jsx>{styles}</style>
     </>
   );
 };
