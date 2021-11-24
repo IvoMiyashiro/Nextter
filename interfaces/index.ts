@@ -1,7 +1,7 @@
 export interface UserContextInterface {
-  uid: String,
-  name: String,
-  img: String,
+  uid: string,
+  name: string,
+  img: string,
 }
 
 export interface IUser {
@@ -26,4 +26,8 @@ export interface IDevit {
   revits: Array<any>,
   createdAt: Date,
   updatedAt : Date
+}
+
+export interface IDevitFavs {
+  uid: string,
 }

@@ -7,7 +7,7 @@ const DevitSchema = new Schema({
   },
   content: {
     type: String,
-    max: 50,
+    max: 280,
   },
   img: {
     type: String,

@@ -1,16 +1,22 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 import { IUser } from '../../interfaces';
 import { ImageSection } from './ImageSection';
+
+import { fetchWithToken } from '../../helpers/fetchWithToken';
+import { useDevitFaved } from '../../hooks/useDevitFaved';
+import useTimeAgo from '../../hooks/useTimeAgo';
+import { AppContext } from '../../context/userContext';
 
 import { AiOutlineRetweet } from 'react-icons/ai';
 import { BsThreeDots } from 'react-icons/bs';
 import { FiMessageCircle } from 'react-icons/fi';
 import { MdFavorite, MdFavoriteBorder } from 'react-icons/md';
-import styles from './styles/imageSectionStyles';
 import { colors } from '../../styles/theme';
+import styles from './styles/imageSectionStyles';
 
 interface IProps {
+  id: string,
   user: IUser,
   img: string
   content: string
@@ -21,22 +27,24 @@ interface IProps {
   updatedAt: Date
 }
 
-export const ContentSection = ({ 
+export const ContentSection = ({
+  id,
   user,
   content,
   favs,
   revits,
   comments,
   createdAt,
-  updatedAt,
   img
 }: IProps) => {
-
-  const [isFav, setFav] = useState<boolean>(false);
+  
+  const { state } = useContext(AppContext);
+  const timeAgo = useTimeAgo( +new Date(createdAt));
+  const [isDevitFaved, setDevitFaved]: any = useDevitFaved(state.uid, favs);
+  const [currentFavs, setCurrentFavs] = useState(favs.length);
   const [isFavHover, setFavHover] = useState<boolean>(false);
   const [isCommentsHover, setCommentsHover] = useState<boolean>(false);
   const [isRevitHover, setRevitHover] = useState<boolean>(false);
-  const [favLenght, setFavLenght] = useState<number>(favs.length);
 
   const handleOnMouseOverFavIcon = () => {
     setFavHover(true);
@@ -59,15 +67,17 @@ export const ContentSection = ({
     setRevitHover(false);
   };
 
-  const handleFavDevit = () => {
-    setFav(prev => !prev);
-    if (favs.length === favLenght) {
-      return setFavLenght(prev => (prev + 1));
+  const handleFavDevit = async() => {
+    await fetchWithToken(`/devit/${id}/fav`, {uid: state.uid}, 'PUT');
+    setDevitFaved((prev: boolean) => !prev);
+
+    if (isDevitFaved) {
+      return setCurrentFavs(prev => (prev - 1));
     }
-    
-    setFavLenght(prev => (prev - 1));
+
+    return setCurrentFavs(prev => (prev + 1)); 
   };
-  
+
   return (
     <>
       <div>
@@ -75,7 +85,7 @@ export const ContentSection = ({
           <section>
             <h2>{user.name}</h2>
             <p>@username</p>
-            <p> &nbsp;- 12h</p>
+            <p>· {timeAgo}</p>
           </section>
           <section>
             <button>
@@ -86,7 +96,7 @@ export const ContentSection = ({
         <main>
           {content}
           {
-            img && <ImageSection imgUrl={img}/>
+            !!img && <ImageSection imgUrl={img}/>
           }
         </main>
         <footer>
@@ -114,11 +124,11 @@ export const ContentSection = ({
               className="list-item-fav"
             >
               {
-                !isFav
+                !isDevitFaved
                   ? <button className="button-fav"><MdFavoriteBorder size="16px" color={isFavHover ? colors.fav : ''}/></button>
                   : <button className="button-fav"><MdFavorite size="16px" color={colors.fav} /></button>
               } 
-              <span>{favLenght}</span>
+              <span>{currentFavs}</span>
             </li>
           </ul>
         </footer>

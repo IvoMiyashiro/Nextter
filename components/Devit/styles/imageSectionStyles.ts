@@ -10,7 +10,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  
+  height: 20px;
 }
 
 section {
@@ -42,7 +42,7 @@ button {
 }
 
 main {
-  margin: .25em 0;
+  margin-top: .25em;
   margin-bottom: .75em;
   color: ${colors.title};
   font-size: .9rem;

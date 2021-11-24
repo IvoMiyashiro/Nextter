@@ -10,7 +10,7 @@ export const useFetchDevits = () => {
         const resp = await fetchWithToken('/devit');
         const body = await resp.json();
         const { devits } = body;
-        setDevits(devits);
+        setDevits(devits.reverse());
 
       } catch (error) {
         console.log(error);

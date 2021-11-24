@@ -16,6 +16,7 @@ interface User {
 export const Devit = ({ devit }: IProps) => {
 
   const {
+    id,
     uid,
     content,
     img,
@@ -36,6 +37,7 @@ export const Devit = ({ devit }: IProps) => {
           alt={user.name}
         />
         <ContentSection
+          id={id}
           user={user}
           content={content}
           favs={favs}

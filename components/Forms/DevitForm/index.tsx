@@ -25,12 +25,8 @@ export const DevitForm = ({handleOpenModal}: IProp) => {
   const [isLoading, setLoading] = useState(false);
   const [textAreaValue, setTextAreaValue] = useState('');
   const [dragState, setDragState] = useState(false);
-  const [imageUrl, setImageUrl] = useState({
-    file: new File(
-      ['foo'],
-      'foo.txt', {
-        type: 'text/plain',
-      }),
+  const [imageUrl, setImageUrl] = useState<any>({
+    file: '',
     fileUrl: ''
   });
 
@@ -39,7 +35,7 @@ export const DevitForm = ({handleOpenModal}: IProp) => {
       return setSubmitButtonDisabled(false);
     }
 
-    if (textAreaValue.length > 0 && textAreaValue.length < 50) {
+    if (textAreaValue.length > 0 && textAreaValue.length < 280) {
       return setSubmitButtonDisabled(false);
     }
 
@@ -55,19 +51,13 @@ export const DevitForm = ({handleOpenModal}: IProp) => {
     setLoading(true);
 
     try {
-      const newFileUrl = await fileUpload(imageUrl.file);
+      const newFile = await fileUpload(imageUrl.file);
       
-  
       await fetchWithToken('devit/create', {
         uid: state.uid,
         content: textAreaValue,
-        img: newFileUrl,
+        img: newFile,
       }, 'POST');
-
-      setImageUrl(prev => ({
-        ...prev,
-        fileUrl: newFileUrl
-      }));
     } catch (error) {
       console.log(error);
     }
