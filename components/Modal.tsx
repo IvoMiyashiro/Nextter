@@ -5,7 +5,7 @@ interface IProps {
   handleOpenModal: (value: boolean) => void,
 }
 
-export const ResponsiveModal = ({children, handleOpenModal}: IProps) => {
+export const Modal = ({children, handleOpenModal}: IProps) => {
 
   const modalRef = useRef(null);
 
@@ -29,6 +29,7 @@ export const ResponsiveModal = ({children, handleOpenModal}: IProps) => {
           width: 100%;
           z-index: 9;
           top: 0;
+          left: 0;
           background: rgba(91, 112, 131, 0.4);
         }
       `}</style>

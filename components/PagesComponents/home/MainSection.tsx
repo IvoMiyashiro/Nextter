@@ -3,7 +3,7 @@ import { useFetchDevits } from '../../../hooks/useFetchDevits';
 
 import { DevitForm } from '../../../components/Forms/DevitForm';
 import { Navbar } from '../../../components/Navbar';
-import { ResponsiveModal } from '../../../components/Modal';
+import { Modal } from '../../../components/Modal';
 import { TopBar } from '../../../components/TopBar';
 import { DevitButton } from '../../Buttons/DevitButton';
 import { Devit } from '../../Devit';
@@ -24,11 +24,11 @@ export const MainSection = () => {
       {
         isDevitFormOpen
         &&
-      <ResponsiveModal
+      <Modal
         handleOpenModal={setDevitFormOpen}
       >
         <DevitForm handleOpenModal={setDevitFormOpen} />
-      </ResponsiveModal>
+      </Modal>
       }
       <section>
         {

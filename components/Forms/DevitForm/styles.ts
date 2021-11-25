@@ -13,7 +13,7 @@ export default css`
     z-index: 100;
   }
 
-  section {
+  header {
     align-items: center;
     border-bottom: 1px solid ${colors.gray};
     display: flex;
@@ -38,14 +38,6 @@ export default css`
     gap: 1em;
   }
 
-  picture {
-    border-radius: 50%;
-    height: 48px;
-    overflow: hidden;
-    position: relative;
-    width: 48px;
-  }
-
   div {
     width: 100%;
   }
@@ -67,6 +59,14 @@ export default css`
     color: #9897A9;
   }
 
+  section {
+    border-radius: 50%;
+    height: 48px;
+    overflow: hidden;
+    position: relative;
+    width: 48px;
+  }
+
   .submit-button-container {
     width: auto;
   }
@@ -83,8 +83,8 @@ export default css`
       overflow-y: auto;
     }
 
-  .submit-button-container {
-    display: none;
-  }
+    .submit-button-container {
+      display: none;
+    }
   }
 `;

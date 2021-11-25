@@ -3,17 +3,17 @@ import { useContext, useState } from 'react';
 import { IUser } from '../../interfaces';
 import { ImageSection } from './ImageSection';
 
-import { fetchWithToken } from '../../helpers/fetchWithToken';
 import { useDevitFaved } from '../../hooks/useDevitFaved';
-import useTimeAgo from '../../hooks/useTimeAgo';
 import { AppContext } from '../../context/userContext';
+import { fetchWithToken } from '../../helpers/fetchWithToken';
 
 import { AiOutlineRetweet } from 'react-icons/ai';
-import { BsThreeDots } from 'react-icons/bs';
 import { FiMessageCircle } from 'react-icons/fi';
 import { MdFavorite, MdFavoriteBorder } from 'react-icons/md';
 import { colors } from '../../styles/theme';
 import styles from './styles/ContentSectionStyles';
+import { ContentHeader } from './ContentHeader';
+import { ContentMain } from './ContentMain';
 
 interface IProps {
   id: string,
@@ -25,6 +25,7 @@ interface IProps {
   comments: Array<any>
   createdAt: Date
   updatedAt: Date
+  handleCommentFormOpen: (value: boolean) => void
 }
 
 export const ContentSection = ({
@@ -35,14 +36,13 @@ export const ContentSection = ({
   revits,
   comments,
   createdAt,
-  img
+  img,
+  handleCommentFormOpen
 }: IProps) => {
   
   const { state } = useContext(AppContext);
-  const timeAgo = useTimeAgo( +new Date(createdAt));
   const [isDevitFaved, setDevitFaved]: any = useDevitFaved(state.uid, favs);
   const [currentFavs, setCurrentFavs] = useState(favs.length);
-
   const [isFavOnMouseOver, setFavMouseOver] = useState<boolean>(false);
   const [isCommentsOnMouseOver, setCommentsOnMouseOver] = useState<boolean>(false);
   const [isRevitOnMouseOver, setRevitOnMouse] = useState<boolean>(false);
@@ -65,31 +65,22 @@ export const ContentSection = ({
       console.log(error);
     }
   };
-
   return (
     <>
       <div>
-        <header>
-          <section>
-            <h2>{user.name}</h2>
-            <p>@username</p>
-            <p>· {timeAgo}</p>
-          </section>
-          <section>
-            <button>
-              <BsThreeDots size="22px" />
-            </button>
-          </section>
-        </header>
-        <main>
-          {content}
-          {
-            !!img && <ImageSection imgUrl={img}/>
-          }
-        </main>
+        <ContentHeader
+          user={user}
+          username={'ivomiyashiro'}
+          createdAt={createdAt}
+        />
+        <ContentMain 
+          content={content}
+          img={img}
+        />
         <footer>
           <ul>
-            <li 
+            <li
+              onClick={() => handleCommentFormOpen(true)} 
               onMouseOver={() => setCommentsOnMouseOver(true)}
               onMouseLeave={() => setCommentsOnMouseOver(false)}
               className="list-item-comments"

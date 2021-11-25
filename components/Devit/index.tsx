@@ -1,9 +1,15 @@
 
 import { useGetUser } from '../../hooks/useGetUser';
+
 import { IDevit, IUser } from '../../interfaces';
-import { colors } from '../../styles/theme';
+
 import { ContentSection } from './ContentSection';
-import { ProfileImage } from './PofileImage';
+import { ProfileImage } from './ProfileImage';
+import { Modal } from '../Modal';
+
+import { colors } from '../../styles/theme';
+import { CommentForm } from '../Forms/CommentForm';
+import { useState } from 'react';
 
 interface IProps {
   devit: IDevit
@@ -28,6 +34,7 @@ export const Devit = ({ devit }: IProps) => {
   } = devit;
 
   const { user }: User = useGetUser(uid);
+  const [isCommentFormOpen, setCommentFormOpen] = useState(false);
   
   return (
     <>
@@ -46,7 +53,21 @@ export const Devit = ({ devit }: IProps) => {
           createdAt={createdAt}
           updatedAt={updatedAt}
           img={img}
+          handleCommentFormOpen={setCommentFormOpen}
         />
+        {
+          isCommentFormOpen
+          &&
+          <Modal handleOpenModal={setCommentFormOpen}>
+            <CommentForm
+              user={user}
+              content={content}
+              createdAt={createdAt}
+              img={img}
+              handleOpenModal={setCommentFormOpen}
+            />
+          </Modal>
+        }
       </div>
       <style jsx>{`
         div {
