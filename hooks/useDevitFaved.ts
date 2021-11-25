@@ -1,10 +1,5 @@
 import { useEffect, useState } from 'react';
 
-interface IIsFaved {
-  isDevitFaved: boolean,
-  setDevitFaved: (value: boolean | ((prev: boolean) => boolean)) => void
-}
-
 export const useDevitFaved = (uid: string, favs: string[]) => {
 
   const [isDevitFaved, setDevitFaved] = useState(false);

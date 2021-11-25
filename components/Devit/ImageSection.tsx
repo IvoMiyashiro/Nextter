@@ -18,13 +18,12 @@ export const ImageSection = ({ imgUrl } : IProps) => {
           height: 100%;
           width: 100%;
           margin-top: .5em;
-          overflow: hidden;
-          border-radius: 12px;
         }
 
         img {
           object-fit: cover;
           width: 100%;
+          border-radius: 12px;
         }
       `}</style>
     </>
