@@ -1,91 +1,48 @@
+import { useContext, useEffect, useState } from 'react';
+import { AppContext } from '../../context/userContext';
 
-import { useGetUser } from '../../hooks/useGetUser';
+import { IDevit } from '../../interfaces';
+import { CommentCard } from '../CommentCard';
 
-import { IDevit, IUser } from '../../interfaces';
 
-import { ContentSection } from './ContentSection';
-import { ProfileImage } from './ProfileImage';
-import { Modal } from '../Modal';
-
-import { colors } from '../../styles/theme';
-import { CommentForm } from '../Forms/CommentForm';
-import { useState } from 'react';
+import { DevitCard } from '../DevitCard';
 
 interface IProps {
   devit: IDevit
 }
 
-interface User {
-  user: IUser
-}
-
 export const Devit = ({ devit }: IProps) => {
 
-  const {
-    id,
-    uid,
-    content,
-    img,
-    comments,
-    favs,
-    revits,
-    createdAt,
-    updatedAt
-  } = devit;
+  const { comments } = devit;
+  const { state } = useContext(AppContext);
+  const [userComments, setUserComments] = useState<any>([]);
 
-  const { user }: User = useGetUser(uid);
-  const [isCommentFormOpen, setCommentFormOpen] = useState(false);
+  useEffect(() => {
+    const commentArr = comments.map(comment => {
+      if (comment.uid === state.uid) {
+        return comment;
+      }
+    });
+    setUserComments(commentArr);
+  }, [comments, state.uid]);
   
   return (
     <>
       <div>
-        <ProfileImage
-          profileImage={user.profilePicture} 
-          alt={user.name}
-        />
-        <ContentSection
-          id={id}
-          user={user}
-          content={content}
-          favs={favs}
-          revits={revits}
-          comments={comments}
-          createdAt={createdAt}
-          updatedAt={updatedAt}
-          img={img}
-          handleCommentFormOpen={setCommentFormOpen}
-        />
+        <DevitCard devit={devit} />
         {
-          isCommentFormOpen
+          userComments.length !== 0
           &&
-          <Modal handleOpenModal={setCommentFormOpen}>
-            <CommentForm
-              user={user}
-              content={content}
-              createdAt={createdAt}
-              img={img}
-              handleOpenModal={setCommentFormOpen}
-            />
-          </Modal>
+          userComments.map(comment => {
+            console.log(userComments);
+            return (
+              <CommentCard key={comment.id} devit={devit}/>
+            );
+          })
         }
       </div>
-      <style jsx>{`
-        div {
-          display: flex;
-          gap: .75em;
-          width: 100%;
-          padding: 1em;
-          border-bottom: 1px solid ${colors.gray};
-          background: ${colors.background};
-          transition: background .2s ease-in-out;
-          cursor: pointer;
-        }
 
-        div:hover {
-          transition: background .2s ease-in-out;
-          background: rgba(17, 34, 64, 0.4)
-        }
-      `}</style>
+
     </>
   );
 };

@@ -10,10 +10,11 @@ import { HeaderSection } from '../DevitForm/HeaderSection';
 import { MainSection } from '../DevitForm/MainSection';
 import { ProfileImage } from '../../Devit/ProfileImage';
 
-import styles from './styles';
 import { IUser } from '../../../interfaces';
+import styles from './styles';
 
 interface IProps {
+  id: string
   user: IUser
   createdAt: Date
   content: string
@@ -22,6 +23,7 @@ interface IProps {
 }
 
 export const CommentForm = ({
+  id,
   user,
   createdAt,
   content,
@@ -61,11 +63,11 @@ export const CommentForm = ({
         ? newFile = await fileUpload(imageUrl.file)
         : newFile = '';
       
-      await fetchWithToken('devit/create', {
+      await fetchWithToken(`devit/${id}/comment`, {
         uid: state.uid,
         content: textAreaValue,
         img: newFile,
-      }, 'POST');
+      }, 'PUT');
     } catch (error) {
       console.log(error);
     }
@@ -84,7 +86,7 @@ export const CommentForm = ({
           buttonChild="Reply"
         />
         <div>
-          <section className="test">
+          <section className="profile-img-container">
             <ProfileImage
               profileImage={user.profilePicture} 
               alt={user.name}

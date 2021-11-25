@@ -32,7 +32,7 @@ export default css`
     color: ${colors.primary};
   }
 
-  .test {
+  .profile-img-container {
     display: flex;
     flex-direction: column;
     gap: 0.5em;

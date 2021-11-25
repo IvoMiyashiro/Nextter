@@ -1,19 +1,21 @@
 import { useContext, useState } from 'react';
 
 import { IUser } from '../../interfaces';
-import { ImageSection } from './ImageSection';
 
 import { useDevitFaved } from '../../hooks/useDevitFaved';
 import { AppContext } from '../../context/userContext';
 import { fetchWithToken } from '../../helpers/fetchWithToken';
+
+import { ContentHeader } from './ContentHeader';
+import { ContentMain } from './ContentMain';
 
 import { AiOutlineRetweet } from 'react-icons/ai';
 import { FiMessageCircle } from 'react-icons/fi';
 import { MdFavorite, MdFavoriteBorder } from 'react-icons/md';
 import { colors } from '../../styles/theme';
 import styles from './styles/ContentSectionStyles';
-import { ContentHeader } from './ContentHeader';
-import { ContentMain } from './ContentMain';
+import { Modal } from '../Modal';
+import { CommentForm } from '../Forms/CommentForm';
 
 interface IProps {
   id: string,
@@ -25,7 +27,6 @@ interface IProps {
   comments: Array<any>
   createdAt: Date
   updatedAt: Date
-  handleCommentFormOpen: (value: boolean) => void
 }
 
 export const ContentSection = ({
@@ -37,7 +38,6 @@ export const ContentSection = ({
   comments,
   createdAt,
   img,
-  handleCommentFormOpen
 }: IProps) => {
   
   const { state } = useContext(AppContext);
@@ -46,6 +46,7 @@ export const ContentSection = ({
   const [isFavOnMouseOver, setFavMouseOver] = useState<boolean>(false);
   const [isCommentsOnMouseOver, setCommentsOnMouseOver] = useState<boolean>(false);
   const [isRevitOnMouseOver, setRevitOnMouse] = useState<boolean>(false);
+  const [isCommentFormOpen, setCommentFormOpen] = useState(false);
 
   const handleFavDevit = async() => {
     try {
@@ -65,6 +66,7 @@ export const ContentSection = ({
       console.log(error);
     }
   };
+
   return (
     <>
       <div>
@@ -80,7 +82,7 @@ export const ContentSection = ({
         <footer>
           <ul>
             <li
-              onClick={() => handleCommentFormOpen(true)} 
+              onClick={() => setCommentFormOpen(true)} 
               onMouseOver={() => setCommentsOnMouseOver(true)}
               onMouseLeave={() => setCommentsOnMouseOver(false)}
               className="list-item-comments"
@@ -111,6 +113,20 @@ export const ContentSection = ({
             </li>
           </ul>
         </footer>
+        {
+          isCommentFormOpen
+          &&
+          <Modal handleOpenModal={setCommentFormOpen}>
+            <CommentForm
+              id={id}
+              user={user}
+              content={content}
+              createdAt={createdAt}
+              img={img}
+              handleOpenModal={setCommentFormOpen}
+            />
+          </Modal>
+        }
       </div>
       <style jsx>{styles}</style>
     </>
