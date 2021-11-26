@@ -14,6 +14,10 @@ export default css`
     cursor: pointer;
   }
 
+  div {
+    width: 100%;
+  }
+
   section:hover {
     transition: background .2s ease-in-out;
     background: rgba(17, 34, 64, 0.4)
@@ -27,7 +31,7 @@ export default css`
   }
 
   li {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: .5em;
     color: ${colors.text};
@@ -36,11 +40,10 @@ export default css`
 
   span {
     font-size: .8rem;
-    margin-top: -0.2em;
+    margin-top: -0.2em
   }
 
   button {
-    padding: 0;
     border: none;
     background-color: transparent;
   }

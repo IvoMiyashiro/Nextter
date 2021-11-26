@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { AppContext } from '../../context/userContext';
 
-import { IDevit } from '../../interfaces';
+import { IComment, IDevit } from '../../interfaces';
 import { CommentCard } from '../CommentCard';
 
 
@@ -33,10 +33,10 @@ export const Devit = ({ devit }: IProps) => {
         {
           userComments.length !== 0
           &&
-          userComments.map(comment => {
+          userComments.map((comment: IComment) => {
             console.log(userComments);
             return (
-              <CommentCard key={comment.id} devit={devit}/>
+              <CommentCard key={comment.id} comment={comment}/>
             );
           })
         }

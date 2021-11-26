@@ -1,8 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import mongoose from 'mongoose';
-import { jwtValidator } from '../../../../helpers/jwtValidator';
-import Devit from '../../../../models/Devit';
-import dbConnection from '../../../../utils/database';
+import { jwtValidator } from '../../../../../helpers/jwtValidator';
+import Devit from '../../../../../models/Devit';
+import dbConnection from '../../../../../utils/database';
 
 const comment = async(req: NextApiRequest, res: NextApiResponse) => {
   

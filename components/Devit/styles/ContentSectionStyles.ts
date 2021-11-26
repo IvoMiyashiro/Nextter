@@ -1,96 +1,108 @@
 import css from 'styled-jsx/css';
+import { breakpoints } from '../../../styles/breakpoints';
 import { colors } from '../../../styles/theme';
 
 export default css`
-div {
-  width: 100%;
-}
+  div {
+    width: 100%;
+  }
 
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 20px;
-}
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 20px;
+  }
 
-section {
-  display: flex;
-  align-items: center;
-  gap: .5em;
-}
+  section {
+    display: flex;
+    align-items: center;
+    gap: .5em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 225px;
+  }
 
-h2 {
-  font-size: 1rem;
-  color: ${colors.title};
-  font-weight: 600;
-}
+  h2 {
+    font-size: 1rem;
+    color: ${colors.title};
+    font-weight: 600;
+  }
 
-p {
-  color: ${colors.text};
-  font-size: .85rem;
-}
+  p {
+    color: ${colors.text};
+    font-size: .85rem;
 
-span {
-  font-size: .8rem;
-  margin-top: -0.2em;
-}
+  }
 
-button {
-  padding: 0;
-  background: transparent;
-  color: ${colors.text};
-}
+  span {
+    font-size: .8rem;
+    margin-top: -0.2em;
+  }
 
-main {
-  margin-top: .25em;
-  margin-bottom: .75em;
-  color: ${colors.title};
-  font-size: .9rem;
-}
+  button {
+    padding: 0;
+    background: transparent;
+    color: ${colors.text};
+  }
 
-ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  gap: 3em;
-}
+  main {
+    margin-top: .25em;
+    margin-bottom: .75em;
+    color: ${colors.title};
+    font-size: .9rem;
+  }
 
-li {
-  display: flex;
-  align-items: center;
-  gap: .5em;
-  color: ${colors.text};
-  cursor: pointer;
-}
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 3em;
+  }
 
-button {
-  padding: 0.5em;
-  border-radius: 50%;
-}
+  li {
+    display: flex;
+    align-items: center;
+    gap: .5em;
+    color: ${colors.text};
+    cursor: pointer;
+  }
 
-.list-item-fav:hover {
-  color: ${colors.fav};
-}
+  button {
+    padding: 0.5em;
+    border-radius: 50%;
+  }
 
-.list-item-fav:hover .button-fav {
-  background: rgba(249, 24, 128, 0.1);
-}
+  .list-item-fav:hover {
+    color: ${colors.fav};
+  }
 
-.list-item-comments:hover {
-  color: ${colors.comments};
-}
+  .list-item-fav:hover .button-fav {
+    background: rgba(249, 24, 128, 0.1);
+  }
 
-.list-item-comments:hover .button-comment {
-  background: rgba(29, 155, 240, 0.1);
-}
+  .list-item-comments:hover {
+    color: ${colors.comments};
+  }
 
-.list-item-revits:hover {
-  color: ${colors.revits};
-}
+  .list-item-comments:hover .button-comment {
+    background: rgba(29, 155, 240, 0.1);
+  }
 
-.list-item-revits:hover .button-revit {
-  background: rgba(0, 186, 124, 0.1);
-}
+  .list-item-revits:hover {
+    color: ${colors.revits};
+  }
+
+  .list-item-revits:hover .button-revit {
+    background: rgba(0, 186, 124, 0.1);
+  }
+
+  @media (min-width: ${breakpoints.desktop}) {
+      section {
+      max-width: auto;
+    }
+  }
 
 `;

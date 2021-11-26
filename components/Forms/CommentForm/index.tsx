@@ -63,7 +63,7 @@ export const CommentForm = ({
         ? newFile = await fileUpload(imageUrl.file)
         : newFile = '';
       
-      await fetchWithToken(`devit/${id}/comment`, {
+      await fetchWithToken(`devit/${id}/comments`, {
         uid: state.uid,
         content: textAreaValue,
         img: newFile,

@@ -60,7 +60,9 @@ export const DevitCard = ({ devit }: IProps) => {
           grid-template-columns: 48px 1fr;
           gap: .75em;
           width: 100%;
-          padding: 1em;
+          padding: 0 1em;
+          padding-top: 1em;
+          padding-bottom: .5em;
           background: ${colors.background};
           border-bottom: 1px solid ${comments.length === 0 ? colors.gray : 'transparent'};
           transition: background .2s ease-in-out;

@@ -1,12 +1,13 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { jwtValidator } from '../../../../helpers/jwtValidator';
-import Devit from '../../../../models/Devit';
-import dbConnection from '../../../../utils/database';
+import { jwtValidator } from '../../../../../helpers/jwtValidator';
+import { IComment } from '../../../../../interfaces';
+import Devit from '../../../../../models/Devit';
+import dbConnection from '../../../../../utils/database';
 
 const favComment = async(req: NextApiRequest, res: NextApiResponse) => {
 
   const { id } = req.query;
-  const { uid } = req.body;
+  const { uid, commentId } = req.body;
 
   try {
     dbConnection();
@@ -28,19 +29,46 @@ const favComment = async(req: NextApiRequest, res: NextApiResponse) => {
         msg: 'Devit not found.'
       });
     }
+    
+    const comment = devit.comments.filter(comment => {
+      if (comment.id.toString() === commentId) {
+        return comment;
+      }
+    });
 
-    if (devit.favs.includes(uid)) {
-      await devit.updateOne({ $pull: {favs: uid}});
+    // if comments is already faved
+    if (comment[0].uid === uid) {
+      const newFavArr = comment.favs.filter(favUid => {
+        if (favUid === uid) {
+          return favUid;
+        }
+      });
+
+      const newComment = {
+        ...comment[0],
+        favs: newFavArr
+      };
+
+      await devit.comments.updateOne({ $set: {comment: newComment}});
       return res.status(200).json({
         success: true,
-        msg: 'The devit has been unfaved.'
+        msg: 'Comment has been unfaved.'
       });
     }
+    
+    // if comments is not faved
+    const newComment = {
+      ...comment[0],
+      favs: [
+        ...comment[0].favs,
+        uid
+      ]
+    };
 
-    await devit.updateOne({ $push: {favs: uid}});
+    await devit.updateOne({ $set: {comments: [...devit.comments, newComment]}});
     return res.status(200).json({
       success: true,
-      msg: 'The devit has been faved.'
+      msg: 'Comment has been faved.'
     });
   } catch (error) {
     console.log(error);

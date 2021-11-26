@@ -5,6 +5,8 @@ import { AppContext } from '../../context/userContext';
 import { useDevitFaved } from '../../hooks/useDevitFaved';
 import { fetchWithToken } from '../../helpers/fetchWithToken';
 
+import { IComment } from '../../interfaces';
+
 import { ProfileImage } from '../Devit/ProfileImage';
 import { ContentHeader } from '../Devit/ContentHeader';
 import { ContentMain } from '../Devit/ContentMain';
@@ -13,11 +15,11 @@ import { MdFavorite, MdFavoriteBorder } from 'react-icons/md';
 import { colors } from '../../styles/theme';
 import styles from './styles';
 
-// interface IProps {
-//   comment
-// }
+interface IProps {
+  comment: IComment
+}
 
-export const CommentCard = ({ devit }: any) => {
+export const CommentCard = ({ comment }: IProps) => {
 
   const {
     id,
@@ -26,7 +28,7 @@ export const CommentCard = ({ devit }: any) => {
     url,
     favs,
     createdAt,
-  } = devit;
+  } = comment;
 
   const { state } = useContext(AppContext);
   const [isDevitFaved, setDevitFaved]: any = useDevitFaved(state.uid, favs);
@@ -38,11 +40,11 @@ export const CommentCard = ({ devit }: any) => {
   const handleFavComment = async() => {
     try {
       setDevitFaved((prev: boolean) => !prev);
-      await fetchWithToken(
-        `/devit/${id}/fav`,
-        {uid: state.uid},
-        'PUT'
-      );
+      // await fetchWithToken(
+      //   `/devit/${id}/comments/fav`,
+      //   {uid: state.uid},
+      //   'PUT'
+      // );
   
       if (isDevitFaved) {
         return setCurrentFavs(prev => (prev - 1));
@@ -81,8 +83,16 @@ export const CommentCard = ({ devit }: any) => {
               >
                 {
                   !isDevitFaved
-                    ? <button className="button-fav"><MdFavoriteBorder size="16px" color={isFavOnMouseOver ? colors.fav : ''}/></button>
-                    : <button className="button-fav"><MdFavorite size="16px" color={colors.fav} /></button>
+                    ? (
+                      <button className="button-fav">
+                        <MdFavoriteBorder size="16px" color={isFavOnMouseOver ? colors.fav : colors.text}/>
+                      </button>
+                    )
+                    : ( 
+                      <button className="button-fav">
+                        <MdFavorite size="16px" color={colors.fav} />
+                      </button>
+                    )
                 } 
                 <span>{currentFavs}</span>
               </li>

@@ -3,7 +3,7 @@ import { jwtValidator } from '../../../../helpers/jwtValidator';
 import Devit from '../../../../models/Devit';
 import dbConnection from '../../../../utils/database';
 
-const createDevit = async(req: NextApiRequest, res: NextApiResponse) => {
+const favDevit = async(req: NextApiRequest, res: NextApiResponse) => {
 
   const { id } = req.query;
   const { uid } = req.body;
@@ -52,4 +52,4 @@ const createDevit = async(req: NextApiRequest, res: NextApiResponse) => {
   }
 };
 
-export default createDevit;
+export default favDevit;

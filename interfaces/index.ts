@@ -31,3 +31,12 @@ export interface IDevit {
 export interface IDevitFavs {
   uid: string,
 }
+
+export interface IComment {
+  id: string
+  uid: string
+  content: string
+  url: string
+  favs: string[]
+  createdAt: Date
+}
