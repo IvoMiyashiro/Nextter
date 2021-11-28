@@ -17,9 +17,11 @@ import styles from './styles';
 
 interface IProps {
   comment: IComment
+  isLastComment: boolean
+  devitId: String
 }
 
-export const CommentCard = ({ comment }: IProps) => {
+export const CommentCard = ({ comment, isLastComment, devitId }: IProps) => {
 
   const {
     id,
@@ -36,15 +38,15 @@ export const CommentCard = ({ comment }: IProps) => {
   const [isFavOnMouseOver, setFavMouseOver] = useState<boolean>(false);
 
   const { user } = useGetUser(uid);
-
+  console.log(devitId, id);
   const handleFavComment = async() => {
     try {
       setDevitFaved((prev: boolean) => !prev);
-      // await fetchWithToken(
-      //   `/devit/${id}/comments/fav`,
-      //   {uid: state.uid},
-      //   'PUT'
-      // );
+      await fetchWithToken(
+        `/devit/${devitId}/comments/fav`,
+        {uid: state.uid, commentId: id},
+        'PUT'
+      );
   
       if (isDevitFaved) {
         return setCurrentFavs(prev => (prev - 1));
@@ -55,19 +57,27 @@ export const CommentCard = ({ comment }: IProps) => {
       console.log(error);
     }
   };
-
+  console.log(isLastComment);
   return (
     <>
       <section>
-        <ProfileImage
-          profileImage={user.profilePicture} 
-          alt={user.name}
-        />
+        <div className="profile-img-section">
+          <ProfileImage
+            profileImage={user.profilePicture} 
+            alt={user.name}
+          />
+          {
+            !isLastComment
+            &&
+            <div className="line"></div>
+          }
+        </div>
         <div>
           <ContentHeader
             user={user}
             username={'ivomiyashiro'}
             createdAt={createdAt}
+            isComment={true}
           />
           <ContentMain
             content={content}

@@ -6,14 +6,15 @@ import { BsThreeDots } from 'react-icons/bs';
 import style from './styles/ContentSectionStyles';
 
 interface IProps {
-  user: IUser,
+  user: IUser
   username: string
   createdAt: Date
+  isComment: boolean
 }
 
-export const ContentHeader = ({ user, username, createdAt }: IProps ) => {
+export const ContentHeader = ({ user, username, createdAt, isComment }: IProps ) => {
   
-  const timeAgo = useTimeAgo( +new Date(createdAt));
+  // const timeAgo = useTimeAgo( +new Date(createdAt));
 
   return (
     <>
@@ -21,13 +22,17 @@ export const ContentHeader = ({ user, username, createdAt }: IProps ) => {
         <section>
           <h2>{user.name}</h2>
           <p>@{username}</p>
-          <p>· {timeAgo}</p>
+          {/* <p>· {timeAgo}</p> */}
         </section>
-        <section>
-          <button>
-            <BsThreeDots size="22px" />
-          </button>
-        </section>
+        {
+          !isComment
+          &&
+          <section> 
+            <button>
+              <BsThreeDots size="22px" />
+            </button>
+          </section>
+        }
       </header>
       <style jsx>{style}</style>
     </>

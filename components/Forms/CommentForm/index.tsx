@@ -98,6 +98,7 @@ export const CommentForm = ({
               user={user}
               username={'ivomiyashiro'}
               createdAt={createdAt}
+              isComment={false}
             />
             <ContentMain 
               content={content}

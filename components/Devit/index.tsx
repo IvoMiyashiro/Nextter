@@ -13,10 +13,10 @@ interface IProps {
 
 export const Devit = ({ devit }: IProps) => {
 
-  const { comments } = devit;
+  const { comments, id } = devit;
   const { state } = useContext(AppContext);
   const [userComments, setUserComments] = useState<any>([]);
-
+  
   useEffect(() => {
     const commentArr = comments.map(comment => {
       if (comment.uid === state.uid) {
@@ -33,10 +33,14 @@ export const Devit = ({ devit }: IProps) => {
         {
           userComments.length !== 0
           &&
-          userComments.map((comment: IComment) => {
-            console.log(userComments);
+          userComments.map((comment: IComment, i:number) => {
             return (
-              <CommentCard key={comment.id} comment={comment}/>
+              <CommentCard 
+                key={comment.id}
+                devitId={id}
+                comment={comment} 
+                isLastComment={userComments.length === (i + 1)} 
+              />
             );
           })
         }

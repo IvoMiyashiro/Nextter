@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import mongoose from 'mongoose';
 import { jwtValidator } from '../../../../../helpers/jwtValidator';
+import { Types } from 'mongoose';
 import Devit from '../../../../../models/Devit';
 import dbConnection from '../../../../../utils/database';
 
@@ -29,23 +29,22 @@ const comment = async(req: NextApiRequest, res: NextApiResponse) => {
         msg: 'Devit not found.'
       });
     }
-    const commentId = new mongoose.Types.ObjectId();
+
     await devit.updateOne(
       { $push: {
         comments: {
-          id: commentId,
+          id: (new Types.ObjectId()).toString(),
           uid,
           content,
-          url: img,
+          img,
           favs: [],
-          createdAt: new Date()
         }
       }}
     );
 
     return res.status(200).json({
       success: true,
-      msg: 'The devit has been commented.'
+      msg: 'Devit has been commented.'
     });
 
   } catch (error) {

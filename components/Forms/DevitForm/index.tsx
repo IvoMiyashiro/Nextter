@@ -72,15 +72,17 @@ export const DevitForm = ({handleOpenModal}: IProp) => {
           isLoading={isLoading}
           buttonChild="Devit"
         />
-        <MainSection
-          handleTextAreaValue={setTextAreaValue}
-          handleImageUrl={setImageUrl}
-          isSubmitButtonDisabled={isSubmitButtonDisabled}
-          textAreaValue={textAreaValue}
-          imageUrl={imageUrl.fileUrl}
-          textAreaPlaceholder="What's happening?"
-          user={state.name}
-        />
+        <div style={{marginTop: '1em'}}>
+          <MainSection
+            handleTextAreaValue={setTextAreaValue}
+            handleImageUrl={setImageUrl}
+            isSubmitButtonDisabled={isSubmitButtonDisabled}
+            textAreaValue={textAreaValue}
+            imageUrl={imageUrl.fileUrl}
+            textAreaPlaceholder="What's happening?"
+            user={state.name}
+          />
+        </div>
       </form>
       <style jsx>{styles}</style>
     </>

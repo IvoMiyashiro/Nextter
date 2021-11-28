@@ -14,7 +14,7 @@ export default css`
     bottom: 0;
     display: flex;
     height: 53px;
-    position: fixed;
+    position: sticky;
     width: 100%;
     background: ${colors.background};
   }

@@ -33,7 +33,6 @@ export default css`
   main {
     display: flex;
     width: 100%;
-    margin-top: 1em;
     padding: 0 1em;
     gap: 1em;
   }

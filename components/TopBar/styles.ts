@@ -9,6 +9,11 @@ export default css`
     justify-content: space-between;
     border-bottom: 1px solid ${colors.gray};
     padding: 0 1em;
+    position: sticky;
+    top: 0;
+    background: ${colors.background};
+    width: 100%;
+    z-index: 9;
   }
 
   section {

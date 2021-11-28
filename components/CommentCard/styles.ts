@@ -7,15 +7,34 @@ export default css`
     gap: .75em;
     width: 100%;
     padding: 0 1em;
-    padding-bottom: 1em;
-    border-bottom: 1px solid ${colors.gray};
+    padding-top: .5em;
     background: ${colors.background};
     transition: background .2s ease-in-out;
     cursor: pointer;
   }
 
+  section:last-child {
+    border-bottom: 1px solid ${colors.gray};
+    padding-bottom: .75em;
+  }
+
   div {
     width: 100%;
+  }
+
+  .profile-img-section {
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .5em;
+  }
+
+  .line {
+    width: 2px;
+    background-color: rgb(61, 84, 102);
+    height: 100%;
+    padding: 0;
   }
 
   section:hover {
