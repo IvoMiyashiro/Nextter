@@ -46,7 +46,7 @@ export default css`
     border: none;
     color: ${colors.title};
     font-size: 1.35rem;
-    height: 168px;
+    min-height: 168px;
     outline: none;
     padding: .5em 0;
     resize: none;

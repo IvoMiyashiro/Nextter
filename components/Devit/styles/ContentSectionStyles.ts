@@ -8,71 +8,46 @@ export default css`
   }
 
   header {
-    display: flex;
-    justify-content: space-between;
     align-items: center;
+    display: flex;
     height: 20px;
+    justify-content: space-between;
   }
 
   section {
-    display: flex;
     align-items: center;
+    display: flex;
     gap: .5em;
-    white-space: nowrap;
+    max-width: 225px;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 225px;
+    white-space: nowrap;
   }
 
   h2 {
-    font-size: 1rem;
     color: ${colors.title};
+    font-size: 1rem;
     font-weight: 600;
   }
 
   p {
     color: ${colors.text};
     font-size: .85rem;
-
   }
-
-  span {
-    font-size: .8rem;
-    margin-top: -0.2em;
-  }
-
+  
   button {
-    padding: 0;
     background: transparent;
+    border-radius: 50%;
     color: ${colors.text};
+    padding: 0;
+    padding: 0.5em;
   }
 
   main {
-    margin-top: .25em;
-    margin-bottom: .75em;
     color: ${colors.title};
     font-size: .9rem;
-  }
-
-  ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    gap: 3em;
-  }
-
-  li {
-    display: flex;
-    align-items: center;
-    gap: .5em;
-    color: ${colors.text};
-    cursor: pointer;
-  }
-
-  button {
-    padding: 0.5em;
-    border-radius: 50%;
+    margin-bottom: .75em;
+    margin-top: .25em;
   }
 
   .list-item-fav:hover {

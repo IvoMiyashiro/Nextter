@@ -26,6 +26,7 @@ export const MainSection = () => {
         &&
       <Modal
         handleOpenModal={setDevitFormOpen}
+        justify="center"
       >
         <DevitForm handleOpenModal={setDevitFormOpen} />
       </Modal>

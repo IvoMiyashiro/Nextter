@@ -7,7 +7,7 @@ const favComment = async(req: NextApiRequest, res: NextApiResponse) => {
  
   const { id } = req.query;
   const { uid, commentId } = req.body;
-  console.log(id, uid, commentId);
+
   try {
     dbConnection();
 

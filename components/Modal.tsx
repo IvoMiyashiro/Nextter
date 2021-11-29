@@ -3,9 +3,10 @@ import { ReactChild, useRef, MouseEvent } from 'react';
 interface IProps {
   children?: ReactChild
   handleOpenModal: (value: boolean) => void,
+  align: string
 }
 
-export const Modal = ({children, handleOpenModal}: IProps) => {
+export const Modal = ({children, handleOpenModal, align}: IProps) => {
 
   const modalRef = useRef(null);
 
@@ -24,6 +25,7 @@ export const Modal = ({children, handleOpenModal}: IProps) => {
         div {
           display: flex;
           justify-content: center;
+          align-items: ${align};
           position: fixed;
           height: 100vh;
           width: 100%;

@@ -4,17 +4,27 @@ import { fetchWithToken } from '../../../helpers/fetchWithToken';
 import { AppContext } from '../../../context/userContext';
 import { fileUpload } from '../../../helpers/fileUpload';
 
-import { HeaderSection } from './HeaderSection';
+import { HeaderSection } from '../DevitForm/HeaderSection';
 import { MainSection } from './MainSection';
 
-import styles from './styles';
+import styles from '../DevitForm/styles';
 
 
 interface IProp {
+  id: string
+  content: string
+  createdAt: Date
+  img: string
   handleOpenModal: (value: boolean) => void
 }
 
-export const DevitForm = ({handleOpenModal}: IProp) => {
+export const QuoteDevitForm = ({
+  id,
+  content,
+  createdAt,
+  img,
+  handleOpenModal,
+}: IProp) => {
 
   const { state } = useContext(AppContext);
   const [isSubmitButtonDisabled, setSubmitButtonDisabled] = useState(true);
@@ -36,8 +46,6 @@ export const DevitForm = ({handleOpenModal}: IProp) => {
 
     setSubmitButtonDisabled(true);
   },[textAreaValue, imageUrl]);
-
-
 
   const handleSubmit = async(e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -77,11 +85,16 @@ export const DevitForm = ({handleOpenModal}: IProp) => {
             handleTextAreaValue={setTextAreaValue}
             handleImageUrl={setImageUrl}
             isSubmitButtonDisabled={isSubmitButtonDisabled}
-            isRevit={false}
             textAreaValue={textAreaValue}
             imageUrl={imageUrl.fileUrl}
-            textAreaPlaceholder="What's happening?"
-            user={state.name}
+            textAreaPlaceholder="Add a comment"
+            name={state.name}
+            profileImg={state.img}
+            // username={state.username}
+            id={id}
+            content={content}
+            createdAt={createdAt}
+            img={img}
           />
         </div>
       </form>

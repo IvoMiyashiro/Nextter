@@ -1,5 +1,4 @@
 import { Schema, model, models } from 'mongoose';
-import { CommentSchema } from './Comment';
 
 const DevitSchema = new Schema({
   uid: {
@@ -13,9 +12,10 @@ const DevitSchema = new Schema({
   img: {
     type: String,
   },
-  comments: [
-    CommentSchema
-  ],
+  comments: {
+    type: Array,
+    default: []
+  },
   revits: {
     type: Array,
     default: []

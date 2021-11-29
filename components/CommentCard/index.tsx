@@ -38,7 +38,7 @@ export const CommentCard = ({ comment, isLastComment, devitId }: IProps) => {
   const [isFavOnMouseOver, setFavMouseOver] = useState<boolean>(false);
 
   const { user } = useGetUser(uid);
-  console.log(devitId, id);
+
   const handleFavComment = async() => {
     try {
       setDevitFaved((prev: boolean) => !prev);
@@ -57,7 +57,7 @@ export const CommentCard = ({ comment, isLastComment, devitId }: IProps) => {
       console.log(error);
     }
   };
-  console.log(isLastComment);
+
   return (
     <>
       <section>

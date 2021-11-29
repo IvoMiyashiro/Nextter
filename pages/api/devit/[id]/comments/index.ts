@@ -38,6 +38,7 @@ const comment = async(req: NextApiRequest, res: NextApiResponse) => {
           content,
           img,
           favs: [],
+          createdAt: new Date()
         }
       }}
     );
