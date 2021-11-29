@@ -4,12 +4,12 @@ import dbConnection from '../../../utils/database';
 
 const getUser = async(req: NextApiRequest, res: NextApiResponse) => {
 
-  const { userId } = req.query;
+  const { uid } = req.query;
 
   try {
     dbConnection();
 
-    const user = await User.findById(userId[0], [
+    const user = await User.findById(uid[0], [
       'name',
       'email',
       'bio',

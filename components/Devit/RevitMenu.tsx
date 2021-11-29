@@ -1,3 +1,7 @@
+import { IUser } from '../../interfaces';
+
+import { fetchWithToken } from '../../helpers/fetchWithToken';
+
 import { AiOutlineRetweet } from 'react-icons/ai';
 import { FiEdit2 } from 'react-icons/fi';
 import { colors } from '../../styles/theme';
@@ -5,25 +9,39 @@ import style from './styles/RevitMenuStyles';
 
 interface IProps {
   id: string
-  createdAt: Date
-  content: string
-  img: string
+  user: IUser
+  isRevitted: boolean
   handleOpenModal: (value: boolean) => void
   handleQuoteDevitFormOpen: (value: boolean) => void
 }
 
 export const RevitMenu = ({
+  id,
+  user,
+  isRevitted,
   handleOpenModal,
   handleQuoteDevitFormOpen
 }: IProps) => {
+
+  const handleRevitDevit = () => {
+    if (!isRevitted) {
+      return fetchWithToken(`devit/${id}/revit`, {
+        uid: user.id,
+      }, 'PUT');
+    }
+
+    fetchWithToken(`devit/${id}/revit`, {
+      uid: user.id,
+    }, 'DELETE');
+  };
 
   return (
     <>
       <div>
         <ul>
-          <li onClick={() => handleOpenModal(false)}>
+          <li onClick={() => {handleOpenModal(false); handleRevitDevit();}}>
             <AiOutlineRetweet size="18px" color={colors.text} />
-            <p>Revit</p>
+            <p>{isRevitted ? 'Undo Revit' : 'Revit'}</p>
           </li>
           <li onClick={() => {handleQuoteDevitFormOpen(true); handleOpenModal(false);}}>
             <FiEdit2 size="18px" color={colors.text} />

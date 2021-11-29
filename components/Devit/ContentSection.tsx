@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { IUser } from '../../interfaces';
 
@@ -11,6 +11,9 @@ import { RevitMenu } from './RevitMenu';
 import { QuoteDevitForm } from '../Forms/QuoteDevitForm';
 
 import styles from './styles/ContentSectionStyles';
+import { fetchWithToken } from '../../helpers/fetchWithToken';
+import { useFetchDevits } from '../../hooks/useFetchDevits';
+import { fetchWithoutToken } from '../../helpers/fetchWithoutToken';
 
 interface IProps {
   id: string,
@@ -38,6 +41,16 @@ export const ContentSection = ({
   const [isCommentFormOpen, setCommentFormOpen] = useState(false);
   const [isRevitMenuOpen, setRevitMenuOpen] = useState(false);
   const [isQuoteDevitFormOpen, setQuoteDevitFormOpen] = useState(false);
+  const [isRevitted, setRevitted] = useState(false);
+  
+  useEffect(() => {
+    fetchWithoutToken('/devit/revits',{uid: user.id}, 'POST')
+      .then(res => res.json())
+      .then(revits => revits.body.map(revit => {
+        if (revit.devitId === id) return setRevitted(true);
+      }))
+      .catch(error => console.log(error));    
+  }, [user.id, id]);
 
   return (
     <>
@@ -85,11 +98,10 @@ export const ContentSection = ({
             handleOpenModal={setRevitMenuOpen}
             align="flex-end"
           >
-            <RevitMenu 
+            <RevitMenu
               id={id}
-              content={content}
-              createdAt={createdAt}
-              img={img}
+              user={user}
+              isRevitted={isRevitted}
               handleOpenModal={setRevitMenuOpen}
               handleQuoteDevitFormOpen={setQuoteDevitFormOpen}
             />

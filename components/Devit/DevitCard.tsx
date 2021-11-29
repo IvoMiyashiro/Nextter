@@ -1,9 +1,9 @@
-import { IDevit } from '../interfaces';
-import { ContentSection } from './Devit/ContentSection';
-import { ProfileImage } from './Devit/ProfileImage';
+import { IDevit } from '../../interfaces';
+import { ContentSection } from './ContentSection';
+import { ProfileImage } from './ProfileImage';
 
-import { colors } from '../styles/theme';
-import { useGetUser } from '../hooks/useGetUser';
+import { colors } from '../../styles/theme';
+import { useGetUser } from '../../hooks/useGetUser';
 
 interface IProps {
   devit: IDevit

@@ -6,7 +6,7 @@ interface IData {
   img?: String,
 }
 
-export const fetchWithToken = (endpoint: string, data: any, method = 'GET') => {
+export const fetchWithToken = (endpoint: string, data?: any, method = 'GET') => {
 
   const url = `${baseURL}/${endpoint}`;
   const token = localStorage.getItem('token') || '';

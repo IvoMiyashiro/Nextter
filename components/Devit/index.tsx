@@ -5,7 +5,7 @@ import { IComment, IDevit } from '../../interfaces';
 import { CommentCard } from '../CommentCard';
 
 
-import { DevitCard } from '../DevitCard';
+import { DevitCard } from './DevitCard';
 
 interface IProps {
   devit: IDevit

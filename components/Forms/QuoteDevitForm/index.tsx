@@ -58,11 +58,11 @@ export const QuoteDevitForm = ({
         ? newFile = await fileUpload(imageUrl.file)
         : newFile = '';
       
-      await fetchWithToken('devit/create', {
+      await fetchWithToken(`devit/${id}/revit`, {
         uid: state.uid,
         content: textAreaValue,
         img: newFile,
-      }, 'POST');
+      }, 'PUT');
     } catch (error) {
       console.log(error);
     }
