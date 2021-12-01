@@ -1,10 +1,9 @@
 import { useContext, useEffect, useState } from 'react';
-import { AppContext } from '../../context/userContext';
 
 import { IComment, IDevit } from '../../interfaces';
+
+import { AppContext } from '../../context/AppContext';
 import { CommentCard } from '../CommentCard';
-
-
 import { DevitCard } from './DevitCard';
 
 interface IProps {
@@ -13,19 +12,19 @@ interface IProps {
 
 export const Devit = ({ devit }: IProps) => {
 
-  const { comments, id } = devit;
-  const { state } = useContext(AppContext);
+  const {comments, id} = devit;
+  const {userState} = useContext(AppContext);
   const [userComments, setUserComments] = useState<any>([]);
-  
+
   useEffect(() => {
     const commentArr = comments.map(comment => {
-      if (comment.uid === state.uid) {
+      if (comment.uid === userState.id) {
         return comment;
       }
     });
     setUserComments(commentArr);
-  }, [comments, state.uid]);
-  
+  }, [comments, userState.id]);
+
   return (
     <>
       <div>
@@ -35,7 +34,7 @@ export const Devit = ({ devit }: IProps) => {
           &&
           userComments.map((comment: IComment, i:number) => {
             return (
-              <CommentCard 
+              <CommentCard
                 key={comment.id}
                 devitId={id}
                 comment={comment} 
@@ -45,8 +44,6 @@ export const Devit = ({ devit }: IProps) => {
           })
         }
       </div>
-
-
     </>
   );
 };

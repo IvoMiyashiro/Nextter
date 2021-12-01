@@ -1,7 +1,7 @@
 import { useState, DragEvent, ChangeEvent, Dispatch, SetStateAction } from 'react';
 
-import { ImageSection } from '../DevitForm/ImageSection';
-import { MediaButtons } from '../DevitForm/MediaButtons';
+import { ImageSection } from '../CreateDevitForm/ImageSection';
+import { MediaButtons } from '../CreateDevitForm/MediaButtons';
 import { ProfileImage } from '../../Devit/ProfileImage';
 import { RevitCard } from '../../RevitCard';
 
@@ -21,6 +21,7 @@ interface IProps {
   content: string
   createdAt: Date
   img: string
+  username: string
 }
 
 export const MainSection = ({
@@ -29,6 +30,7 @@ export const MainSection = ({
   isSubmitButtonDisabled,
   textAreaValue,
   imageUrl,
+  username,
   textAreaPlaceholder,
   name,
   profileImg,

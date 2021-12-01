@@ -6,23 +6,46 @@ import { isValidPassword } from '../../../helpers/validateBodyHelpers';
 
 const signin =  async(req: NextApiRequest, res: NextApiResponse) => {
 
-  const { email, password } = req.body;
+  const { email, password: bodyPassword } = req.body;
 
   try {
     dbConnection();
-    const user = await User.findOne({ email });
-    const validPassword = isValidPassword(user, password);
+    const {
+      id,
+      name,
+      password: userPassword,
+      bio,
+      profilePicture,
+      coverPicture,
+      birthDate,
+      followers,
+      followins,
+      createdAt,
+    } = await User.findOne({ email });
 
+    const validPassword = isValidPassword(userPassword, bodyPassword);
     if (!validPassword) {
-      throw new Error('Email or password are incorrect');
+      return res.status(400).json({
+        success: false,
+        msg: 'Incorrect email or password.'
+      });
     }
 
-    const token = await generateJWT(user.id, user.name);
+    const token = await generateJWT(id, name);
 
     return res.status(200).json({
       success: true,
-      uid: user.id,
-      name: user.name,
+      user: {
+        id: id,
+        name: name,
+        bio: bio,
+        profilePicture: profilePicture,
+        coverPicture: coverPicture,
+        birthDate: birthDate,
+        followers: followers,
+        followins: followins,
+        createdAt: createdAt,
+      },
       token,
     });
 
@@ -31,13 +54,6 @@ const signin =  async(req: NextApiRequest, res: NextApiResponse) => {
     const user = await User.findOne({ email });
 
     if (!user) {
-      return res.status(400).json({
-        success: false,
-        msg: 'Incorrect email or password.'
-      });
-    }
-
-    if (!isValidPassword(user, password)) {
       return res.status(400).json({
         success: false,
         msg: 'Incorrect email or password.'

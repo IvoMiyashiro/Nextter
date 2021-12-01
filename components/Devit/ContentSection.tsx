@@ -1,6 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 
 import { IUser } from '../../interfaces';
+
+import { useIsDevitRevitted } from '../../hooks/useIsDevitRevitted';
 
 import { ContentHeader } from './ContentHeader';
 import { ContentMain } from './ContentMain';
@@ -11,12 +13,12 @@ import { RevitMenu } from './RevitMenu';
 import { QuoteDevitForm } from '../Forms/QuoteDevitForm';
 
 import styles from './styles/ContentSectionStyles';
-import { fetchWithToken } from '../../helpers/fetchWithToken';
-import { useFetchDevits } from '../../hooks/useFetchDevits';
-import { fetchWithoutToken } from '../../helpers/fetchWithoutToken';
+import { HeaderActionsMenu } from './HeaderActionsMenu';
+import { AppContext } from '../../context/AppContext';
 
 interface IProps {
   id: string,
+  uid: string
   user: IUser,
   img: string
   content: string
@@ -29,6 +31,7 @@ interface IProps {
 
 export const ContentSection = ({
   id,
+  uid,
   user,
   content,
   favs,
@@ -38,19 +41,12 @@ export const ContentSection = ({
   img,
 }: IProps) => {
 
+  const {userState} = useContext(AppContext);
   const [isCommentFormOpen, setCommentFormOpen] = useState(false);
   const [isRevitMenuOpen, setRevitMenuOpen] = useState(false);
   const [isQuoteDevitFormOpen, setQuoteDevitFormOpen] = useState(false);
-  const [isRevitted, setRevitted] = useState(false);
-  
-  useEffect(() => {
-    fetchWithoutToken('/devit/revits',{uid: user.id}, 'POST')
-      .then(res => res.json())
-      .then(revits => revits.body.map(revit => {
-        if (revit.devitId === id) return setRevitted(true);
-      }))
-      .catch(error => console.log(error));    
-  }, [user.id, id]);
+  const [isHeaderActionMenuOpen, setHeaderActionsMenuOpen] = useState(false);
+  const {isRevittedByUser, revitId} = useIsDevitRevitted(userState.id, id);
 
   return (
     <>
@@ -60,6 +56,7 @@ export const ContentSection = ({
           username={'ivomiyashiro'}
           createdAt={createdAt}
           isComment={false}
+          handleHeaderActionsMenu={setHeaderActionsMenuOpen}
         />
         <ContentMain 
           content={content}
@@ -100,8 +97,9 @@ export const ContentSection = ({
           >
             <RevitMenu
               id={id}
+              revitId={revitId}
               user={user}
-              isRevitted={isRevitted}
+              isRevitted={isRevittedByUser}
               handleOpenModal={setRevitMenuOpen}
               handleQuoteDevitFormOpen={setQuoteDevitFormOpen}
             />
@@ -123,7 +121,23 @@ export const ContentSection = ({
             />
           </Modal>
         }
+        {
+          isHeaderActionMenuOpen
+          &&
+          <Modal
+            handleOpenModal={setHeaderActionsMenuOpen}
+            align="flex-end"
+          >
+            <HeaderActionsMenu
+              id={id}
+              devitUser={user}
+              userId={userState.id}
+              handleOpenModal={setHeaderActionsMenuOpen}
+            />
+          </Modal>
+        }
       </div>
+
       <style jsx>{styles}</style>
     </>
   );

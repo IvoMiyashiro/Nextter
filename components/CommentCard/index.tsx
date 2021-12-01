@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 
 import { useGetUser } from '../../hooks/useGetUser';
-import { AppContext } from '../../context/userContext';
+import { AppContext } from '../../context/AppContext';
 import { useDevitFaved } from '../../hooks/useDevitFaved';
 import { fetchWithToken } from '../../helpers/fetchWithToken';
 
@@ -32,11 +32,10 @@ export const CommentCard = ({ comment, isLastComment, devitId }: IProps) => {
     createdAt,
   } = comment;
 
-  const { state } = useContext(AppContext);
-  const [isDevitFaved, setDevitFaved]: any = useDevitFaved(state.uid, favs);
+  const { userState } = useContext(AppContext);
+  const [isDevitFaved, setDevitFaved]: any = useDevitFaved(userState.id, favs);
   const [currentFavs, setCurrentFavs] = useState(favs.length);
   const [isFavOnMouseOver, setFavMouseOver] = useState<boolean>(false);
-
   const { user } = useGetUser(uid);
 
   const handleFavComment = async() => {
@@ -44,7 +43,7 @@ export const CommentCard = ({ comment, isLastComment, devitId }: IProps) => {
       setDevitFaved((prev: boolean) => !prev);
       await fetchWithToken(
         `/devit/${devitId}/comments/fav`,
-        {uid: state.uid, commentId: id},
+        {uid: userState.id, commentId: id},
         'PUT'
       );
   

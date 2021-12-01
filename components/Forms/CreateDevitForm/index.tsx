@@ -1,22 +1,20 @@
 import { useState, useEffect, FormEvent, useContext } from 'react';
 
-import { fetchWithToken } from '../../../helpers/fetchWithToken';
-import { AppContext } from '../../../context/userContext';
-import { fileUpload } from '../../../helpers/fileUpload';
+import { AppContext } from '../../../context/AppContext';
+import { createDevit } from '../../../actions/devits';
 
 import { HeaderSection } from './HeaderSection';
 import { MainSection } from './MainSection';
 
 import styles from './styles';
 
-
 interface IProp {
   handleOpenModal: (value: boolean) => void
 }
 
-export const DevitForm = ({handleOpenModal}: IProp) => {
+export const CreateDevitForm = ({handleOpenModal}: IProp) => {
 
-  const { state } = useContext(AppContext);
+  const { userState, devitDispatch } = useContext(AppContext);
   const [isSubmitButtonDisabled, setSubmitButtonDisabled] = useState(true);
   const [isLoading, setLoading] = useState(false);
   const [textAreaValue, setTextAreaValue] = useState('');
@@ -41,26 +39,14 @@ export const DevitForm = ({handleOpenModal}: IProp) => {
 
   const handleSubmit = async(e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setLoading(true);
-
-    try {
-      let newFile = '';
-
-      !!imageUrl.file
-        ? newFile = await fileUpload(imageUrl.file)
-        : newFile = '';
-      
-      await fetchWithToken('devit/create', {
-        uid: state.uid,
-        content: textAreaValue,
-        img: newFile,
-      }, 'POST');
-    } catch (error) {
-      console.log(error);
-    }
-
-    setLoading(false);
-    handleOpenModal(false);
+    createDevit(
+      imageUrl.file,
+      userState.id,
+      textAreaValue,
+      devitDispatch,
+      setLoading,
+      handleOpenModal
+    );
   };
 
   return (
@@ -77,11 +63,10 @@ export const DevitForm = ({handleOpenModal}: IProp) => {
             handleTextAreaValue={setTextAreaValue}
             handleImageUrl={setImageUrl}
             isSubmitButtonDisabled={isSubmitButtonDisabled}
-            isRevit={false}
             textAreaValue={textAreaValue}
             imageUrl={imageUrl.fileUrl}
             textAreaPlaceholder="What's happening?"
-            user={state.name}
+            user={userState.name}
           />
         </div>
       </form>

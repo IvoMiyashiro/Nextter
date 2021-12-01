@@ -1,10 +1,11 @@
 import { FormEvent, useContext, useState } from 'react';
 import { useRouter } from 'next/router';
 
+import { IUser } from '../../../interfaces';
 import { fetchWithoutToken } from '../../../helpers/fetchWithoutToken';
-import { AppContext } from '../../../context/userContext';
 import { signin } from '../../../actions/auth';
 
+import { AppContext } from '../../../context/AppContext';
 import { InputControl } from '../../InputControl';
 import { Spinner } from '../../Spinner';
 
@@ -23,7 +24,7 @@ interface IProps {
 
 export const SigninForm = ({ setValue }: IProps) => {
 
-  const { dispatch } = useContext(AppContext);
+  const { userDispatch } = useContext(AppContext);
 
   const regEx = {
     email: /^\S+@\S+\.\S+$/,
@@ -58,14 +59,9 @@ export const SigninForm = ({ setValue }: IProps) => {
         password: passwordInputState.value,
       }, 'POST');
       const body = await resp.json();
-
       if (body.success) {
-        const { uid, name, img } = body;
-        dispatch(signin({
-          uid,
-          name,
-          img
-        }));
+        const user: IUser = body.user;
+        userDispatch(signin(user));
         localStorage.setItem('token', body.token);
         return router.push('./home');
       }

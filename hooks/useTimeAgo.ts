@@ -35,7 +35,7 @@ export default function useTimeAgo(timestamp: number) {
     style: 'short' 
   });
 
-  const { value, unit}: any = timeAgo;
+  const { value, unit }: any = timeAgo;
 
   return rtf.format(value, unit);
 }

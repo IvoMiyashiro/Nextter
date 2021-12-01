@@ -1,4 +1,4 @@
-import { NextApiRequest, NextApiResponse } from 'next';
+simport { NextApiRequest, NextApiResponse } from 'next';
 import { jwtValidator } from '../../../../../helpers/jwtValidator';
 import { validateCreateDevitBody } from '../../../../../middlewares/validateCreateDevitBody';
 import { Types } from 'mongoose';

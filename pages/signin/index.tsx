@@ -37,7 +37,7 @@ const Sigin: NextPage = () => {
         
       {
         isCheckingAuth
-          ? <Spinner color="white" />
+          ? <Spinner color="white" size="32px" />
           : <PageBody />
       }
     </>

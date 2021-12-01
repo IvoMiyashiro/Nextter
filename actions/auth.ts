@@ -1,12 +1,8 @@
-import { UserContextInterface } from './../interfaces/index';
+import { IUser } from './../interfaces/index';
 
-export const signin = ({uid, name, img}: UserContextInterface) => {
+export const signin = (user: IUser) => {
   return {
     type: 'UPDATE',
-    payload: {
-      uid,
-      name,
-      img
-    }
+    payload: user
   };
 };

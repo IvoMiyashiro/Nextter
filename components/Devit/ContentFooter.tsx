@@ -2,7 +2,7 @@ import { useContext, useState } from 'react';
 
 import { useDevitFaved } from '../../hooks/useDevitFaved';
 import { fetchWithToken } from '../../helpers/fetchWithToken';
-import { AppContext } from '../../context/userContext';
+import { AppContext } from '../../context/AppContext';
 
 import { AiOutlineRetweet } from 'react-icons/ai';
 import { FiMessageCircle } from 'react-icons/fi';
@@ -28,8 +28,8 @@ export const ContentFooter = ({
   handleRevitMenuOpen
 }: IProps) => {
 
-  const { state } = useContext(AppContext);
-  const [isDevitFaved, setDevitFaved]: any = useDevitFaved(state.uid, favs);
+  const { userState } = useContext(AppContext);
+  const [isDevitFaved, setDevitFaved]: any = useDevitFaved(userState.id, favs);
   const [currentFavs, setCurrentFavs] = useState(favs.length);
   const [isFavOnMouseOver, setFavMouseOver] = useState<boolean>(false);
   const [isCommentsOnMouseOver, setCommentsOnMouseOver] = useState<boolean>(false);
@@ -40,7 +40,7 @@ export const ContentFooter = ({
       setDevitFaved((prev: boolean) => !prev);
       await fetchWithToken(
         `/devit/${id}/fav`,
-        {uid: state.uid},
+        {uid: userState.id},
         'PUT'
       );
   

@@ -9,7 +9,7 @@ import { useIsLoggedin } from '../../hooks/useIsLoggedin';
 const Home: NextPage = () => {
 
   const [isCheckingAuth, setCheckingAuth] = useState(true);
-  const { isLoggedin } = useIsLoggedin();
+  const {isLoggedin} = useIsLoggedin();
   const router = useRouter();
   
   useEffect(() => {

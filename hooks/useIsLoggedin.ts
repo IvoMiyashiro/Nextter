@@ -1,13 +1,13 @@
 import { useContext, useEffect, useState } from 'react';
-import { AppContext } from '../context/userContext';
+import { signin } from '../actions/auth';
+import { AppContext } from '../context/AppContext';
 import { fetchWithToken } from '../helpers/fetchWithToken';
 
 export const useIsLoggedin = () => {
   const [isLoggedin, setLoggedin] = useState<boolean | null>(null);
-  const { state, dispatch } = useContext(AppContext);
+  const {userDispatch} = useContext(AppContext);
 
   useEffect(() => {
-
     const handleIsLoggedin = async() => {
 
       try {
@@ -17,22 +17,12 @@ export const useIsLoggedin = () => {
   
         const resp = await fetchWithToken('/auth/renew');
         const body = await resp.json();
-  
-        const { uid, name, img, token: newToken } = body;
+        const { user, token: newToken } = body;
   
         localStorage.setItem('token', newToken);
+        userDispatch(signin(user));
   
-        dispatch({
-          type: 'UPDATE',
-          payload: {
-            ...state,
-            uid,
-            name,
-            img
-          }
-        });
-  
-        if (!resp.ok) return setLoggedin(false);
+        if (!body.success) return setLoggedin(false);
       } catch (error) {
         console.log(error);
         return setLoggedin(false);
@@ -43,8 +33,7 @@ export const useIsLoggedin = () => {
     
     handleIsLoggedin();
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [userDispatch]);
 
   return {
     isLoggedin,

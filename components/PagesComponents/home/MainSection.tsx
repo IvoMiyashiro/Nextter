@@ -1,22 +1,18 @@
 import {  useState } from 'react';
+
 import { useFetchDevits } from '../../../hooks/useFetchDevits';
 
-import { DevitForm } from '../../../components/Forms/DevitForm';
+import { CreateDevitForm } from '../../Forms/CreateDevitForm';
 import { Navbar } from '../../../components/Navbar';
 import { Modal } from '../../../components/Modal';
 import { TopBar } from '../../../components/TopBar';
 import { DevitButton } from '../../Buttons/DevitButton';
 import { Devit } from '../../Devit';
-import { IDevit } from '../../../interfaces';
-
-interface IDevitsArray {
-  devits: IDevit[]
-}
 
 export const MainSection = () => {
 
   const [isDevitFormOpen, setDevitFormOpen] = useState(false);
-  const { devits }: IDevitsArray = useFetchDevits();
+  const { devitState } = useFetchDevits();
 
   return (
     <div>
@@ -28,12 +24,14 @@ export const MainSection = () => {
         handleOpenModal={setDevitFormOpen}
         align="center"
       >
-        <DevitForm handleOpenModal={setDevitFormOpen} />
+        <CreateDevitForm handleOpenModal={setDevitFormOpen} />
       </Modal>
       }
       <section>
-        {
-          devits.map(devit => {
+        { 
+          devitState.length !== 0
+          &&
+          devitState.map(devit => {
             return <Devit key={devit.id} devit={devit}/>;
           })
         }

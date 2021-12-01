@@ -1,13 +1,13 @@
 import { useState, useEffect, FormEvent, useContext } from 'react';
 
 import { fetchWithToken } from '../../../helpers/fetchWithToken';
-import { AppContext } from '../../../context/userContext';
+import { AppContext } from '../../../context/AppContext';
 import { fileUpload } from '../../../helpers/fileUpload';
 
-import { HeaderSection } from '../DevitForm/HeaderSection';
+import { HeaderSection } from '../CreateDevitForm/HeaderSection';
 import { MainSection } from './MainSection';
 
-import styles from '../DevitForm/styles';
+import styles from '../CreateDevitForm/styles';
 
 
 interface IProp {
@@ -26,7 +26,7 @@ export const QuoteDevitForm = ({
   handleOpenModal,
 }: IProp) => {
 
-  const { state } = useContext(AppContext);
+  const { userState } = useContext(AppContext);
   const [isSubmitButtonDisabled, setSubmitButtonDisabled] = useState(true);
   const [isLoading, setLoading] = useState(false);
   const [textAreaValue, setTextAreaValue] = useState('');
@@ -59,7 +59,7 @@ export const QuoteDevitForm = ({
         : newFile = '';
       
       await fetchWithToken(`devit/${id}/revit`, {
-        uid: state.uid,
+        uid: userState.id,
         content: textAreaValue,
         img: newFile,
       }, 'PUT');
@@ -88,9 +88,9 @@ export const QuoteDevitForm = ({
             textAreaValue={textAreaValue}
             imageUrl={imageUrl.fileUrl}
             textAreaPlaceholder="Add a comment"
-            name={state.name}
-            profileImg={state.img}
-            // username={state.username}
+            name={userState.name}
+            profileImg={userState.profilePicture}
+            username={userState.username}
             id={id}
             content={content}
             createdAt={createdAt}

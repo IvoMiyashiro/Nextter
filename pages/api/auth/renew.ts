@@ -1,17 +1,39 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import generateJWT from '../../../helpers/generateJwt';
 import { jwtValidator } from '../../../helpers/jwtValidator';
+import User from '../../../models/User';
 
 const renewToken = async (req: NextApiRequest, res: NextApiResponse) => {
 
   try {
-    const { uid, name }: any = await jwtValidator(req, res);
-    const token = await generateJWT(uid, name);
+    const { uid, name: tokenName }: any = await jwtValidator(req, res);
+    const token = await generateJWT(uid, tokenName);
+
+    const {
+      id,
+      name,
+      bio,
+      profilePicture,
+      coverPicture,
+      birthDate,
+      followers,
+      followins,
+      createdAt
+    } = await User.findById(uid);
 
     return res.json({
       success: true,
-      uid,
-      name,
+      user: {
+        id: id,
+        name: name,
+        bio: bio,
+        profilePicture: profilePicture,
+        coverPicture: coverPicture,
+        birthDate: birthDate,
+        followers: followers,
+        followins: followins,
+        createdAt: createdAt,
+      },
       token
     });
   } catch (error) {

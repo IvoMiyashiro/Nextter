@@ -9,6 +9,7 @@ import style from './styles/RevitMenuStyles';
 
 interface IProps {
   id: string
+  revitId: string
   user: IUser
   isRevitted: boolean
   handleOpenModal: (value: boolean) => void
@@ -17,6 +18,7 @@ interface IProps {
 
 export const RevitMenu = ({
   id,
+  revitId,
   user,
   isRevitted,
   handleOpenModal,
@@ -27,10 +29,12 @@ export const RevitMenu = ({
     if (!isRevitted) {
       return fetchWithToken(`devit/${id}/revit`, {
         uid: user.id,
+        content: '',
+        img: ''
       }, 'PUT');
     }
 
-    fetchWithToken(`devit/${id}/revit`, {
+    fetchWithToken(`devit/${id}/revit/${revitId}/delete`, {
       uid: user.id,
     }, 'DELETE');
   };

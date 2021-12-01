@@ -7,15 +7,16 @@ export default css`
   div {
     width: 100%;
     background-color: ${colors.background};
-    height: 170px;
     border-radius: 32px 32px 0px 0;
-    padding: 1em;
+    padding: 1.25em;
   }
 
   ul {
     gap: 2em;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
     list-style: none;
     width: 100%;
     margin: 0;
@@ -42,5 +43,4 @@ export default css`
     font-family: ${fonts.base};
     margin-top: -.5em;
   }
-
 `;

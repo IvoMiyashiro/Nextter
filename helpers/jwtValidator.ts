@@ -14,7 +14,6 @@ export const jwtValidator = async(req: NextApiRequest, res: NextApiResponse) => 
   }
 
   try {
-
     const { uid, name }: any = jwt.verify(
       token as string,
       process.env.SECRET_JWT_SEED as string

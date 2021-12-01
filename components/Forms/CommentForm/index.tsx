@@ -1,13 +1,13 @@
 import { FormEvent, useContext, useEffect, useState } from 'react';
-import { AppContext } from '../../../context/userContext';
+import { AppContext } from '../../../context/AppContext';
 
 import { fetchWithToken } from '../../../helpers/fetchWithToken';
 import { fileUpload } from '../../../helpers/fileUpload';
 
 import { ContentHeader } from '../../Devit/ContentHeader';
 import { ContentMain } from '../../Devit/ContentMain';
-import { HeaderSection } from '../DevitForm/HeaderSection';
-import { MainSection } from '../DevitForm/MainSection';
+import { HeaderSection } from '../CreateDevitForm/HeaderSection';
+import { MainSection } from '../CreateDevitForm/MainSection';
 import { ProfileImage } from '../../Devit/ProfileImage';
 
 import { IUser } from '../../../interfaces';
@@ -31,7 +31,7 @@ export const CommentForm = ({
   handleOpenModal
 }: IProps) => {
 
-  const { state } = useContext(AppContext);
+  const { userState } = useContext(AppContext);
   const [isSubmitButtonDisabled, setSubmitButtonDisabled] = useState(true);
   const [isLoading, setLoading] = useState(false);
   const [textAreaValue, setTextAreaValue] = useState('');
@@ -64,7 +64,7 @@ export const CommentForm = ({
         : newFile = '';
       
       await fetchWithToken(`devit/${id}/comments`, {
-        uid: state.uid,
+        uid: userState.id,
         content: textAreaValue,
         img: newFile,
       }, 'PUT');

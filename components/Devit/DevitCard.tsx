@@ -42,6 +42,7 @@ export const DevitCard = ({ devit }: IProps) => {
         <section className="profile-img-container">
           <ContentSection
             id={id}
+            uid={uid}
             user={user}
             content={content}
             favs={favs}

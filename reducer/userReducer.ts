@@ -1,15 +1,17 @@
-import { USER_INIT_STATE } from './../context/userContext';
-import { UserContextInterface } from './../interfaces/index';
+import { USER_INIT_STATE } from '../context/AppContext';
+import { IUser } from './../interfaces/index';
 
 export type ActionType = {
   type: 'UPDATE',
-  payload: UserContextInterface
+  payload: IUser
 }
 
-export const userReducer = (state = USER_INIT_STATE, action: ActionType) => {
+export const userReducer = (state = USER_INIT_STATE, action: any) => {
   switch (action.type) {
   case 'UPDATE':
-    return action.payload;
+    return {
+      ...action.payload
+    };
 
   default:
     return state;
