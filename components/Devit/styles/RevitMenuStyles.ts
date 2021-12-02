@@ -30,6 +30,11 @@ export default css`
     gap: .75em;
   }
 
+  section {
+    width: 100%;
+    height: 40px;
+  }
+
   button {
     width: 100%;
     border: 1px solid ${colors.text};

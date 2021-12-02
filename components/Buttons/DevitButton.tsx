@@ -1,5 +1,6 @@
 import DevitIcon from '../Icons/Devit';
 import { colors } from '../../styles/theme';
+import { breakpoints } from '../../styles/breakpoints';
 
 interface IProps {
   handleOpenModal: (value: boolean) => void
@@ -30,6 +31,12 @@ export const DevitButton = ({handleOpenModal}: IProps) => {
           display: flex;
           align-items: center;
           justify-content: center;
+        }
+
+        @media (min-width: ${breakpoints.desktop}) {
+          button {
+            display: none;
+          }
         }
       `}</style>
     </>

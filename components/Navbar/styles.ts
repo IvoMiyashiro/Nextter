@@ -1,4 +1,5 @@
 import css from 'styled-jsx/css';
+import { breakpoints } from '../../styles/breakpoints';
 import { colors } from '../../styles/theme';
 
 export default css`
@@ -26,5 +27,11 @@ export default css`
     display: flex;
     justify-content: space-around;
     width: 100%;
+  }
+
+  @media (min-width: ${breakpoints.desktop}) {
+    footer {
+      display: none;
+    }
   }
 `;

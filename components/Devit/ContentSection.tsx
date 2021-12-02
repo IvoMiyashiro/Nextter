@@ -15,6 +15,7 @@ import { QuoteDevitForm } from '../Forms/QuoteDevitForm';
 import styles from './styles/ContentSectionStyles';
 import { HeaderActionsMenu } from './HeaderActionsMenu';
 import { AppContext } from '../../context/AppContext';
+import { DeleteDevitToast } from '../Toast/DeleteDevitToast';
 
 interface IProps {
   id: string,
@@ -41,11 +42,13 @@ export const ContentSection = ({
 }: IProps) => {
 
   const {userState} = useContext(AppContext);
+  const {isRevittedByUser, revitId} = useIsDevitRevitted(userState.id, id);
   const [isCommentFormOpen, setCommentFormOpen] = useState(false);
   const [isRevitMenuOpen, setRevitMenuOpen] = useState(false);
   const [isQuoteDevitFormOpen, setQuoteDevitFormOpen] = useState(false);
   const [isHeaderActionsMenuOpen, setHeaderActionsMenuOpen] = useState(false);
-  const {isRevittedByUser, revitId} = useIsDevitRevitted(userState.id, id);
+  const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [isLoading, setLoading] = useState(false);
 
   return (
     <>
@@ -132,10 +135,26 @@ export const ContentSection = ({
             align="flex-end"
           >
             <HeaderActionsMenu
-              id={id}
               devitUser={user}
               userId={userState.id}
+              isLoading={isLoading}
               handleOpenModal={setHeaderActionsMenuOpen}
+              handleDeleteModalOpen={setDeleteModalOpen}
+            />
+          </Modal>
+        }
+        {
+          isDeleteModalOpen
+          &&
+          <Modal
+            handleOpenModal={setDeleteModalOpen}
+            isModalOpen={isDeleteModalOpen}
+          >
+            <DeleteDevitToast
+              id={id}
+              userId={userState.id}
+              setLoading={setLoading}
+              handleDeleteModalOpen={setDeleteModalOpen}
             />
           </Modal>
         }

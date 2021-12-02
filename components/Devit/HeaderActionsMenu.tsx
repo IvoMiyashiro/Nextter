@@ -1,11 +1,7 @@
-import { useContext, useState } from 'react';
-
 import { IUser } from '../../interfaces';
 
-import { deleteDevit } from '../../actions/devits';
-
-import { AppContext } from '../../context/AppContext';
 import { Spinner } from '../Spinner';
+import { PrimaryButton } from '../Buttons/PrimaryButton';
 
 import UnFollowIcon from '../Icons/Unfollow';
 import DeleteIcon from '../Icons/Delete';
@@ -13,29 +9,22 @@ import { colors } from '../../styles/theme';
 import style from './styles/RevitMenuStyles';
 
 interface IProps {
-  id: string
   devitUser: IUser
   userId: string
+  isLoading: boolean
   handleOpenModal: (value: boolean) => void
+  handleDeleteModalOpen: (value: boolean) => void
 }
 
 export const HeaderActionsMenu = ({
-  id,
   devitUser,
   userId,
+  isLoading,
   handleOpenModal,
+  handleDeleteModalOpen,
 }: IProps) => {
 
-  const {devitDispatch} = useContext(AppContext);
-  const [isLoading, setLoading] = useState(false);
-
-  const handleDeleteDevit = () => {
-    deleteDevit(id, userId, devitDispatch, setLoading);
-  };
-
-  const handleUnfollowUser = () => {
-    
-  };
+  const handleUnfollowUser = () => {};
 
   return (
     <>
@@ -45,7 +34,7 @@ export const HeaderActionsMenu = ({
             devitUser.id === userId
               ? (
                 <li 
-                  onClick={() => {handleOpenModal(false); handleDeleteDevit();}} 
+                  onClick={() => {handleDeleteModalOpen(true); handleOpenModal(false);}} 
                   style={{color: colors.red, fontWeight: 'bold'}}
                 >
                   <DeleteIcon 
@@ -72,15 +61,20 @@ export const HeaderActionsMenu = ({
               )
           }
           <li>
-            <button
-              onClick={() => handleOpenModal(false)}
-            >
-              {
-                isLoading
-                  ? <Spinner color={colors.title} size="32px" />
-                  : 'Cancel'
-              }
-            </button>
+            <section>
+              <PrimaryButton
+                onClick={() => handleOpenModal(false)}
+                style="outline"
+                textColor={colors.title}
+                buttonColor={colors.text}
+              >
+                {
+                  isLoading
+                    ? <Spinner color={colors.title} size="32px" />
+                    : 'Cancel'
+                }
+              </PrimaryButton>
+            </section>
           </li>
         </ul>
       </div>

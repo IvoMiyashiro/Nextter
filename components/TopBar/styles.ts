@@ -13,7 +13,7 @@ export default css`
     top: 0;
     background: ${colors.background};
     width: 100%;
-    z-index: 9;
+    z-index: 8;
   }
 
   section {
