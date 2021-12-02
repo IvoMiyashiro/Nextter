@@ -1,9 +1,11 @@
 import { ChangeEvent, useRef } from 'react';
-import { breakpoints } from '../../../styles/breakpoints';
-import { colors } from '../../../styles/theme';
+
 import { PrimaryButton } from '../../Buttons/PrimaryButton';
 import GifIcon from '../../Icons/Gif';
 import PictureIcon from '../../Icons/Picture';
+
+import { breakpoints } from '../../../styles/breakpoints';
+import { colors } from '../../../styles/theme';
 
 type fileState = {
   file: File,
@@ -40,14 +42,18 @@ export const MediaButtons = ({ isDisabled, handleImageUrl }: IProps) => {
         <section>
           <input type="file" ref={inputFileRef} onChange={(e) => handleImageChange(e)}/>
           <button type="button" onClick={handleSelectPicture}>
-            <PictureIcon width="18px" height="18px" fill="currentColor" color={colors.primary}/>
+            <PictureIcon width="22px" height="22px" fill="currentColor" color={colors.primary}/>
           </button>
           <button type="button">
-            <GifIcon width="18px" height="18px" fill="currentColor" color={colors.primary}/>
+            <GifIcon width="22px" height="22px" fill="currentColor" color={colors.primary}/>
           </button>
         </section>
         <section className="submit-button-container">
-          <PrimaryButton isDisabled={isDisabled}>
+          <PrimaryButton 
+            isDisabled={isDisabled}
+            textColor={colors.background}
+            buttonColor={colors.primary}
+          >
             Devit
           </PrimaryButton>
         </section>
@@ -68,6 +74,7 @@ export const MediaButtons = ({ isDisabled, handleImageUrl }: IProps) => {
 
         .submit-button-container {
           display: none;
+          height: 32px;
         }
 
         button {

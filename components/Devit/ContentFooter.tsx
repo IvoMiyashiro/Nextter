@@ -4,6 +4,7 @@ import { favDevit, unFavDevit } from '../../actions/devits';
 
 import { useDevitFaved } from '../../hooks/useDevitFaved';
 import { AppContext } from '../../context/AppContext';
+import { HoverableButton } from '../Buttons/HoverableButton';
 
 import RedevitIcon from '../Icons/Redevit';
 import FavIcon from '../Icons/Fav';
@@ -33,9 +34,6 @@ export const ContentFooter = ({
   const {userState, devitDispatch} = useContext(AppContext);
   const [isDevitFaved, setDevitFaved]: any = useDevitFaved(userState.id, favs);
   const [currentFavs, setCurrentFavs] = useState(favs.length);
-  const [isFavOnMouseOver, setFavMouseOver] = useState<boolean>(false);
-  const [isCommentsOnMouseOver, setCommentsOnMouseOver] = useState<boolean>(false);
-  const [isRevitOnMouseOver, setRevitOnMouse] = useState<boolean>(false);
 
   const handleFavDevit = async() => {
 
@@ -56,71 +54,57 @@ export const ContentFooter = ({
         <ul>
           <li
             onClick={() => handleCommentOpen(true)}
-            onMouseOver={() => setCommentsOnMouseOver(true)}
-            onMouseLeave={() => setCommentsOnMouseOver(false)}
             className="list-item-comments"
           >
-            <button className="button-comment">
-              <CommentIcon
-                width="16px"
-                heigth="16px"
-                stroke="currentColor"
-                stroke-width="0"
-                fill={isCommentsOnMouseOver ? colors.comments : colors.text} 
-                color={isCommentsOnMouseOver ? colors.comments : colors.text}
-              />
-            </button>
+            <HoverableButton
+              icon={CommentIcon}
+              width="16px"
+              height="16px"
+              color={colors.comments}
+              defaultColor={colors.text}
+              backgroundColor={'rgba(29, 155, 240, 0.1)'}
+            />
             <span>{comments.length}</span>
           </li>
           <li
             onClick={() => handleRevitMenuOpen(true)}
-            onMouseOver={() => setRevitOnMouse(true)}
-            onMouseLeave={() => setRevitOnMouse(false)}
             className="list-item-revits"
           >
-            <button className="button-revit">
-              <RedevitIcon 
-                width="16px"
-                heigth="16px"
-                stroke="currentColor"
-                stroke-width="0"
-                fill={isRevitOnMouseOver ? colors.revits : colors.text} 
-                color={isRevitOnMouseOver ? colors.revits : colors.title} 
-              />
-            </button>
+            <HoverableButton
+              icon={RedevitIcon}
+              width="16px"
+              height="16px"
+              color={colors.revits}
+              defaultColor={colors.text}
+              backgroundColor={'rgba(0, 186, 124, 0.1)'}
+            />
             <span>{revits.length}</span>
           </li>
           <li 
             onClick={handleFavDevit}
-            onMouseOver={() => setFavMouseOver(true)}
-            onMouseLeave={() => setFavMouseOver(false)}
             className="list-item-fav"
           >
             {
               !isDevitFaved
                 ? (
-                  <button className="button-fav">
-                    <FavIcon 
-                      width="16px"
-                      heigth="16px"
-                      stroke="currentColor"
-                      stroke-width="0"
-                      fill={isFavOnMouseOver ? colors.fav : colors.text} 
-                      color={isFavOnMouseOver ? colors.fav : colors.text} 
-                    />
-                  </button>
+                  <HoverableButton
+                    icon={FavIcon}
+                    width="16px"
+                    height="16px"
+                    color={colors.fav}
+                    defaultColor={colors.text}
+                    backgroundColor={'rgba(249, 24, 128, 0.2)'}
+                  />
                 )
                 : (
-                  <button className="button-fav">
-                    <FavFill 
-                      width="16px"
-                      heigth="16px"
-                      stroke="currentColor"
-                      stroke-width="0"
-                      fill={isFavOnMouseOver ? colors.fav : colors.fav} 
-                      color={isFavOnMouseOver ? colors.fav : colors.fav} 
-                    />
-                  </button>
+                  <HoverableButton
+                    icon={FavFill}
+                    width="16px"
+                    height="16px"
+                    color={colors.fav}
+                    defaultColor={colors.fav}
+                    backgroundColor={'rgba(249, 24, 128, 0.2)'}
+                  />
                 )
             } 
             <span>{currentFavs}</span>

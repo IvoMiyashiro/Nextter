@@ -68,6 +68,7 @@ export default css`
 
   .submit-button-container {
     width: auto;
+    height: 32px;
   }
 
   @media (min-width: ${breakpoints.desktop}) {

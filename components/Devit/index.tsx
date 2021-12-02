@@ -33,14 +33,16 @@ export const Devit = ({ devit }: IProps) => {
           userComments.length !== 0
           &&
           userComments.map((comment: IComment, i:number) => {
-            return (
-              <CommentCard
-                key={comment.id}
-                devitId={id}
-                comment={comment} 
-                isLastComment={userComments.length === (i + 1)} 
-              />
-            );
+            if (comment !== undefined) { 
+              return (
+                <CommentCard
+                  key={comment.id}
+                  devitId={id}
+                  comment={comment} 
+                  isLastComment={userComments.length === (i + 1)} 
+                />
+              );
+            };
           })
         }
       </div>

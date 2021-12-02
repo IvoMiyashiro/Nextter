@@ -3,7 +3,6 @@ import { colors } from '../styles/theme';
 import { breakpoints } from '../styles/breakpoints';
 
 export default css`
-
   div {
     display: grid;
     grid-template-columns: 1fr;

@@ -31,7 +31,6 @@ interface IProps {
 
 export const ContentSection = ({
   id,
-  uid,
   user,
   content,
   favs,
@@ -45,7 +44,7 @@ export const ContentSection = ({
   const [isCommentFormOpen, setCommentFormOpen] = useState(false);
   const [isRevitMenuOpen, setRevitMenuOpen] = useState(false);
   const [isQuoteDevitFormOpen, setQuoteDevitFormOpen] = useState(false);
-  const [isHeaderActionMenuOpen, setHeaderActionsMenuOpen] = useState(false);
+  const [isHeaderActionsMenuOpen, setHeaderActionsMenuOpen] = useState(false);
   const {isRevittedByUser, revitId} = useIsDevitRevitted(userState.id, id);
 
   return (
@@ -76,6 +75,7 @@ export const ContentSection = ({
           &&
           <Modal 
             handleOpenModal={setCommentFormOpen}
+            isModalOpen={isCommentFormOpen}
             align="center"
           >
             <CommentForm
@@ -93,6 +93,7 @@ export const ContentSection = ({
           &&
           <Modal 
             handleOpenModal={setRevitMenuOpen}
+            isModalOpen={isRevitMenuOpen}
             align="flex-end"
           >
             <RevitMenu
@@ -110,6 +111,7 @@ export const ContentSection = ({
           &&
           <Modal
             handleOpenModal={setQuoteDevitFormOpen}
+            isModalOpen={isQuoteDevitFormOpen}
             align="center"
           >
             <QuoteDevitForm
@@ -122,10 +124,11 @@ export const ContentSection = ({
           </Modal>
         }
         {
-          isHeaderActionMenuOpen
+          isHeaderActionsMenuOpen
           &&
           <Modal
             handleOpenModal={setHeaderActionsMenuOpen}
+            isModalOpen={isHeaderActionsMenuOpen}
             align="flex-end"
           >
             <HeaderActionsMenu

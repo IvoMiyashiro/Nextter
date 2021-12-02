@@ -7,6 +7,7 @@ import { IUser } from '../../interfaces';
 import DotsIcon from '../Icons/Dots';
 import style from './styles/ContentSectionStyles';
 import { colors } from '../../styles/theme';
+import { HoverableButton } from '../Buttons/HoverableButton';
 
 interface IProps {
   user: IUser
@@ -37,16 +38,16 @@ export const ContentHeader = ({
         {
           !isComment
           &&
-          <section> 
-            <button onClick={() => handleHeaderActionsMenu(true)}>
-              <DotsIcon 
-                height="20px"
-                width="20px"
-                stroke="currentColor"
-                color={colors.text}
-                fill={colors.text} 
-              />
-            </button>
+          <section>
+            <HoverableButton
+              icon={DotsIcon}
+              height="20px"
+              width="20px"
+              color={colors.primary}
+              defaultColor={colors.text}
+              backgroundColor={colors.rgbaPrimary}
+              onClick={() => handleHeaderActionsMenu(true)}
+            />
           </section>
         }
       </header>

@@ -3,13 +3,19 @@ import Image from 'next/image';
 import StarsIcon from '../Icons/Stars';
 import { colors } from '../../styles/theme';
 import style from './styles';
+import { useState } from 'react';
+import { MobileAsideMenu } from '../MobileAsideMenu';
+import { Modal } from '../Modal';
 
 export const TopBar = () => {
+
+  const [isSidebarOpen, setSidebarOpen] = useState(false);
+
   return (
     <>
       <header>
         <section>
-          <button>
+          <button onClick={() => setSidebarOpen(true)}>
             <Image
               src="/yo.jpg"
               alt="profile"
@@ -25,9 +31,20 @@ export const TopBar = () => {
             stroke="currentColor"
             stroke-width="0"
             color={colors.title}
-            fill={colors.title} 
+            fill={colors.title}
           />
         </section>
+        <Modal
+          handleOpenModal={setSidebarOpen}
+          isModalOpen={isSidebarOpen}
+          isResponsive={true}
+        >
+          <MobileAsideMenu
+            handleSidebarOpen={setSidebarOpen}
+            isVisible={isSidebarOpen}
+          />  
+        </Modal>
+        
       </header>
       <style jsx>{style}</style>
     </>
