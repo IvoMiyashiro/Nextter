@@ -59,12 +59,23 @@ export default css`
 
   span {
     font-size: .8rem;
-    margin-top: -0.2em
   }
 
   button {
-    border: none;
-    background-color: transparent;
-    padding: 0;
+    background: transparent;
+    color: ${colors.text};
+    border-radius: 50%;
+    padding: 0.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .list-item-fav:hover {
+    color: ${colors.fav};
+  }
+
+  .list-item-fav:hover .button-fav {
+    background: rgba(249, 24, 128, 0.2);
   }
 `;

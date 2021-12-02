@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import { BsMoonStars } from 'react-icons/bs';
+import StarsIcon from '../Icons/Stars';
 import { colors } from '../../styles/theme';
 import style from './styles';
 
@@ -19,7 +19,14 @@ export const TopBar = () => {
           <h2>Home</h2>
         </section>
         <section>
-          <BsMoonStars color={colors.title} size="20px" />
+          <StarsIcon 
+            height="24px"
+            width="24px"
+            stroke="currentColor"
+            stroke-width="0"
+            color={colors.title}
+            fill={colors.title} 
+          />
         </section>
       </header>
       <style jsx>{style}</style>

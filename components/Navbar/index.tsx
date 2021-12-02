@@ -2,35 +2,46 @@ import { useRouter } from 'next/router';
 
 import { ListIconItem } from './ListIconItem';
 
-import { HiOutlineBell, HiOutlineHome } from 'react-icons/hi';
-import { FiMessageCircle, FiSearch } from 'react-icons/fi';
+import HomeIcon from '../Icons/Home';
+import SearchIcon from '../Icons/Search';
+import NotificationIcon from '../Icons/Notifications';
+import MessagesIcon from '../Icons/Messages';
 
+import { colors } from '../../styles/theme';
 import styles from './styles';
 
 export const Navbar = () => {
 
-  // const router = useRouter();
-  // const route = router.pathname;
+  const router = useRouter();
+  const currentRoute = router.pathname;
 
   return (
     <>
       <footer>
         <ul>
           <ListIconItem 
-            icon={HiOutlineHome}
+            icon={HomeIcon}
             route="/home"
+            fill={currentRoute === '/home' ? colors.title : 'transparent'}
+            strokeWidth="0"
           />
           <ListIconItem
-            icon={FiSearch}
+            icon={SearchIcon}
             route="/explore"
+            fill={colors.title}
+            strokeWidth={currentRoute === '/explore' ? 1 : 0}
           />
           <ListIconItem
-            icon={HiOutlineBell}
+            icon={NotificationIcon}
             route="/notifications"
+            fill={colors.title}
+            strokeWidth={currentRoute === '/notifications' ? 1 : 0}
           />
           <ListIconItem
-            icon={FiMessageCircle}
-            route="/message"
+            icon={MessagesIcon}
+            route="/messages"
+            fill={colors.title}
+            strokeWidth={currentRoute === '/messages' ? 1 : 0}
           />
         </ul>
       </footer>

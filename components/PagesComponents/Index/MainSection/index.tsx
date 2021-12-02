@@ -4,9 +4,9 @@ import Link from 'next/link';
 import { ButtonsSection } from '../ButtonsSection';
 import { FooterSection } from '../FooterSection';
 
-import { HiCode } from 'react-icons/hi';
 import { colors } from '../../../../styles/theme';
 import styles from './styles';
+import Logo from '../../../Icons/Logo';
 
 export const MainSection = () => {
 
@@ -19,7 +19,11 @@ export const MainSection = () => {
           <header>
             <Link href="/">
               <a>
-                <HiCode size={56} color={colors.primary} />
+                <Logo
+                  height="52px"
+                  width="52px"
+                  color={colors.primary}
+                />
               </a>
             </Link>
             <h1>Happening now</h1>

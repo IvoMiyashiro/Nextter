@@ -9,7 +9,7 @@ export const colors = {
   red: '#F5323E',
   green: '#05AC72',
   lightGreen: '#CBF5E3',
-  title: '#CCD6F6',
+  title: 'rgb(204, 214, 246)',
   text: '#838DAA',
   gray: 'rgb(61, 84, 102)',
   fav: 'rgb(249, 24, 128)',

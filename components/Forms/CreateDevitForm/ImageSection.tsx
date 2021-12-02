@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
-import { FaTimes } from 'react-icons/fa';
+import TimesIcon from '../../Icons/Times';
+import { colors } from '../../../styles/theme';
 
 type fileState = {
   file: File,
@@ -18,7 +19,7 @@ export const ImageSection = ({src, alt, handleImageUrl}: props) => {
       <div>
         <img src={src} alt={alt} />
         <button onClick={() => handleImageUrl((prev: fileState) => ({...prev, fileUrl: ''}))} type="button">
-          <FaTimes size={18}/>
+          <TimesIcon width="18px" height="18px" fill="currentColor" color={colors.title} />
         </button>
       </div>
       <style jsx>{`

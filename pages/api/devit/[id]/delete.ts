@@ -30,7 +30,7 @@ const deleteDevit = async(req: NextApiRequest, res: NextApiResponse) => {
     }
 
     return res.status(200).json({
-      sucess: true,
+      success: true,
       msg: 'Devit has been removed.'
     });
   } catch (error) {

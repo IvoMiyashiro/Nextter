@@ -1,18 +1,11 @@
 import { Dispatch } from 'react';
 import { fetchWithToken } from '../helpers/fetchWithToken';
 import { fileUpload } from '../helpers/fileUpload';
-import { IDevit } from '../interfaces';
 
-export const getDevits = (devits: IDevit[]) => {
-  return {
-    type: 'LOAD DEVITS',
-    payload: devits
-  };
-};
-
-export const createDevit = async(
+export const createComment = async(
   file: File,
   uid: string,
+  id: string,
   content: string,
   dispatch: Dispatch<any>,
   setLoading: (value: boolean) => void,
@@ -28,16 +21,15 @@ export const createDevit = async(
       ? newFile = await fileUpload(file)
       : newFile = '';
     
-    const resp = await fetchWithToken('devit/create', {
+    const resp = await fetchWithToken(`devit/${id}/comments`, {
       uid,
       content,
       img: newFile,
-    }, 'POST');
+    }, 'PUT');
     const body = await resp.json();
-
-    
+    console.log(body.devit);
     dispatch({
-      type: 'CREATE DEVIT',
+      type: 'CREATE COMMENT',
       payload: body.devit
     });
     
@@ -48,50 +40,24 @@ export const createDevit = async(
   }
 };
 
-export const deleteDevit = async(
+export const favComment = async(
   devitId: string,
-  uid: string,
-  dispatch: Dispatch<any>,
-  setLoading: (value: boolean) => void
-) => {
-
-  setLoading(true);
-
-  try {
-    const resp = await fetchWithToken(`devit/${devitId}/delete`, {
-      uid
-    }, 'DELETE');
-    const body = await resp.json();
-
-    if (!body.success) return;
-
-    dispatch({
-      type: 'DELETE DEVIT',
-      payload: devitId
-    });
-
-    setLoading(false);
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-export const favDevit = async(
-  devitId: string,
+  commentId: string,
   uid: string,
   dispatch: Dispatch<any>
 ) => {
   try {
     await fetchWithToken(
-      `/devit/${devitId}/fav`,
-      {uid},
+      `/devit/${devitId}/comments/fav`,
+      {uid, commentId},
       'PUT'
     );
 
     dispatch({
-      type: 'FAV DEVIT',
+      type: 'FAV COMMENT',
       payload: {
         devitId,
+        commentId,
         uid
       }
     });
@@ -101,27 +67,28 @@ export const favDevit = async(
 
 };
 
-export const unFavDevit = async(
+export const unFavComment = async(
   devitId: string,
+  commentId: string,
   uid: string,
   dispatch: Dispatch<any>
 ) => {
   try {
     await fetchWithToken(
-      `/devit/${devitId}/fav`,
-      {uid},
+      `/devit/${devitId}/comments/fav`,
+      {uid, commentId},
       'PUT'
     );
 
     dispatch({
-      type: 'UNFAV DEVIT',
+      type: 'UNFAV COMMENT',
       payload: {
         devitId,
+        commentId,
         uid
       }
     });
   } catch (error) {
     console.log(error);
   }
-
 };

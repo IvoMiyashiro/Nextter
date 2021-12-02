@@ -1,9 +1,14 @@
+import { useContext, useState } from 'react';
+
 import { IUser } from '../../interfaces';
 
-import { fetchWithToken } from '../../helpers/fetchWithToken';
+import { deleteDevit } from '../../actions/devits';
 
-import { BsTrash } from 'react-icons/bs';
-import { RiUserUnfollowLine } from 'react-icons/ri';
+import { AppContext } from '../../context/AppContext';
+import { Spinner } from '../Spinner';
+
+import UnFollowIcon from '../Icons/Unfollow';
+import DeleteIcon from '../Icons/Delete';
 import { colors } from '../../styles/theme';
 import style from './styles/RevitMenuStyles';
 
@@ -21,10 +26,11 @@ export const HeaderActionsMenu = ({
   handleOpenModal,
 }: IProps) => {
 
+  const {devitDispatch} = useContext(AppContext);
+  const [isLoading, setLoading] = useState(false);
+
   const handleDeleteDevit = () => {
-    fetchWithToken(`devit/${id}/delete`, {
-      uid: userId,
-    }, 'DELETE');
+    deleteDevit(id, userId, devitDispatch, setLoading);
   };
 
   const handleUnfollowUser = () => {
@@ -42,13 +48,25 @@ export const HeaderActionsMenu = ({
                   onClick={() => {handleOpenModal(false); handleDeleteDevit();}} 
                   style={{color: colors.red, fontWeight: 'bold'}}
                 >
-                  <BsTrash size="18px" color={colors.red} />
+                  <DeleteIcon 
+                    width="20px"
+                    height="20px"
+                    stroke="currentColor"
+                    stroke-width="0"
+                    fill={colors.red}
+                  />
                   <p style={{ marginBottom: '-0.15em'}}>Delete</p>
                 </li>
               )
               : (
                 <li onClick={() => {handleOpenModal(false); handleUnfollowUser();}}>
-                  <RiUserUnfollowLine size="18px" color={colors.text} />
+                  <UnFollowIcon
+                    width="20px"
+                    height="20px"
+                    stroke="currentColor"
+                    stroke-width="0"
+                    fill={colors.text}
+                  />
                   <p>Unfollow @{devitUser.name}</p>
                 </li>
               )
@@ -57,7 +75,11 @@ export const HeaderActionsMenu = ({
             <button
               onClick={() => handleOpenModal(false)}
             >
-              Cancel
+              {
+                isLoading
+                  ? <Spinner color={colors.title} size="32px" />
+                  : 'Cancel'
+              }
             </button>
           </li>
         </ul>

@@ -6,7 +6,6 @@ import dbConnection from '../../../utils/database';
 const getDevits = async(req: NextApiRequest, res: NextApiResponse) => {
 
   const { uid } = req.body;
-
   try {
     dbConnection();
 

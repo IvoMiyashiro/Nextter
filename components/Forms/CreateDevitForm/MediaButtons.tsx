@@ -1,8 +1,9 @@
 import { ChangeEvent, useRef } from 'react';
-import { AiOutlinePicture, AiOutlineFileGif } from 'react-icons/ai';
 import { breakpoints } from '../../../styles/breakpoints';
 import { colors } from '../../../styles/theme';
 import { PrimaryButton } from '../../Buttons/PrimaryButton';
+import GifIcon from '../../Icons/Gif';
+import PictureIcon from '../../Icons/Picture';
 
 type fileState = {
   file: File,
@@ -39,10 +40,10 @@ export const MediaButtons = ({ isDisabled, handleImageUrl }: IProps) => {
         <section>
           <input type="file" ref={inputFileRef} onChange={(e) => handleImageChange(e)}/>
           <button type="button" onClick={handleSelectPicture}>
-            <AiOutlinePicture size={24} color={colors.primary} />
+            <PictureIcon width="18px" height="18px" fill="currentColor" color={colors.primary}/>
           </button>
           <button type="button">
-            <AiOutlineFileGif size={24} color={colors.primary} />
+            <GifIcon width="18px" height="18px" fill="currentColor" color={colors.primary}/>
           </button>
         </section>
         <section className="submit-button-container">
@@ -72,7 +73,7 @@ export const MediaButtons = ({ isDisabled, handleImageUrl }: IProps) => {
         button {
           background: transparent;
           border: none;
-          padding: 0;
+          padding: .5em;
         }
 
         input {

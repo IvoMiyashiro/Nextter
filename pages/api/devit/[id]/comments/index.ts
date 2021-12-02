@@ -21,16 +21,8 @@ const comment = async(req: NextApiRequest, res: NextApiResponse) => {
       });
     }
 
-    const devit = Devit.findById(id);
-
-    if (!devit) {
-      return res.status(404).json({
-        success: false,
-        msg: 'Devit not found.'
-      });
-    }
-
-    await devit.updateOne(
+    const newDevit = await Devit.findOneAndUpdate(
+      { _id: id },
       { $push: {
         comments: {
           id: (new Types.ObjectId()).toString(),
@@ -43,9 +35,11 @@ const comment = async(req: NextApiRequest, res: NextApiResponse) => {
       }}
     );
 
+    const devit = await Devit.findById(id);
+
     return res.status(200).json({
       success: true,
-      msg: 'Devit has been commented.'
+      devit,
     });
 
   } catch (error) {

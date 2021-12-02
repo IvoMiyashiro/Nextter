@@ -13,7 +13,7 @@ export default css`
     0px 0px 62px rgba(0, 0, 0, 0.35);
     bottom: 0;
     display: flex;
-    height: 53px;
+    height: 52px;
     position: fixed;
     width: 100%;
     background: ${colors.background};

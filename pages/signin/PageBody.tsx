@@ -4,8 +4,8 @@ import Link from 'next/link';
 import { SigninForm } from '../../components/Forms/SigninForm';
 import { Toast } from '../../components/Toast';
 
-import { FaTimes } from 'react-icons/fa';
-import { HiCode } from 'react-icons/hi';
+import Logo from '../../components/Icons/Logo';
+import TimesIcon from '../../components/Icons/Times';
 import { colors } from '../../styles/theme';
 import styles from '../signup/styles';
 
@@ -35,13 +35,21 @@ export const PageBody = () => {
           <header>
             <Link href="/">
               <a>
-                <FaTimes size="24px" color={colors.title} />
+                <TimesIcon
+                  heith="24px"
+                  width="24px"
+                  fill="currentColor"
+                  color={colors.text}
+                />
               </a>
             </Link>
             <Link href="/" passHref>
-              <picture>
-                <HiCode size={48} color={colors.primary} />
-              </picture>
+              <Logo
+                heith="52px"
+                width="52px"
+                fill="currentColor"
+                color={colors.primary}
+              />
             </Link>
           </header>
           <SigninForm

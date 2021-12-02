@@ -1,8 +1,9 @@
-import { FaTimes } from 'react-icons/fa';
-import { colors } from '../../../styles/theme';
-import { PrimaryButton } from '../../Buttons/PrimaryButton';
 import { Spinner } from '../../Spinner';
+import { PrimaryButton } from '../../Buttons/PrimaryButton';
+
+import { colors } from '../../../styles/theme';
 import styles from './styles';
+import TimesIcon from '../../Icons/Times';
 
 interface IProps {
   handleOpenModal: (value: boolean) => void,
@@ -21,7 +22,7 @@ export const HeaderSection = ({
     <>
       <header>
         <button onClick={() => handleOpenModal(false)}>
-          <FaTimes size={24}/>
+          <TimesIcon width="24px" height="24px" fill="currentColor" color={colors.title} />
         </button>
         <div className="submit-button-container">
           <PrimaryButton isDisabled={isSubmitButtonDisabled}>

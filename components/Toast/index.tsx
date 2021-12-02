@@ -1,4 +1,3 @@
-import { FaTimes } from 'react-icons/fa';
 import { breakpoints } from '../../styles/breakpoints';
 import { colors } from '../../styles/theme';
 

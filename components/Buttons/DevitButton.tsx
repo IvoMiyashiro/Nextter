@@ -1,4 +1,4 @@
-import { FaFeatherAlt } from 'react-icons/fa';
+import DevitIcon from '../Icons/Devit';
 import { colors } from '../../styles/theme';
 
 interface IProps {
@@ -9,7 +9,12 @@ export const DevitButton = ({handleOpenModal}: IProps) => {
   return (
     <>      
       <button onClick={() => handleOpenModal(true)}>
-        <FaFeatherAlt size={24}/>
+        <DevitIcon 
+          height="24px"
+          width="24px"
+          color={colors.background}
+          fill={colors.background}
+        />
       </button>
       <style jsx>{`
         button {
@@ -22,6 +27,9 @@ export const DevitButton = ({handleOpenModal}: IProps) => {
           background: ${colors.primary};
           border: none;
           color: ${colors.background};
+          display: flex;
+          align-items: center;
+          justify-content: center;
         }
       `}</style>
     </>

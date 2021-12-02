@@ -4,8 +4,8 @@ import { breakpoints } from '../../styles/breakpoints';
 
 export default css`
   div {
-    display: flex;
     align-items: center;
+    display: flex;
     height: 100vh;
     padding: 2em 0;
   }
@@ -17,20 +17,25 @@ export default css`
     height: 100%;
     justify-content: space-between;
     margin: 0 auto;
+    max-height: 700px;
     max-width: 500px;
     position: relative;
     width: 85%;
-    max-height: 700px;
   }
 
   a {
+    align-items: center;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    padding: .4em;
     position: absolute;
     right: -5px;
     top: -10px;
   }
 
-  picture {
-    text-align: center;
+  a:hover {
+    background-color: rgba(204, 214, 246, .1);
   }
 
   header {

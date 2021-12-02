@@ -4,9 +4,9 @@ import Link from 'next/link';
 import { SignupForm } from '../../components/Forms/SignupForm';
 import { Toast } from '../../components/Toast';
 
-import { FaTimes } from 'react-icons/fa';
 import { colors } from '../../styles/theme';
 import styles from '../signup/styles';
+import TimesIcon from '../../components/Icons/Times';
 
 export const PageBody = () => {
 
@@ -34,7 +34,12 @@ export const PageBody = () => {
           <header>
             <Link href="/">
               <a>
-                <FaTimes size="24px" color={colors.title} />
+                <TimesIcon
+                  heith="24px"
+                  width="24px"
+                  fill="currentColor"
+                  color={colors.text}
+                />
               </a>
             </Link>
           </header>

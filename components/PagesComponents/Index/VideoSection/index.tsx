@@ -1,4 +1,3 @@
-import { HiCode } from 'react-icons/hi';
 
 import { colors } from '../../../../styles/theme';
 import styles from './styles';

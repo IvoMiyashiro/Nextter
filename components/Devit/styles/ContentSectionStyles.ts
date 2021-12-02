@@ -50,30 +50,6 @@ export default css`
     margin-top: .25em;
   }
 
-  .list-item-fav:hover {
-    color: ${colors.fav};
-  }
-
-  .list-item-fav:hover .button-fav {
-    background: rgba(249, 24, 128, 0.1);
-  }
-
-  .list-item-comments:hover {
-    color: ${colors.comments};
-  }
-
-  .list-item-comments:hover .button-comment {
-    background: rgba(29, 155, 240, 0.1);
-  }
-
-  .list-item-revits:hover {
-    color: ${colors.revits};
-  }
-
-  .list-item-revits:hover .button-revit {
-    background: rgba(0, 186, 124, 0.1);
-  }
-
   @media (min-width: ${breakpoints.desktop}) {
       section {
       max-width: auto;

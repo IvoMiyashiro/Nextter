@@ -1,8 +1,7 @@
 import { FormEvent, useContext, useEffect, useState } from 'react';
 import { AppContext } from '../../../context/AppContext';
 
-import { fetchWithToken } from '../../../helpers/fetchWithToken';
-import { fileUpload } from '../../../helpers/fileUpload';
+import { createComment } from '../../../actions/comments';
 
 import { ContentHeader } from '../../Devit/ContentHeader';
 import { ContentMain } from '../../Devit/ContentMain';
@@ -31,7 +30,7 @@ export const CommentForm = ({
   handleOpenModal
 }: IProps) => {
 
-  const { userState } = useContext(AppContext);
+  const { userState, devitDispatch } = useContext(AppContext);
   const [isSubmitButtonDisabled, setSubmitButtonDisabled] = useState(true);
   const [isLoading, setLoading] = useState(false);
   const [textAreaValue, setTextAreaValue] = useState('');
@@ -54,26 +53,16 @@ export const CommentForm = ({
 
   const handleSubmit = async(e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    createComment(
+      imageUrl.file,
+      userState.id,
+      id,
+      textAreaValue,
+      devitDispatch,
+      setLoading,
+      handleOpenModal,
+    );
     setLoading(true);
-
-    try {
-      let newFile = '';
-
-      !!imageUrl.file
-        ? newFile = await fileUpload(imageUrl.file)
-        : newFile = '';
-      
-      await fetchWithToken(`devit/${id}/comments`, {
-        uid: userState.id,
-        content: textAreaValue,
-        img: newFile,
-      }, 'PUT');
-    } catch (error) {
-      console.log(error);
-    }
-
-    setLoading(false);
-    handleOpenModal(false);
   };
 
   return (

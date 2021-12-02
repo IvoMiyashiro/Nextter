@@ -1,12 +1,12 @@
-import useTimeAgo from '../../hooks/useTimeAgo';
 import ReactTimeAgo from 'react-time-ago';
 import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en.json';
 
 import { IUser } from '../../interfaces';
 
-import { BsThreeDots } from 'react-icons/bs';
+import DotsIcon from '../Icons/Dots';
 import style from './styles/ContentSectionStyles';
+import { colors } from '../../styles/theme';
 
 interface IProps {
   user: IUser
@@ -39,7 +39,13 @@ export const ContentHeader = ({
           &&
           <section> 
             <button onClick={() => handleHeaderActionsMenu(true)}>
-              <BsThreeDots size="22px" />
+              <DotsIcon 
+                height="20px"
+                width="20px"
+                stroke="currentColor"
+                color={colors.text}
+                fill={colors.text} 
+              />
             </button>
           </section>
         }

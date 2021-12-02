@@ -1,12 +1,14 @@
 import { useContext, useState } from 'react';
 
+import { favDevit, unFavDevit } from '../../actions/devits';
+
 import { useDevitFaved } from '../../hooks/useDevitFaved';
-import { fetchWithToken } from '../../helpers/fetchWithToken';
 import { AppContext } from '../../context/AppContext';
 
-import { AiOutlineRetweet } from 'react-icons/ai';
-import { FiMessageCircle } from 'react-icons/fi';
-import { MdFavorite, MdFavoriteBorder } from 'react-icons/md';
+import RedevitIcon from '../Icons/Redevit';
+import FavIcon from '../Icons/Fav';
+import FavFill from '../Icons/FavFill';
+import CommentIcon from '../Icons/Comment';
 import { colors } from '../../styles/theme';
 import style from './styles/ContentFooterStyles';
 
@@ -28,7 +30,7 @@ export const ContentFooter = ({
   handleRevitMenuOpen
 }: IProps) => {
 
-  const { userState } = useContext(AppContext);
+  const {userState, devitDispatch} = useContext(AppContext);
   const [isDevitFaved, setDevitFaved]: any = useDevitFaved(userState.id, favs);
   const [currentFavs, setCurrentFavs] = useState(favs.length);
   const [isFavOnMouseOver, setFavMouseOver] = useState<boolean>(false);
@@ -36,22 +38,16 @@ export const ContentFooter = ({
   const [isRevitOnMouseOver, setRevitOnMouse] = useState<boolean>(false);
 
   const handleFavDevit = async() => {
-    try {
-      setDevitFaved((prev: boolean) => !prev);
-      await fetchWithToken(
-        `/devit/${id}/fav`,
-        {uid: userState.id},
-        'PUT'
-      );
-  
-      if (isDevitFaved) {
-        return setCurrentFavs(prev => (prev - 1));
-      }
-  
-      return setCurrentFavs(prev => (prev + 1)); 
-    } catch (error) {
-      console.log(error);
+
+    setDevitFaved((prev: boolean) => !prev);
+    
+    if (isDevitFaved) {
+      unFavDevit(id, userState.id, devitDispatch);
+      return setCurrentFavs(prev => (prev - 1));
     }
+
+    favDevit(id, userState.id, devitDispatch);
+    setCurrentFavs(prev => (prev + 1)); 
   };
 
   return (
@@ -64,7 +60,16 @@ export const ContentFooter = ({
             onMouseLeave={() => setCommentsOnMouseOver(false)}
             className="list-item-comments"
           >
-            <button className="button-comment"><FiMessageCircle size="16px" color={isCommentsOnMouseOver ? colors.comments : ''} /></button>
+            <button className="button-comment">
+              <CommentIcon
+                width="16px"
+                heigth="16px"
+                stroke="currentColor"
+                stroke-width="0"
+                fill={isCommentsOnMouseOver ? colors.comments : colors.text} 
+                color={isCommentsOnMouseOver ? colors.comments : colors.text}
+              />
+            </button>
             <span>{comments.length}</span>
           </li>
           <li
@@ -73,7 +78,16 @@ export const ContentFooter = ({
             onMouseLeave={() => setRevitOnMouse(false)}
             className="list-item-revits"
           >
-            <button className="button-revit"><AiOutlineRetweet size="16px" color={isRevitOnMouseOver ? colors.revits : ''} /></button>
+            <button className="button-revit">
+              <RedevitIcon 
+                width="16px"
+                heigth="16px"
+                stroke="currentColor"
+                stroke-width="0"
+                fill={isRevitOnMouseOver ? colors.revits : colors.text} 
+                color={isRevitOnMouseOver ? colors.revits : colors.title} 
+              />
+            </button>
             <span>{revits.length}</span>
           </li>
           <li 
@@ -84,8 +98,30 @@ export const ContentFooter = ({
           >
             {
               !isDevitFaved
-                ? <button className="button-fav"><MdFavoriteBorder size="16px" color={isFavOnMouseOver ? colors.fav : ''}/></button>
-                : <button className="button-fav"><MdFavorite size="16px" color={colors.fav} /></button>
+                ? (
+                  <button className="button-fav">
+                    <FavIcon 
+                      width="16px"
+                      heigth="16px"
+                      stroke="currentColor"
+                      stroke-width="0"
+                      fill={isFavOnMouseOver ? colors.fav : colors.text} 
+                      color={isFavOnMouseOver ? colors.fav : colors.text} 
+                    />
+                  </button>
+                )
+                : (
+                  <button className="button-fav">
+                    <FavFill 
+                      width="16px"
+                      heigth="16px"
+                      stroke="currentColor"
+                      stroke-width="0"
+                      fill={isFavOnMouseOver ? colors.fav : colors.fav} 
+                      color={isFavOnMouseOver ? colors.fav : colors.fav} 
+                    />
+                  </button>
+                )
             } 
             <span>{currentFavs}</span>
           </li>

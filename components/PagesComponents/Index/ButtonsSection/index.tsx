@@ -1,8 +1,8 @@
 import Link from 'next/link';
 
-import { BsGithub } from 'react-icons/bs';
-import { HiOutlineMail } from 'react-icons/hi';
-
+import GithubIcon from '../../../Icons/Github';
+import MessagesIcon from '../../../Icons/Messages';
+import { colors } from '../../../../styles/theme';
 import styles from './styles';
 
 interface IProps {
@@ -24,7 +24,11 @@ export const ButtonsSection = ({ layout }: IProps) => {
         <section>
           <button>
             <picture>
-              <BsGithub size={26} />
+              <GithubIcon 
+                width="26px"
+                height="26px"
+                color={colors.primary}
+              />
             </picture>
             {
               layout
@@ -38,7 +42,12 @@ export const ButtonsSection = ({ layout }: IProps) => {
           >
             <button>
               <picture>
-                <HiOutlineMail size={26} />
+                <MessagesIcon 
+                  width="26px"
+                  height="26px"
+                  fill="currentColor"
+                  color={colors.primary}
+                />
               </picture>
               {
                 layout

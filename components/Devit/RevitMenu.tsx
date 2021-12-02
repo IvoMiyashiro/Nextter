@@ -2,10 +2,10 @@ import { IUser } from '../../interfaces';
 
 import { fetchWithToken } from '../../helpers/fetchWithToken';
 
-import { AiOutlineRetweet } from 'react-icons/ai';
-import { FiEdit2 } from 'react-icons/fi';
 import { colors } from '../../styles/theme';
 import style from './styles/RevitMenuStyles';
+import RedevitIcon from '../Icons/Redevit';
+import EditIcon from '../Icons/Edit';
 
 interface IProps {
   id: string
@@ -44,11 +44,11 @@ export const RevitMenu = ({
       <div>
         <ul>
           <li onClick={() => {handleOpenModal(false); handleRevitDevit();}}>
-            <AiOutlineRetweet size="18px" color={colors.text} />
+            <RedevitIcon width="18px" height="18px" fill="currentColor" stoke-width="0" color={colors.text} />
             <p>{isRevitted ? 'Undo Revit' : 'Revit'}</p>
           </li>
           <li onClick={() => {handleQuoteDevitFormOpen(true); handleOpenModal(false);}}>
-            <FiEdit2 size="18px" color={colors.text} />
+            <EditIcon width="18px" height="18px" fill="currentColor" stoke-width="0" color={colors.text} />
             <p>Quote Devit</p>
           </li>
           <li>
