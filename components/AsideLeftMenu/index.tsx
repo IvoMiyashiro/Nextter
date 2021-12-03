@@ -1,13 +1,13 @@
 import Link from 'next/link';
 
-import { LeftAsideFooter } from '../LeftAsideFooter';
-import { LeftAsideMenu } from '../LeftAsideMenu';
+import { AsideLeftFooter } from './AsideLeftFooter';
+import { AsideLeftMenu } from './AsideLeftMenu';
 
-import Logo from '../../../Icons/Logo';
-import { colors } from '../../../../styles/theme';
+import Logo from '../Icons/Logo';
+import { colors } from '../../styles/theme';
 import styles from './styles';
 
-export const LeftAsideSection = () => {
+export const AsideLeftSection = () => {
   return (
     <>
       <aside>
@@ -23,8 +23,8 @@ export const LeftAsideSection = () => {
               </a>
             </Link>
           </header>
-          <LeftAsideMenu />
-          <LeftAsideFooter />
+          <AsideLeftMenu />
+          <AsideLeftFooter />
         </div>
       </aside>
 

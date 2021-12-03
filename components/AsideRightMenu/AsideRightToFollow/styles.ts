@@ -1,12 +1,12 @@
 import css from 'styled-jsx/css';
-import { colors } from '../../../../styles/theme';
+import { colors } from '../../../styles/theme';
 
 export default css`
-
   div {
     background-color: ${colors.backgroundAlt};
     border-radius: 16px;
     margin-top: 1em;
+    overflow: hidden;
   }
 
   header {

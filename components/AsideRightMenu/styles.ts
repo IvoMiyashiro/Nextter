@@ -7,6 +7,6 @@ export default css`
     margin-left: 1.75em;
     position: sticky;
     top: 0;
-    height: 100vh;
+    min-height: 100vh;
   }
 `;

@@ -1,17 +1,17 @@
-import { PrimaryButton } from '../../../Buttons/PrimaryButton';
+import { PrimaryButton } from '../../Buttons/PrimaryButton';
 import { MenuItem } from './MenuItem';
 
-import HomeIcon from '../../../Icons/Home';
-import HashtagIcon from '../../../Icons/HashTag';
-import NotificationIcon from '../../../Icons/Notifications';
-import MessagesIcon from '../../../Icons/Messages';
-import UserIcon from '../../../Icons/User';
-import SettingsIcon from '../../../Icons/Settings';
-import HelpIcon from '../../../Icons/Help';
-import { colors } from '../../../../styles/theme';
+import HomeIcon from '../../Icons/Home';
+import HashtagIcon from '../../Icons/HashTag';
+import NotificationIcon from '../../Icons/Notifications';
+import MessagesIcon from '../../Icons/Messages';
+import UserIcon from '../../Icons/User';
+import SettingsIcon from '../../Icons/Settings';
+import HelpIcon from '../../Icons/Help';
+import { colors } from '../../../styles/theme';
 import styles from './styles';
 
-export const LeftAsideMenu = () => {
+export const AsideLeftMenu = () => {
   return (
     <>
       <menu>

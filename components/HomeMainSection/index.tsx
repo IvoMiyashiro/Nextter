@@ -1,16 +1,17 @@
 import {  useState } from 'react';
 
-import { useFetchDevits } from '../../../../hooks/useFetchDevits';
+import { useFetchDevits } from '../../hooks/useFetchDevits';
 
-import { CreateDevitForm } from '../../../Forms/CreateDevitForm';
-import { Navbar } from '../../../Navbar';
-import { Modal } from '../../../Modal';
-import { TopBar } from '../../../TopBar';
-import { DevitButton } from '../../../Buttons/DevitButton';
-import { Devit } from '../../../Devit';
-import { LeftAsideSection } from '../LeftAsideSection';
+import { CreateDevitForm } from '../Forms/CreateDevitForm';
+import { Navbar } from '../Navbar';
+import { Modal } from '../Modal';
+import { TopBar } from '../TopBar';
+import { DevitButton } from '../Buttons/DevitButton';
+import { Devit } from '../Devit';
+import { AsideLeftSection } from '../AsideLeftMenu';
+import { AsideRightSection } from '../AsideRightMenu';
+
 import styles from './styles';
-import { RightAsideSection } from '../RightAsideSection';
 
 export const MainSection = () => {
 
@@ -32,7 +33,7 @@ export const MainSection = () => {
           </Modal>
         }
         <div className="home-layout">
-          <LeftAsideSection />
+          <AsideLeftSection />
           <main>
             <section>
               <TopBar />
@@ -45,7 +46,7 @@ export const MainSection = () => {
               }
             </section>
           </main>
-          <RightAsideSection />
+          <AsideRightSection />
         </div>
         <DevitButton handleOpenModal={setDevitFormOpen}/>
         <Navbar />

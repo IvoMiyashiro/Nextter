@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { NextPage } from 'next';
 
 import { Spinner } from '../../components/Spinner';
-import { MainSection } from '../../components/PagesComponents/home/MainSection';
+import { MainSection } from '../../components/HomeMainSection';
 import { useIsLoggedin } from '../../hooks/useIsLoggedin';
 
 const Home: NextPage = () => {
