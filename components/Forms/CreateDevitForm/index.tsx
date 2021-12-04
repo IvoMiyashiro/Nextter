@@ -14,7 +14,7 @@ interface IProp {
 
 export const CreateDevitForm = ({handleOpenModal}: IProp) => {
 
-  const { userState, devitDispatch } = useContext(AppContext);
+  const {userState, devitDispatch} = useContext(AppContext);
   const [isSubmitButtonDisabled, setSubmitButtonDisabled] = useState(true);
   const [isLoading, setLoading] = useState(false);
   const [textAreaValue, setTextAreaValue] = useState('');
@@ -67,6 +67,7 @@ export const CreateDevitForm = ({handleOpenModal}: IProp) => {
             imageUrl={imageUrl.fileUrl}
             textAreaPlaceholder="What's happening?"
             user={userState.name}
+            isLoading={isLoading}
           />
         </div>
       </form>

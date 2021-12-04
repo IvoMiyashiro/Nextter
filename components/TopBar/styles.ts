@@ -34,5 +34,12 @@ export default css`
     border-radius: 50%;
     padding: 0;
     overflow: hidden;
+    display: block;
+  }
+
+  @media (min-width: ${breakpoints.tablet}) {
+    button {
+      display: none;
+    }
   }
 `;

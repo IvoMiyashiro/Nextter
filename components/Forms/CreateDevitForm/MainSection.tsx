@@ -15,6 +15,7 @@ interface IProps {
   imageUrl: string
   textAreaPlaceholder: string
   user: string
+  isLoading: boolean
 }
 
 export const MainSection = ({
@@ -24,7 +25,8 @@ export const MainSection = ({
   textAreaValue,
   imageUrl,
   textAreaPlaceholder,
-  user
+  user,
+  isLoading
 }: IProps) => {
 
   const [dragState, setDragState] = useState(false);
@@ -87,6 +89,7 @@ export const MainSection = ({
           <MediaButtons 
             isDisabled={isSubmitButtonDisabled}
             handleImageUrl={handleImageUrl}
+            isLoading={isLoading}
           />
         </div>
       </main>

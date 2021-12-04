@@ -4,7 +4,7 @@ import { AsideRightTrendings } from './AsideRightTrendings';
 
 import styles from './styles';
 
-export const AsideRightSection = () => {
+export const AsideRightMenu = () => {
   return (
     <>
       <aside>

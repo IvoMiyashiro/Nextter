@@ -19,9 +19,6 @@ export const DevitButton = ({handleOpenModal}: IProps) => {
       </button>
       <style jsx>{`
         button {
-          position: fixed;
-          bottom: 74px;
-          right: 22px;
           height: 56px;
           width: 56px;
           border-radius: 50%;
@@ -31,12 +28,6 @@ export const DevitButton = ({handleOpenModal}: IProps) => {
           display: flex;
           align-items: center;
           justify-content: center;
-        }
-
-        @media (min-width: ${breakpoints.desktop}) {
-          button {
-            display: none;
-          }
         }
       `}</style>
     </>

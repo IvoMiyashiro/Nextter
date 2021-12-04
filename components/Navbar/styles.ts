@@ -29,7 +29,7 @@ export default css`
     width: 100%;
   }
 
-  @media (min-width: ${breakpoints.desktop}) {
+  @media (min-width: ${breakpoints.tablet}) {
     footer {
       display: none;
     }

@@ -6,17 +6,15 @@ export default css`
   
   aside {
     display: none;
-    align-items: flex-end;
     flex-direction: column;
+    align-items: center;
     height: 100vh;
     position: sticky;
     left: 0;
     top: 0;
-    border-right: 1px solid ${colors.gray};
   }
 
   div {
-    width: 275px;
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -26,6 +24,7 @@ export default css`
     display: flex;
     align-items: center;
     height: 62px;
+    margin-left: -0.25em
   }
 
   a {
@@ -41,7 +40,7 @@ export default css`
     transition: .2s ease;
   }
 
-  @media (min-width: ${breakpoints.desktop}) {
+  @media (min-width: ${breakpoints.tablet}) {
     aside {
       display: flex;
     }

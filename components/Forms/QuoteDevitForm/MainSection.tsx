@@ -69,12 +69,12 @@ export const MainSection = ({
 
   return (
     <>
-      <main>
+      <div>
         <ProfileImage
           profileImage="/yo.jpg"
           alt={name}
         />
-        <div>
+        <section>
           <textarea
             placeholder={textAreaPlaceholder}
             onChange={(e) => handleTextAreaChange(e)}
@@ -113,8 +113,8 @@ export const MainSection = ({
             isDisabled={isSubmitButtonDisabled}
             handleImageUrl={handleImageUrl}
           />
-        </div>
-      </main>
+        </section>
+      </div>
 
       <style jsx>{styles}</style>
     </>

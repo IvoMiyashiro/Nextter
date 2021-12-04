@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { NextPage } from 'next';
 
 import { Spinner } from '../../components/Spinner';
-import { MainSection } from '../../components/HomeMainSection';
+import { HomePage } from '../../components/HomePage';
 import { useIsLoggedin } from '../../hooks/useIsLoggedin';
 
 const Home: NextPage = () => {
@@ -21,7 +21,7 @@ const Home: NextPage = () => {
       {
         isCheckingAuth
           ? <div><Spinner color="white" size="32px"/></div>
-          : <MainSection />
+          : <HomePage />
       }
       <style jsx>{`
         div {

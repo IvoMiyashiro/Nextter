@@ -10,8 +10,9 @@ import SettingsIcon from '../../Icons/Settings';
 import HelpIcon from '../../Icons/Help';
 import { colors } from '../../../styles/theme';
 import styles from './styles';
+import { DevitButton } from '../../Buttons/DevitButton';
 
-export const AsideLeftMenu = () => {
+export const AsideLeftMenuItems = () => {
   return (
     <>
       <menu>
@@ -60,6 +61,11 @@ export const AsideLeftMenu = () => {
             Devit
           </PrimaryButton>
         </section>
+        <div>
+          <DevitButton 
+            handleOpenModal={false}
+          />
+        </div>
       </menu>
 
       <style jsx>{styles}</style>

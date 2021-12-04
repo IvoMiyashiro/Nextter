@@ -4,7 +4,6 @@ import { colors } from '../../../styles/theme';
 
 export default css`
   footer {
-    margin-right: 1.5em;
     margin-top: auto;
     margin-bottom: 1.5em;
     display: flex;
@@ -43,5 +42,11 @@ export default css`
 
   .dots-container {
     margin-left: auto;
+  }
+
+  @media (min-width: ${breakpoints.tablet}) and (max-width: ${breakpoints.desktop}) {
+    footer {
+      display: none;
+    }
   }
 `;

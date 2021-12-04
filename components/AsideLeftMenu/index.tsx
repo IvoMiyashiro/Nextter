@@ -1,13 +1,13 @@
 import Link from 'next/link';
 
 import { AsideLeftFooter } from './AsideLeftFooter';
-import { AsideLeftMenu } from './AsideLeftMenu';
+import { AsideLeftMenuItems } from './AsideLeftMenuItems';
 
 import Logo from '../Icons/Logo';
 import { colors } from '../../styles/theme';
 import styles from './styles';
 
-export const AsideLeftSection = () => {
+export const AsideLeftMenu = () => {
   return (
     <>
       <aside>
@@ -23,7 +23,7 @@ export const AsideLeftSection = () => {
               </a>
             </Link>
           </header>
-          <AsideLeftMenu />
+          <AsideLeftMenuItems />
           <AsideLeftFooter />
         </div>
       </aside>

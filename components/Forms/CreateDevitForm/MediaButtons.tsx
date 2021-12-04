@@ -6,18 +6,20 @@ import PictureIcon from '../../Icons/Picture';
 
 import { breakpoints } from '../../../styles/breakpoints';
 import { colors } from '../../../styles/theme';
+import { Spinner } from '../../Spinner';
 
 type fileState = {
-  file: File,
+  file: File
   fileUrl: string
 }
 
 interface IProps {
   isDisabled: boolean,
   handleImageUrl: (value: fileState | ((prev: fileState) => fileState)) => void
+  isLoading: boolean
 }
 
-export const MediaButtons = ({ isDisabled, handleImageUrl }: IProps) => {
+export const MediaButtons = ({ isDisabled, handleImageUrl, isLoading }: IProps) => {
 
   const inputFileRef = useRef<HTMLInputElement>(null);
 
@@ -54,7 +56,11 @@ export const MediaButtons = ({ isDisabled, handleImageUrl }: IProps) => {
             textColor={colors.background}
             buttonColor={colors.primary}
           >
-            Devit
+            {
+              isLoading
+                ? <Spinner size="18px" color={colors.title} />
+                : 'Devit'
+            }
           </PrimaryButton>
         </section>
       </div>
@@ -63,13 +69,14 @@ export const MediaButtons = ({ isDisabled, handleImageUrl }: IProps) => {
         div {
           border-top: 1px solid ${colors.gray};
           padding: 1em 0;
+          padding-bottom: 0.5em;
           display: flex;
           justify-content: space-between;
         }
 
         section {
           display: flex;
-          gap: 1em;
+          gap: 0.5em;
         }
 
         .submit-button-container {
@@ -87,7 +94,7 @@ export const MediaButtons = ({ isDisabled, handleImageUrl }: IProps) => {
            display: none;
         }
         
-        @media (min-width: ${breakpoints.desktop}) {
+        @media (min-width: ${breakpoints.tablet}) {
           .submit-button-container {
             display: block;
           }

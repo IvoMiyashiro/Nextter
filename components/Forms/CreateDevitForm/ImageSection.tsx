@@ -3,7 +3,7 @@ import TimesIcon from '../../Icons/Times';
 import { colors } from '../../../styles/theme';
 
 type fileState = {
-  file: File,
+  file: string,
   fileUrl: string
 }
 
@@ -18,10 +18,11 @@ export const ImageSection = ({src, alt, handleImageUrl}: props) => {
     <>
       <div>
         <img src={src} alt={alt} />
-        <button onClick={() => handleImageUrl((prev: fileState) => ({...prev, fileUrl: ''}))} type="button">
+        <button onClick={() => handleImageUrl({file: '', fileUrl: ''})} type="button">
           <TimesIcon width="18px" height="18px" fill="currentColor" color={colors.title} />
         </button>
       </div>
+
       <style jsx>{`
         div {
           position: relative;

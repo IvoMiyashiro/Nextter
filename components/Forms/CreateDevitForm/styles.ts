@@ -71,7 +71,7 @@ export default css`
     height: 32px;
   }
 
-  @media (min-width: ${breakpoints.desktop}) {
+  @media (min-width: ${breakpoints.tablet}) {
     form {
       min-width: 600px;
       height: auto;

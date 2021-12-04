@@ -45,4 +45,24 @@ export default css`
     margin-top: 1em;
     width: 225px;
   }
+
+  div {
+    margin-top: 1em;
+  }
+
+  @media (min-width: ${breakpoints.tablet}) and (max-width: ${breakpoints.desktop}) {
+    h4 {
+      display: none;
+    }
+  
+    section {
+      display: none;
+    }
+  }
+
+  @media (min-width: ${breakpoints.desktop}) {
+    div {
+      display: none;
+    }
+  }
 `;
