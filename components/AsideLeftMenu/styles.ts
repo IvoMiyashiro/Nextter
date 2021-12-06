@@ -12,6 +12,7 @@ export default css`
     position: sticky;
     left: 0;
     top: 0;
+    z-index: 9;
   }
 
   div {
@@ -38,6 +39,13 @@ export default css`
   a:hover {
     background-color: ${colors.rgbaPrimary};
     transition: .2s ease;
+  }
+
+  @media (min-width: ${breakpoints.tablet}) and (max-width: ${breakpoints.desktop}) {
+    div {
+      align-items: center;
+      margin-left: 0.4em;
+    }
   }
 
   @media (min-width: ${breakpoints.tablet}) {

@@ -11,11 +11,13 @@ import { CommentForm } from '../Forms/CommentForm';
 import { ContentFooter } from './ContentFooter';
 import { RevitMenu } from './RevitMenu';
 import { QuoteDevitForm } from '../Forms/QuoteDevitForm';
-
-import styles from './styles/ContentSectionStyles';
 import { HeaderActionsMenu } from './HeaderActionsMenu';
 import { AppContext } from '../../context/AppContext';
 import { DeleteDevitToast } from '../Toast/DeleteDevitToast';
+
+import styles from './styles/ContentSectionStyles';
+import { ActionMenuMobile } from './ActionMenuMobile';
+import { ActionMenuDesktop } from './ActionMenuDesktop';
 
 interface IProps {
   id: string,
@@ -133,15 +135,24 @@ export const ContentSection = ({
             handleOpenModal={setHeaderActionsMenuOpen}
             isModalOpen={isHeaderActionsMenuOpen}
             align="flex-end"
+            isMobile={true}
           >
-            <HeaderActionsMenu
+            <ActionMenuMobile
               devitUser={user}
-              userId={userState.id}
               isLoading={isLoading}
               handleOpenModal={setHeaderActionsMenuOpen}
               handleDeleteModalOpen={setDeleteModalOpen}
             />
           </Modal>
+        }
+        {
+          isHeaderActionsMenuOpen
+          &&
+          <ActionMenuDesktop
+            devitUser={user}
+            handleMenuOpen={setHeaderActionsMenuOpen}
+            handleDeleteModalOpen={setDeleteModalOpen}
+          />
         }
         {
           isDeleteModalOpen

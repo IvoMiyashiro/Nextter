@@ -9,9 +9,10 @@ export default css`
     position: sticky;
     top: 0;
     min-height: 100vh;
+    margin-right: 1em;
   }
-
-  @media (min-width: ${breakpoints.tablet}) {
+  
+  @media (min-width: ${breakpoints.wideTablet}) {
     aside {
       display: flex;
     }

@@ -4,11 +4,7 @@ import { Devit } from './Devit';
 import { CreateDevitHome } from './Forms/CreateDevitHome';
 import { TopBar } from './TopBar';
 
-interface IProps {
-  handleDevitFormOpen: (value: boolean) => void
-}
-
-export const Timeline = ({ handleDevitFormOpen }: IProps) => {
+export const Timeline = () => {
 
   const {devitState} = useFetchDevits();
 
@@ -17,9 +13,7 @@ export const Timeline = ({ handleDevitFormOpen }: IProps) => {
       <main>
         <TopBar />
         <section>
-          <CreateDevitHome
-            handleOpenModal={handleDevitFormOpen}
-          />
+          <CreateDevitHome />
           { 
             devitState.length !== 0
           &&

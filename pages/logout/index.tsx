@@ -35,7 +35,7 @@ const Logout = () => {
           <section className="buttons-container">
             <section className="button-container">
               <PrimaryButton 
-                onClick={() => {logOut(userDispatch); }}
+                onClick={handleLogOut}
                 type="button"
                 textColor={colors.background}
                 buttonColor={colors.title}

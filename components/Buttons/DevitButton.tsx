@@ -1,15 +1,16 @@
 import DevitIcon from '../Icons/Devit';
 import { colors } from '../../styles/theme';
-import { breakpoints } from '../../styles/breakpoints';
+import { handleOpenCreateDevitForm } from '../../actions/ui';
+import { useContext } from 'react';
+import { AppContext } from '../../context/AppContext';
 
-interface IProps {
-  handleOpenModal: (value: boolean) => void
-}
+export const DevitButton = () => {
 
-export const DevitButton = ({handleOpenModal}: IProps) => {
+  const { uiDispatch } = useContext(AppContext);
+
   return (
     <>      
-      <button onClick={() => handleOpenModal(true)}>
+      <button onClick={() => handleOpenCreateDevitForm(uiDispatch)}>
         <DevitIcon 
           height="24px"
           width="24px"

@@ -1,5 +1,7 @@
 import { useState, useEffect, FormEvent, useContext } from 'react';
 
+import { handleCloseCreateDevitForm } from '../../../actions/ui';
+
 import { AppContext } from '../../../context/AppContext';
 import { createDevit } from '../../../actions/devits';
 
@@ -8,13 +10,9 @@ import { MainSection } from './MainSection';
 
 import styles from './styles';
 
-interface IProp {
-  handleOpenModal: (value: boolean) => void
-}
+export const CreateDevitForm = () => {
 
-export const CreateDevitForm = ({handleOpenModal}: IProp) => {
-
-  const {userState, devitDispatch} = useContext(AppContext);
+  const {userState, devitDispatch, uiDispatch} = useContext(AppContext);
   const [isSubmitButtonDisabled, setSubmitButtonDisabled] = useState(true);
   const [isLoading, setLoading] = useState(false);
   const [textAreaValue, setTextAreaValue] = useState('');
@@ -44,8 +42,8 @@ export const CreateDevitForm = ({handleOpenModal}: IProp) => {
       userState.id,
       textAreaValue,
       devitDispatch,
+      uiDispatch,
       setLoading,
-      handleOpenModal
     );
   };
 
@@ -53,7 +51,6 @@ export const CreateDevitForm = ({handleOpenModal}: IProp) => {
     <>
       <form onSubmit={(e) => handleSubmit(e)}>
         <HeaderSection 
-          handleOpenModal={handleOpenModal}
           isSubmitButtonDisabled={isSubmitButtonDisabled}
           isLoading={isLoading}
           buttonChild="Devit"

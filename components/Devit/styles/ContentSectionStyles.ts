@@ -5,6 +5,7 @@ import { colors } from '../../../styles/theme';
 export default css`
   div {
     width: 100%;
+    position: relative;
   }
 
   header {

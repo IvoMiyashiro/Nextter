@@ -1,13 +1,19 @@
+import { useContext } from 'react';
+import { AppContext } from '../../../context/AppContext';
+
+import { handleCloseCreateDevitForm } from '../../../actions/ui';
+
 import { Spinner } from '../../Spinner';
 import { PrimaryButton } from '../../Buttons/PrimaryButton';
-
-import { colors } from '../../../styles/theme';
-import styles from './styles';
-import TimesIcon from '../../Icons/Times';
 import { HoverableButton } from '../../Buttons/HoverableButton';
 
+import TimesIcon from '../../Icons/Times';
+import { colors } from '../../../styles/theme';
+import styles from './styles';
+
+
 interface IProps {
-  handleOpenModal: (value: boolean) => void,
+  handleOpenModal?: (value: boolean) => void,
   isSubmitButtonDisabled: boolean,
   isLoading: boolean
   buttonChild: string
@@ -19,6 +25,9 @@ export const HeaderSection = ({
   isLoading,
   buttonChild
 }: IProps) => {
+
+  const { uiDispatch } = useContext(AppContext);
+
   return (
     <>
       <header>
@@ -29,7 +38,11 @@ export const HeaderSection = ({
           color={colors.text}
           defaultColor={colors.text}
           backgroundColor={colors.rgbaTitle}
-          onClick={() => handleOpenModal(false)}
+          onClick={
+            handleOpenModal !== undefined 
+              ? () => handleOpenModal(false)
+              : () => handleCloseCreateDevitForm(uiDispatch)
+          }
         />
         <div className="submit-button-container">
           <PrimaryButton 

@@ -3,22 +3,23 @@ import { colors } from '../../styles/theme';
 
 export default css`
   div {
-    display: flex;
     align-items: center;
-    justify-content: center;
-    height: 100vh;
-    width: 100%;
     background: rgba(91, 112, 131, 0.4);
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    width: 100%;
   }
 
   main {
-    padding: 2em;
-    padding-top: 1.6em;
     background-color: ${colors.background};
-    width: 80%;
     border-radius: 16px;
     display: flex;
     flex-direction: column;
+    max-width: 320px;
+    padding-top: 1.6em;
+    padding: 2em;
+    width: 80%;
   }
 
   section {
@@ -38,8 +39,8 @@ export default css`
   p {
     color: ${colors.text};
     font-size: .8rem;
-    margin-top: .5em;
     margin-bottom: 1.5em;
+    margin-top: .5em;
   }
 
   .logo-container {

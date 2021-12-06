@@ -19,6 +19,7 @@ export default css`
     border-radius: 16px;
     display: flex;
     flex-direction: column;
+    max-width: 300px;
   }
 
   section {

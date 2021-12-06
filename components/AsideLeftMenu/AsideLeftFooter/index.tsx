@@ -1,18 +1,21 @@
+import { useContext, useState } from 'react';
 import Image from 'next/image';
-import { useContext } from 'react';
-import { AppContext } from '../../../context/AppContext';
-import { colors } from '../../../styles/theme';
-import DotsIcon from '../../Icons/Dots';
 
+import { AppContext } from '../../../context/AppContext';
+import { LogoutMenu } from './LogoutMenu';
+
+import DotsIcon from '../../Icons/Dots';
+import { colors } from '../../../styles/theme';
 import styles from './styles';
 
 export const AsideLeftFooter = () => {
 
   const {userState} = useContext(AppContext);
+  const [ isMenuOpen, setMenuOpen ] = useState(false);
 
   return (
     <>
-      <footer>
+      <footer onClick={() => setMenuOpen((prev: boolean) => !prev)}>
         <div className="image-container">
           <Image 
             src="/yo.jpg"
@@ -32,6 +35,11 @@ export const AsideLeftFooter = () => {
             fill="currentColor"
           />
         </div>
+        {
+          isMenuOpen
+          &&
+          <LogoutMenu username={userState.username} />
+        }
       </footer>
 
       <style jsx>{styles}</style>

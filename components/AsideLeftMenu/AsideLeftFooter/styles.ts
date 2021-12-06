@@ -4,14 +4,15 @@ import { colors } from '../../../styles/theme';
 
 export default css`
   footer {
-    margin-top: auto;
-    margin-bottom: 1.5em;
-    display: flex;
     align-items: center;
     border-radius: 9999px;
-    height: 64px;
-    padding: 1em;
     cursor: pointer;
+    display: flex;
+    height: 64px;
+    margin-bottom: 1.5em;
+    margin-top: auto;
+    padding: 1em;
+    position: relative;
   }
 
   footer:hover {
@@ -19,11 +20,11 @@ export default css`
   }
 
   .image-container {
+    border-radius: 50%;
+    height: 40px;
+    overflow: hidden;
     position: relative;
     width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    overflow: hidden;
   }
 
   .user-container {
@@ -36,8 +37,8 @@ export default css`
   }
   
   p {
-    font-size: 0.9rem;
     color: ${colors.text};
+    font-size: 0.9rem;
   }
 
   .dots-container {
@@ -45,7 +46,13 @@ export default css`
   }
 
   @media (min-width: ${breakpoints.tablet}) and (max-width: ${breakpoints.desktop}) {
+
     footer {
+      padding: 0.75em;
+    }
+
+    .user-container,
+    .dots-container {
       display: none;
     }
   }

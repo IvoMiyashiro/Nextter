@@ -1,21 +1,17 @@
 import { ChangeEvent, DragEvent, FormEvent, useContext, useEffect, useState } from 'react';
 import { createDevit } from '../../../actions/devits';
+
 import { AppContext } from '../../../context/AppContext';
-import { colors } from '../../../styles/theme';
 import { ProfileImage } from '../../Devit/ProfileImage';
 import { ImageSection } from '../CreateDevitForm/ImageSection';
 import { MediaButtons } from '../CreateDevitForm/MediaButtons';
+
+import { colors } from '../../../styles/theme';
 import styles from './styles';
 
-interface IProps {
-  handleOpenModal: (value: boolean) => void
-}
+export const CreateDevitHome = () => {
 
-export const CreateDevitHome = ({
-  handleOpenModal,
-}: IProps) => {
-
-  const {userState, devitDispatch} = useContext(AppContext);
+  const {userState, devitDispatch, uiDispatch} = useContext(AppContext);
   const [dragState, setDragState] = useState(false);
   const [isSubmitButtonDisabled, setSubmitButtonDisabled] = useState(true);
   const [isLoading, setLoading] = useState(false);
@@ -43,9 +39,9 @@ export const CreateDevitHome = ({
       imageUrl.file,
       userState.id,
       textAreaValue,
+      uiDispatch,
       devitDispatch,
-      setLoading,
-      handleOpenModal
+      setLoading
     );
     setTextAreaValue('');
     setImageUrl({file: '', fileUrl: ''});

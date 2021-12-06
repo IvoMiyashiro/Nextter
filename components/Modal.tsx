@@ -1,4 +1,6 @@
-import { ReactChild, useRef, MouseEvent } from 'react';
+import { ReactChild, useRef, MouseEvent, useContext } from 'react';
+import { handleCloseCreateDevitForm } from '../actions/ui';
+import { AppContext } from '../context/AppContext';
 import { breakpoints } from '../styles/breakpoints';
 
 interface IProps {
@@ -6,8 +8,8 @@ interface IProps {
   isModalOpen: boolean
   align?: string
   justify?: string
-  isResponsive?: boolean
-  handleOpenModal: (value: boolean) => void,
+  isMobile?: boolean
+  handleOpenModal?: (value: boolean) => void | string
 }
 
 export const Modal = ({
@@ -15,21 +17,29 @@ export const Modal = ({
   isModalOpen,
   align,
   justify='center',
-  isResponsive=false,
+  isMobile=false,
   handleOpenModal,
 }: IProps) => {
 
   const modalRef = useRef(null);
+  const { uiDispatch } = useContext(AppContext);
 
   const handleModalOpen = (e: MouseEvent<HTMLDivElement>) => {
-    if (modalRef.current === e.target) {
+    if (modalRef.current === e.target && handleOpenModal) {
       handleOpenModal(false);
     }
   };
 
   return (
     <>
-      <div ref={modalRef} onClick={(e) => handleModalOpen(e)}>
+      <div 
+        ref={modalRef} 
+        onClick={
+          handleOpenModal !== undefined 
+            ? (e) => handleModalOpen(e)
+            : (e) => handleCloseCreateDevitForm(uiDispatch)
+        }
+      >
         {children}
       </div>
       <style jsx>{`
@@ -44,12 +54,12 @@ export const Modal = ({
           z-index: 9;
           top: 0;
           left: 0;
-          background: rgba(91, 112, 131, 0.4);
+          background: rgba(91, 112, 131, 0.2);
         }
         
         @media (min-width: ${breakpoints.desktop}) {
           div {
-            display: ${isResponsive ? 'none' : 'flex'}
+            display: ${isMobile ? 'none' : 'flex'}
           }
         }
       `}</style>

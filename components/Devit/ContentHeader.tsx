@@ -14,7 +14,7 @@ interface IProps {
   username: string
   createdAt: Date
   isComment: boolean
-  handleHeaderActionsMenu: (value: boolean) => void
+  handleHeaderActionsMenu?: (value: boolean) => void
 }
 
 export const ContentHeader = ({
@@ -46,7 +46,7 @@ export const ContentHeader = ({
               color={colors.primary}
               defaultColor={colors.text}
               backgroundColor={colors.rgbaPrimary}
-              onClick={() => handleHeaderActionsMenu(true)}
+              onClick={handleHeaderActionsMenu && (() => handleHeaderActionsMenu(true))}
             />
           </section>
         }

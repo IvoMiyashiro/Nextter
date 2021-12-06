@@ -2,6 +2,7 @@ import { Dispatch } from 'react';
 import { fetchWithToken } from '../helpers/fetchWithToken';
 import { fileUpload } from '../helpers/fileUpload';
 import { IDevit } from '../interfaces';
+import { handleCloseCreateDevitForm } from './ui';
 
 export const getDevits = (devits: IDevit[]) => {
   return {
@@ -15,8 +16,8 @@ export const createDevit = async(
   uid: string,
   content: string,
   dispatch: Dispatch<any>,
+  uiDispatch: Dispatch<any>,
   setLoading: (value: boolean) => void,
-  handleOpenModal: (value: boolean) => void
 ) => {
 
   setLoading(true);
@@ -42,7 +43,8 @@ export const createDevit = async(
     });
     
     setLoading(false);
-    handleOpenModal(false);
+    
+    handleCloseCreateDevitForm(uiDispatch);
   } catch (error) {
     console.log(error);
   }

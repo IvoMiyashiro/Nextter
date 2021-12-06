@@ -106,6 +106,7 @@ export const CommentForm = ({
           imageUrl={imageUrl.fileUrl}
           textAreaPlaceholder="Devit your reply"
           user={user.name}
+          isLoading={isLoading}
         />
       </form>
       <style jsx>{styles}</style>

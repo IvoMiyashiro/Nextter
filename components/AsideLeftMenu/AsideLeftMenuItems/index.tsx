@@ -1,5 +1,11 @@
+import { useContext } from 'react';
+
 import { PrimaryButton } from '../../Buttons/PrimaryButton';
 import { MenuItem } from './MenuItem';
+import { DevitButton } from '../../Buttons/DevitButton';
+import { handleOpenCreateDevitForm } from '../../../actions/ui';
+import { AppContext } from '../../../context/AppContext';
+
 
 import HomeIcon from '../../Icons/Home';
 import HashtagIcon from '../../Icons/HashTag';
@@ -8,11 +14,14 @@ import MessagesIcon from '../../Icons/Messages';
 import UserIcon from '../../Icons/User';
 import SettingsIcon from '../../Icons/Settings';
 import HelpIcon from '../../Icons/Help';
+
 import { colors } from '../../../styles/theme';
 import styles from './styles';
-import { DevitButton } from '../../Buttons/DevitButton';
 
 export const AsideLeftMenuItems = () => {
+
+  const { uiDispatch } = useContext(AppContext);
+
   return (
     <>
       <menu>
@@ -57,14 +66,13 @@ export const AsideLeftMenuItems = () => {
           <PrimaryButton
             textColor={colors.background}
             buttonColor={colors.primary}
+            onClick={() => handleOpenCreateDevitForm(uiDispatch)}
           >
             Devit
           </PrimaryButton>
         </section>
         <div>
-          <DevitButton 
-            handleOpenModal={false}
-          />
+          <DevitButton />
         </div>
       </menu>
 
