@@ -14,6 +14,7 @@ export interface IUser {
   birthDate: Date
   followers: Array<any>
   followins: Array<any>
+  firstEditProfile: boolean
 }
 
 export interface IDevit {

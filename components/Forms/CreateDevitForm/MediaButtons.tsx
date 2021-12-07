@@ -29,7 +29,7 @@ export const MediaButtons = ({ isDisabled, handleImageUrl, isLoading }: IProps) 
     }
   };
 
-  const handleImageChange = async(e: ChangeEvent<HTMLInputElement>) => {
+  const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       handleImageUrl({
         file: e.target.files[0],

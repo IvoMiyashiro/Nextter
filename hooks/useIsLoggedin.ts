@@ -18,11 +18,10 @@ export const useIsLoggedin = () => {
         const resp = await fetchWithToken('/auth/renew');
         const body = await resp.json();
         const { user, token: newToken } = body;
-  
+        if (!body.success) return setLoggedin(false);
+
         localStorage.setItem('token', newToken);
         userDispatch(signin(user));
-  
-        if (!body.success) return setLoggedin(false);
       } catch (error) {
         console.log(error);
         return setLoggedin(false);

@@ -7,19 +7,31 @@ import { DevitButton } from './Buttons/DevitButton';
 import { AsideLeftMenu } from './AsideLeftMenu';
 import { AsideRightMenu } from './AsideRightMenu';
 import { Timeline } from './Timeline';
-
-import { breakpoints } from '../styles/breakpoints';
 import { AppContext } from '../context/AppContext';
 import { DevelotterLayout } from './DevelotterLayout';
+import { FirstEditProfileForm } from './Forms/FirstEditProfileForm';
+
+import { breakpoints } from '../styles/breakpoints';
 
 export const HomePage = () => {
 
-  const {uiState} = useContext(AppContext);
+  const {uiState, userState} = useContext(AppContext);
   const {isCreateDevitFormOpen} = uiState;
+  const { firstEditProfile } = userState;
 
   return (
     <>
       <div>
+        <DevelotterLayout>
+          <AsideLeftMenu />
+          <Timeline />
+          <AsideRightMenu />
+        </DevelotterLayout>
+        <section>
+          <DevitButton />
+        </section>
+        <Navbar />
+
         {
           isCreateDevitFormOpen
           &&
@@ -30,15 +42,16 @@ export const HomePage = () => {
             <CreateDevitForm />
           </Modal>
         }
-        <DevelotterLayout>
-          <AsideLeftMenu />
-          <Timeline />
-          <AsideRightMenu />
-        </DevelotterLayout>
-        <section>
-          <DevitButton />
-        </section>
-        <Navbar />
+        {
+          !firstEditProfile
+          &&
+          <Modal
+            isModalOpen={!firstEditProfile}
+            align="center"
+          >
+            <FirstEditProfileForm />
+          </Modal>
+        }
       </div>
 
       <style jsx>{`

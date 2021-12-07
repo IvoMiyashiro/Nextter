@@ -37,7 +37,7 @@ export const TopBar = () => {
         <Modal
           handleOpenModal={setSidebarOpen}
           isModalOpen={isSidebarOpen}
-          isResponsive={true}
+          isMobile={true}
         >
           <MobileAsideMenu
             handleSidebarOpen={setSidebarOpen}

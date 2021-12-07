@@ -3,32 +3,20 @@ import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 
-import { fetchWithToken } from '../../helpers/fetchWithToken';
-
 import { Spinner } from '../../components/Spinner';
 import { PageBody } from './PageBody';
+import { useIsLoggedin } from '../../hooks/useIsLoggedin';
 
 const Signup: NextPage = () => {
 
   const [isCheckingAuth, setCheckingAuth] = useState(true);
+  const { isLoggedin } = useIsLoggedin();
   const router = useRouter();
 
   useEffect(() => {
-    const handleIsLoggedin = async() => {
-      const token = localStorage.getItem('token');
-
-      if (token) {
-        const resp = await fetchWithToken('/auth/renew');
-
-        if (resp.ok) {
-          router.push('/home');
-        }
-      }
-      setCheckingAuth(false);
-    };
-
-    handleIsLoggedin();
-  }, [router]);
+    if (isLoggedin) router.push('/home');
+    setCheckingAuth(false);
+  }, [isLoggedin, router]);
 
   return (
     <>
