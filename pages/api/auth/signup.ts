@@ -4,10 +4,11 @@ import dbConnection from '../../../utils/database';
 import generateJWT from '../../../helpers/generateJwt';
 import { validateSignupBody } from '../../../middlewares/validateSignupBody';
 import { saltPassword } from '../../../helpers/validateBodyHelpers';
+import { createUsername } from '../../../helpers/createUsername';
 
 const signup = async(req: NextApiRequest, res: NextApiResponse) => {
 
-  const { email, password } = req.body;
+  const { email, password, name } = req.body;
 
   try {
     dbConnection();
@@ -21,9 +22,14 @@ const signup = async(req: NextApiRequest, res: NextApiResponse) => {
         msg: 'Email is already in use.'
       });
     };
+    
+    const username = createUsername(name);
 
-    user = await User.create(req.body);
-    saltPassword(user, password);
+    user = await User.create({
+      ...req.body,
+      username
+    });
+    user.password = saltPassword(user, password);
 
     await user.save();
 

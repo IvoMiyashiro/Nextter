@@ -5,6 +5,11 @@ const UserSchema = new Schema({
     type: String,
     require: true
   },
+  username: {
+    type: String,
+    required: true,
+    unique: true,
+  },
   email: {
     type: String,
     require: true,
@@ -20,7 +25,7 @@ const UserSchema = new Schema({
   },
   profilePicture: {
     type: String,
-    default: ''
+    default: 'https://res.cloudinary.com/dzvweeche/image/upload/v1638828344/profileImage_oilntm.png'
   },
   coverPicture: {
     type: String,
@@ -37,7 +42,8 @@ const UserSchema = new Schema({
   followins: {
     type: Array,
     default: []
-  }
+  },
+  
 }, {timestamps: true});
 
 UserSchema.method('toJSON', function () {

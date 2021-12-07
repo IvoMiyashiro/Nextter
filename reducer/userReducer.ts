@@ -8,6 +8,7 @@ export type ActionType =
 export const userReducer = (state = USER_INIT_STATE, action: any) => {
   switch (action.type) {
   case 'UPDATE':
+    console.log(action.payload);
     return {
       ...action.payload
     };

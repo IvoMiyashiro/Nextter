@@ -18,15 +18,14 @@ export const AsideLeftFooter = () => {
       <footer onClick={() => setMenuOpen((prev: boolean) => !prev)}>
         <div className="image-container">
           <Image 
-            src="/yo.jpg"
-            alt="yo"
+            src={!!userState.profilePicture ? userState.profilePicture : '/defaultProfileImg.png'}
+            alt={userState.name}
             layout="fill"
           />
         </div>
         <div className="user-container">
           <h3>{userState.name}</h3>
-          <p>@ivomiyashiro</p>
-          {/* <p>{userState.username}</p> */}
+          <p>{userState.username}</p>
         </div>
         <div className="dots-container">
           <DotsIcon 

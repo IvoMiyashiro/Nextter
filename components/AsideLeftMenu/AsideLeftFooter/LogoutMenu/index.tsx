@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import Link from 'next/link';
 
 import styles from '../styles';
-import { colors } from '../../../../styles/theme';
+import { boxShadow, colors } from '../../../../styles/theme';
 
 interface IProps {
   username: string
@@ -36,13 +36,8 @@ export const LogoutMenu = ({ username }: IProps) => {
           right: 0;
           width: 300px;
           z-index: 9;
-          box-shadow:
-          0px 0px 0.4px ${colors.rgbaTitle},
-          0px 0px 1px ${colors.rgbaTitle},
-          0px 0px 1.9px ${colors.rgbaTitle},
-          0px 0px 3.4px ${colors.rgbaTitle},
-          0px 0px 6.3px ${colors.rgbaTitle},
-          0px 0px 15px ${colors.rgbaTitle};
+          box-shadow: ${boxShadow}
+
         }
 
         ul {

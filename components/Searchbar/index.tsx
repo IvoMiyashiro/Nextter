@@ -1,7 +1,31 @@
-import { colors, fonts } from '../styles/theme';
-import SearchIcon from './Icons/Search';
+import { useState } from 'react';
+import { createAutocomplete } from '@algolia/autocomplete-core';
+
+import { SearchbarAutocomplete } from './SearchbarAutocomplete';
+
+import SearchIcon from '../Icons/Search';
+import { colors, fonts } from '../../styles/theme';
 
 export const Searchbar = () => {
+
+  const [isFocus, setFocus] = useState(false);
+  const [autocompleteState, setAutocompleteState] = useState({
+    collections: [],
+    isOpen: false
+  });
+
+  const autocomplete = createAutocomplete({
+    onStateChange: ({ state }) => setAutocompleteState(state),
+    getSources: () => [{
+      sourceId: 'users-search',
+      getItems: ({ query }) => {
+        if (!!query) {
+          return fetch('/api/');
+        }
+      }
+    }]
+  });
+
   return (
     <>
       <form>
@@ -9,25 +33,30 @@ export const Searchbar = () => {
           <SearchIcon
             height="20px"
             fill="currentColor"
-            color={colors.text}
+            color={isFocus ? colors.primary : colors.text}
           />
         </button>
-        <input 
+        <input
           type="text"
           placeholder="Search Develotter"
+          onFocus={() => setFocus(true)}
+          onBlur={() => setFocus(false)}
         />
+        {
+          isFocus && <SearchbarAutocomplete />
+        }
       </form>
 
       <style jsx>{`
         form {
           width: 100%;
           background: ${colors.rgbaTitle};
-          border: 1px solid transparent;
+          border: 1px solid ${isFocus ? colors.primary : 'transparent'} ;
           border-radius: 9999px;
           display: flex;
           align-items: center;
           height: 44px;
-          margin-top: .4em;
+          position: relative;
         }
 
         button {

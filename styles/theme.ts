@@ -18,3 +18,12 @@ export const colors = {
   comments: 'rgb(29, 155, 240)',
   revits: 'rgb(0, 186, 124)'
 };
+
+export const boxShadow = `
+  0px 0px 0.4px ${colors.rgbaTitle},
+  0px 0px 1px ${colors.rgbaTitle},
+  0px 0px 1.9px ${colors.rgbaTitle},
+  0px 0px 3.4px ${colors.rgbaTitle},
+  0px 0px 6.3px ${colors.rgbaTitle},
+  0px 0px 15px ${colors.rgbaTitle};
+  `;

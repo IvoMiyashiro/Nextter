@@ -28,6 +28,7 @@ export const SelectDate = ({error, value, setValue}: IInput) => {
     
     const currentYearsOld = new Date().getFullYear() - dateValue;
 
+
     if (currentYearsOld < 15) {
       return setValue((prev: IState) => ({...prev, error: 'Your age must be greater than 16 years old.', ok: false}));
     }

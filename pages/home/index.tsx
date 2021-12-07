@@ -16,6 +16,7 @@ const Home: NextPage = () => {
     if (isLoggedin === false) router.push('/');
     setCheckingAuth(false);
   }, [isLoggedin, router]);
+  
   return(
     <>
       {

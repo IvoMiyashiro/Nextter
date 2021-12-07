@@ -8,7 +8,9 @@ export const AsideRightMenu = () => {
   return (
     <>
       <aside>
-        <Searchbar />
+        <section>
+          <Searchbar />
+        </section>
         <AsideRightTrendings />
         <AsideRightToFollow />
       </aside>

@@ -8,6 +8,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@algolia/autocomplete-core": "1.5.0",
     "bcryptjs": "^2.4.3",
     "express-validator": "^6.13.0",
     "javascript-time-ago": "^2.3.10",

@@ -1,4 +1,4 @@
-import {  useContext, useState } from 'react';
+import { useContext } from 'react';
 
 import { CreateDevitForm } from './Forms/CreateDevitForm';
 import { Navbar } from './Navbar';
@@ -10,11 +10,12 @@ import { Timeline } from './Timeline';
 
 import { breakpoints } from '../styles/breakpoints';
 import { AppContext } from '../context/AppContext';
+import { DevelotterLayout } from './DevelotterLayout';
 
 export const HomePage = () => {
 
   const {uiState} = useContext(AppContext);
-  const { isCreateDevitFormOpen } = uiState;
+  const {isCreateDevitFormOpen} = uiState;
 
   return (
     <>
@@ -29,11 +30,11 @@ export const HomePage = () => {
             <CreateDevitForm />
           </Modal>
         }
-        <div className="home-layout">
+        <DevelotterLayout>
           <AsideLeftMenu />
           <Timeline />
           <AsideRightMenu />
-        </div>
+        </DevelotterLayout>
         <section>
           <DevitButton />
         </section>
@@ -41,12 +42,6 @@ export const HomePage = () => {
       </div>
 
       <style jsx>{`
-        .home-layout {
-          display: block;
-          justify-content: center;
-          margin: 0 auto;
-        }
-
         section {
           position: fixed;
           bottom: 74px;
@@ -56,29 +51,6 @@ export const HomePage = () => {
         @media (min-width: ${breakpoints.tablet}) {
           section {
             display: none;
-          }
-        }
-
-        @media (min-width: ${breakpoints.tablet}) and (max-width: ${breakpoints.wideTablet}) {
-          .home-layout {
-            display: grid;
-            grid-template-columns: 88px minmax(auto, 600px);
-          }
-        }
-
-        @media (min-width: ${breakpoints.wideTablet}) and (max-width: ${breakpoints.desktop}) {
-          .home-layout {
-            display: grid;
-            max-width: 1240px;
-            grid-template-columns: 88px 600px minmax(290px, 375px);
-          }
-        }
-
-        @media (min-width: ${breakpoints.desktop}) {
-          .home-layout {
-            display: grid;
-            max-width: 1240px;
-            grid-template-columns: 260px 600px minmax(290px, 375px);
           }
         }
       `}</style>

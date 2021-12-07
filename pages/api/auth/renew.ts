@@ -9,31 +9,11 @@ const renewToken = async (req: NextApiRequest, res: NextApiResponse) => {
     const { uid, name: tokenName }: any = await jwtValidator(req, res);
     const token = await generateJWT(uid, tokenName);
 
-    const {
-      id,
-      name,
-      bio,
-      profilePicture,
-      coverPicture,
-      birthDate,
-      followers,
-      followins,
-      createdAt
-    } = await User.findById(uid);
+    const user = await User.findById(uid);
 
     return res.json({
       success: true,
-      user: {
-        id: id,
-        name: name,
-        bio: bio,
-        profilePicture: profilePicture,
-        coverPicture: coverPicture,
-        birthDate: birthDate,
-        followers: followers,
-        followins: followins,
-        createdAt: createdAt,
-      },
+      user,
       token
     });
   } catch (error) {

@@ -26,7 +26,7 @@ export const RevitCard = ({
         <header>
           <section className="header-user-info-section">
             <div className="profileImg-container">
-              <Image src='/yo.jpg' alt={name} layout="fill" objectFit="cover"/>
+              <Image src={!!profileImg ? profileImg : '/defaultProfileImg.png'} alt={name} layout="fill" objectFit="cover"/>
             </div>
             <h3>{name}</h3>
             <p>@username</p>

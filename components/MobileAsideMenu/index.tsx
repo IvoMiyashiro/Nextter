@@ -2,8 +2,6 @@ import { useContext } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { logOut } from '../../actions/auth';
-
 import { AppContext } from '../../context/AppContext';
 import { HoverableButton } from '../Buttons/HoverableButton';
 import { MenuItem } from './MenuItem';
@@ -14,7 +12,6 @@ import HelpIcon from '../Icons/Help';
 import TimesIcon from '../Icons/Times';
 import { colors } from '../../styles/theme';
 import styles from './styles';
-import { useRouter } from 'next/router';
 
 interface IProps {
   isVisible: boolean
@@ -26,7 +23,7 @@ export const MobileAsideMenu = ({
   handleSidebarOpen
 }: IProps) => {
 
-  const { userState, userDispatch } = useContext(AppContext);
+  const { userState } = useContext(AppContext);
 
   return (
     <>
@@ -54,16 +51,15 @@ export const MobileAsideMenu = ({
             </section>
             <section>
               <h3>{userState.name}</h3>
-              <p>@ivomiyashiro</p>
-              {/* <p>{userState.username}</p> */}
+              <p>{userState.username}</p>
             </section>
             <section className="follows-container">
               <div className="follows-counter">
-                <h3>{userState.followins.length}</h3>
+                <h3>{!!userState.followins && userState.followins.length}</h3>
                 <span>Following</span>
               </div>
               <div className="follows-counter">
-                <h3>{userState.followers.length}</h3>
+                <h3>{!!userState.followers && userState.followers.length}</h3>
                 <span>Followers</span>
               </div>
             </section>
