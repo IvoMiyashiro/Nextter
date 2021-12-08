@@ -1,18 +1,21 @@
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
-import { BioStep } from './BioStep';
-import { CoverPictureStep } from './CoverPictureStep';
-import { FinalStep } from './FinalStep';
+import { AppContext } from '../../../context/AppContext';
+import { BioStep } from './Steps/BioStep';
+import { CoverPictureStep } from './Steps/CoverPictureStep';
+import { FinalStep } from './Steps/FinalStep';
 import { ProfilePictureStep } from './ProfilePictureStep';
-import { UsernameStep } from './UsernameStep';
+import { UsernameStep } from './Steps/UsernameStep';
+import { PrevButton } from './PrevButton';
 
 import Logo from '../../Icons/Logo';
-import styles from './styles';
 import { colors } from '../../../styles/theme';
-import { PrevButton } from './PrevButton';
+import styles from './styles';
+
 
 export const FirstEditProfileForm = () => {
 
+  const {userState} = useContext(AppContext);
   const [formStep, setFormStep] = useState(0);
   const [formValues, setFormValues] = useState({
     profilePicture: {
@@ -26,6 +29,21 @@ export const FirstEditProfileForm = () => {
     username: '',
     bio: '',
   });
+  
+  useEffect(() => {
+    setFormValues({
+      profilePicture: {
+        file: '',
+        fileUrl: ''
+      },
+      coverPicture:  {
+        file: '',
+        fileUrl: ''
+      },
+      username: userState.username,
+      bio: userState.bio,
+    });
+  }, [userState.username, userState.bio]);
 
   return (
     <>
@@ -57,15 +75,17 @@ export const FirstEditProfileForm = () => {
           <CoverPictureStep 
             handleStep={setFormStep}
             handleFormValues={setFormValues}
-            imageUrl={formValues.profilePicture.fileUrl}
+            profilePicture={formValues.profilePicture.fileUrl}
+            coverPicture={formValues.coverPicture.fileUrl}
           />
         }
         {
           formStep === 2
           &&
-          <UsernameStep 
+          <UsernameStep
             handleStep={setFormStep}
             handleFormValues={setFormValues}
+            username={formValues.username}
           />
         }
         {

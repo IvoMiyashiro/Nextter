@@ -1,12 +1,11 @@
 import css from 'styled-jsx/css';
-import { colors, fonts } from '../../styles/theme';
+import { colors, fonts } from '../../../../../../styles/theme';
 
 export default css`
   div {
-    color: ${colors.text};
+    position: relative;
     display: flex;
     flex-direction: column;
-    position: relative;
   }
 
   input {
@@ -15,11 +14,10 @@ export default css`
     border: none;
     color: ${colors.title};
     font-family: ${fonts.base};
-    font-size: 1rem;
+    font-size: 1.15rem;
     height: 56px;
-    margin-top: .5em;
-    padding-top: 1.5em;
-    padding-left: .75em;
+    width: 100%;
+    padding-left: 1.4em;
     outline: 1px solid ${colors.text};
   }
 
@@ -27,33 +25,30 @@ export default css`
     outline: 2px solid ${colors.primary};
   }
 
-  label {
-    font-size: 1.15rem;
-    position: absolute;
-    top: 24px;
-    left: 13px;
-    transition: top .2s ease;
+  small {
+    color: #F5323E;
+    padding: 0.5em 12px;
   }
 
-  .input-error {
-    outline: 2px solid ${colors.red};
+  span {
+    position: absolute;
+    top: .67em;
+    left: .5em;
+    font-size: 1.25rem;
+    color: ${colors.title};
+  }
+
+  .input-error:focus + .label-error {
+    color: ${colors.red};
   }
 
   .input-error:focus {
     outline: 2px solid ${colors.red};
   }
 
-  .active-input {
-    top: 16px;
-    font-size: 0.8rem;
-  }
-
-  small {
-    margin-top: .75em;  
-    color: #F5323E;
+  .loader-container {
     position: absolute;
-    top: 65px;
-    padding: 0 12px;
+    right: 1em;
+    top: 1em;
   }
-
 `;

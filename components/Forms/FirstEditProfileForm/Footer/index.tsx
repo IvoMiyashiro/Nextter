@@ -17,7 +17,8 @@ export const Footer = ({stepCompleted, handleStep}: IProps) => {
               <PrimaryButton
                 textColor={colors.background}
                 buttonColor={colors.title}
-                onClick={() => handleStep}
+                onClick={() => handleStep((prev: number) => (prev + 1))}
+                buttonType="button"
               >
                 <b>Next</b>
               </PrimaryButton>
