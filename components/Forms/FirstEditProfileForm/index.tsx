@@ -54,11 +54,15 @@ export const FirstEditProfileForm = () => {
             &&
             <PrevButton handleStep={() => setFormStep(prev => (prev - 1))} />
           }
-          <Logo 
-            width="44px"
-            color={colors.title}
-            fill="currentColor"
-          />
+          {
+            formStep !== 4
+            &&
+            <Logo 
+              width="44px"
+              color={colors.title}
+              fill="currentColor"
+            />
+          }
         </header>
         {
           formStep === 0
@@ -94,6 +98,7 @@ export const FirstEditProfileForm = () => {
           <BioStep 
             handleStep={setFormStep}
             handleFormValues={setFormValues}
+            bioValue={formValues.bio}
           />
         }
         {

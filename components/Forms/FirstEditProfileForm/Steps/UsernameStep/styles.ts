@@ -1,8 +1,7 @@
 import css from 'styled-jsx/css';
-import { colors } from '../../../../../styles/theme';
 
 export default css`
-  .usernameStep {
+  div {
     display: flex;
     flex-direction: column;
     padding: 0 2em;

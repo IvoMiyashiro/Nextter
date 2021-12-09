@@ -1,14 +1,11 @@
-import { useContext, useState } from 'react';
-import { AppContext } from '../../../../../context/AppContext';
-import { colors } from '../../../../../styles/theme';
+import { useState } from 'react';
+
 import { PrimaryButton } from '../../../../Buttons/PrimaryButton';
-import { InputControl } from '../../../../InputControl';
-
-import { Footer } from '../../Footer';
 import { Header } from '../../Header';
-
-import styles from './styles';
 import { UsernameInput } from './UsernameInput';
+
+import { colors } from '../../../../../styles/theme';
+import styles from './styles';
 
 export const UsernameStep = ({
   handleStep,
@@ -16,7 +13,6 @@ export const UsernameStep = ({
   username,
 }: any) => {
 
-  const [stepCompleated, setStepCompleated] = useState(false);
   const [inputError, setInputError] = useState('');
 
   return (
@@ -40,6 +36,7 @@ export const UsernameStep = ({
             buttonColor={colors.title}
             isDisabled={!!inputError}
             buttonType="button"
+            onClick={() => handleStep((prev: number) => (prev + 1))}
           >
             <b>Next</b>
           </PrimaryButton>

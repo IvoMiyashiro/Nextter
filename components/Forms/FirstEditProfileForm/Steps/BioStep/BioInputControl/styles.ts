@@ -1,5 +1,5 @@
 import css from 'styled-jsx/css';
-import { colors, fonts } from '../../styles/theme';
+import { colors, fonts } from '../../../../../../styles/theme';
 
 export default css`
   div {

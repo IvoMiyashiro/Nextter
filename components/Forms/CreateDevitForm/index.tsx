@@ -1,7 +1,5 @@
 import { useState, useEffect, FormEvent, useContext } from 'react';
 
-import { handleCloseCreateDevitForm } from '../../../actions/ui';
-
 import { AppContext } from '../../../context/AppContext';
 import { createDevit } from '../../../actions/devits';
 
