@@ -39,8 +39,8 @@ export const CreateDevitHome = () => {
       imageUrl.file,
       userState.id,
       textAreaValue,
-      uiDispatch,
       devitDispatch,
+      uiDispatch,
       setLoading
     );
     setTextAreaValue('');

@@ -31,7 +31,6 @@ export const HomePage = () => {
           <DevitButton />
         </section>
         <Navbar />
-
         {
           isCreateDevitFormOpen
           &&

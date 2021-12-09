@@ -35,7 +35,6 @@ export const createDevit = async(
       img: newFile,
     }, 'POST');
     const body = await resp.json();
-
     
     dispatch({
       type: 'CREATE DEVIT',
@@ -125,5 +124,4 @@ export const unFavDevit = async(
   } catch (error) {
     console.log(error);
   }
-
 };

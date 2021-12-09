@@ -25,7 +25,7 @@ export const DevitCard = ({ devit, userComments }: IProps) => {
   } = devit;
 
   const { user } = useGetUser(uid);
-  console.log(userComments);
+
   return (
     <>
       <div>

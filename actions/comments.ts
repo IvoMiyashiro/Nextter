@@ -27,7 +27,7 @@ export const createComment = async(
       img: newFile,
     }, 'PUT');
     const body = await resp.json();
-    console.log(body.devit);
+
     dispatch({
       type: 'CREATE COMMENT',
       payload: body.devit

@@ -10,7 +10,6 @@ const getUser = async(req: NextApiRequest, res: NextApiResponse) => {
     dbConnection();
 
     const user = await User.findOne({username: username});
-    console.log(user);
 
     if (user) {
       return res.status(400).json({

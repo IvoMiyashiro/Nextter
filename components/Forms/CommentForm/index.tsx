@@ -86,7 +86,7 @@ export const CommentForm = ({
             <ContentHeader
               user={user}
               createdAt={createdAt}
-              isComment={false}
+              isComment={true}
             />
             <ContentMain 
               content={content}

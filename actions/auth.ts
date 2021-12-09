@@ -66,7 +66,7 @@ export const firstEditProfile = async(
       firstEditProfile: true,
     }, 'POST');
     const body = await resp.json();
-    console.log(body.user);
+
     dispatch({
       type: 'UPDATE',
       payload: body.user

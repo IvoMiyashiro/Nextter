@@ -25,7 +25,7 @@ export const Modal = ({
   const { uiDispatch } = useContext(AppContext);
 
   const handleModalOpen = (e: MouseEvent<HTMLDivElement>) => {
-    if (modalRef.current === e.target && handleOpenModal) {
+    if ((modalRef.current === e.target) && handleOpenModal) {
       handleOpenModal(false);
     }
   };
@@ -36,8 +36,8 @@ export const Modal = ({
         ref={modalRef} 
         onClick={
           handleOpenModal !== undefined 
-            ? (e) => handleModalOpen(e)
-            : (e) => handleCloseCreateDevitForm(uiDispatch)
+            ? handleModalOpen
+            : () => handleCloseCreateDevitForm(uiDispatch)
         }
       >
         {children}
