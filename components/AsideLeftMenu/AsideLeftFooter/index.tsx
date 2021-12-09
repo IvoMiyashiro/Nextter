@@ -21,11 +21,12 @@ export const AsideLeftFooter = () => {
             src={!!userState.profilePicture ? userState.profilePicture : '/defaultProfileImg.png'}
             alt={userState.name}
             layout="fill"
+            objectFit="cover"
           />
         </div>
         <div className="user-container">
           <h3>{userState.name}</h3>
-          <p>{userState.username}</p>
+          <p>@{userState.username}</p>
         </div>
         <div className="dots-container">
           <DotsIcon 

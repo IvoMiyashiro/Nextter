@@ -1,9 +1,27 @@
+import { useState } from 'react';
 import { colors } from '../../../../../styles/theme';
 import { PrimaryButton } from '../../../../Buttons/PrimaryButton';
 import Logo from '../../../../Icons/Logo';
+import { Spinner } from '../../../../Spinner';
 import styles from './styles';
 
-export const FinalStep = () => {
+interface IProps {
+  formValues: {
+    profilePicture: {
+      file: string
+      fileUrl: string
+    }
+    coverPicture:  {
+      file: string
+      fileUrl: string
+    }
+    username: string
+    bio: string
+  }
+  isLoading: boolean
+}
+
+export const FinalStep = ({formValues, isLoading}: IProps) => {
   return (
     <>
       <div>
@@ -17,7 +35,12 @@ export const FinalStep = () => {
             textColor={colors.background}
             buttonColor={colors.title}
           >
-            Confirm
+            {
+              isLoading
+                ? <Spinner size="18px" color="blue" /> 
+                : 'Confirm'
+            }
+            
           </PrimaryButton>
         </section>
       </div>

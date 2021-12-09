@@ -1,4 +1,4 @@
-import { useState, DragEvent, ChangeEvent, Dispatch, SetStateAction } from 'react';
+import { useState, DragEvent, ChangeEvent, Dispatch, SetStateAction, useContext } from 'react';
 
 import { ImageSection } from './ImageSection';
 import { MediaButtons } from './MediaButtons';
@@ -6,6 +6,7 @@ import { MediaButtons } from './MediaButtons';
 import { colors } from '../../../styles/theme';
 import styles from './styles';
 import { ProfileImage } from '../../Devit/ProfileImage';
+import { AppContext } from '../../../context/AppContext';
 
 interface IProps {
   handleTextAreaValue: Dispatch<SetStateAction<string>>,
@@ -14,7 +15,6 @@ interface IProps {
   textAreaValue: string,
   imageUrl: string
   textAreaPlaceholder: string
-  user: string
   isLoading: boolean
 }
 
@@ -25,10 +25,10 @@ export const MainSection = ({
   textAreaValue,
   imageUrl,
   textAreaPlaceholder,
-  user,
   isLoading
 }: IProps) => {
 
+  const {userState} = useContext(AppContext);
   const [dragState, setDragState] = useState(false);
 
   const handleTextAreaChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -60,8 +60,8 @@ export const MainSection = ({
     <>
       <main>
         <ProfileImage
-          profileImage="/yo.jpg"
-          alt={user}
+          profileImage={userState.profilePicture}
+          alt={userState.name}
         />
         <div>
           <textarea

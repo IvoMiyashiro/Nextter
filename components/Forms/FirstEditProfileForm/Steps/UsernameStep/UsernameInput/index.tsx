@@ -35,9 +35,9 @@ export const UsernameInput = ({
       return handleInputErrorValue('Your username must be longer than 4 characters.');
     }
     setLoading(true);
-    const resp = await fetchWithoutToken(`${value}`);
+    const resp = await fetchWithoutToken(`user/getByUsername/${value}`);
     const body = await resp.json();
-    setLoading(false  );
+    setLoading(false);
     if (body.success === false && value !== userState.username) {
       return handleInputErrorValue('Username is already taken.');
     }

@@ -17,7 +17,7 @@ export const HomePage = () => {
 
   const {uiState, userState} = useContext(AppContext);
   const {isCreateDevitFormOpen} = uiState;
-  const { firstEditProfile } = userState;
+  const {firstEditProfile} = userState;
 
   return (
     <>

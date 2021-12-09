@@ -11,7 +11,7 @@ export const ProfileImage = ({ profileImage, alt }: IProps) => {
       <div>
         <section>
           <Image 
-            src="/yo.jpg"
+            src={!!profileImage ? profileImage : '/defaultProfileImg.png'}
             alt={alt}
             layout="fill"
             objectFit="cover"

@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import User from '../../../models/User';
-import dbConnection from '../../../utils/database';
+import User from '../../../../../models/User';
+import dbConnection from '../../../../../utils/database';
 
 const getUser = async(req: NextApiRequest, res: NextApiResponse) => {
 
@@ -9,16 +9,7 @@ const getUser = async(req: NextApiRequest, res: NextApiResponse) => {
   try {
     dbConnection();
 
-    const user = await User.findById(uid[0], [
-      'name',
-      'email',
-      'bio',
-      'profilePicture',
-      'coverPicture',
-      'birthDate',
-      'followers',
-      'followins',
-    ]);
+    const user = await User.findById(uid);
 
     return res.status(200).json({
       sucess: true,
@@ -26,7 +17,6 @@ const getUser = async(req: NextApiRequest, res: NextApiResponse) => {
     });
   } catch (error) {
     console.log(error);
-
     return res.status(500).json({
       success: false,
       msg: 'Internal server error.'

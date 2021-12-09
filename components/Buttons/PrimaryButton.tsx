@@ -46,7 +46,7 @@ export const PrimaryButton = ({
         &&
         <Link
           href={href as string}
-        > 
+        >
           <a className={`button-${style}`}>
             {children}
           </a>
@@ -54,7 +54,7 @@ export const PrimaryButton = ({
       }
 
       <style jsx>{`  
-        button {
+        button, a{
           align-items: center;
           border-radius: 9999px;
           display: flex;
@@ -64,6 +64,7 @@ export const PrimaryButton = ({
           justify-content: center;
           padding: 0 1em; 
           width: 100%;
+          font-weight: 800;
         }
 
         .button-normal {

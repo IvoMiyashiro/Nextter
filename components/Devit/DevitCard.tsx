@@ -7,9 +7,10 @@ import { useGetUser } from '../../hooks/useGetUser';
 
 interface IProps {
   devit: IDevit
+  userComments: any
 }
 
-export const DevitCard = ({ devit }: IProps) => {
+export const DevitCard = ({ devit, userComments }: IProps) => {
 
   const {
     id,
@@ -24,7 +25,7 @@ export const DevitCard = ({ devit }: IProps) => {
   } = devit;
 
   const { user } = useGetUser(uid);
-
+  console.log(userComments);
   return (
     <>
       <div>
@@ -34,7 +35,7 @@ export const DevitCard = ({ devit }: IProps) => {
             alt={user.name}
           />
           {
-            comments.length !== 0
+            userComments.length !== 0
             &&
             <section className="line"></section>
           }
@@ -65,7 +66,7 @@ export const DevitCard = ({ devit }: IProps) => {
           padding-top: 1em;
           padding-bottom: .5em;
           background: ${colors.background};
-          border-bottom: 1px solid ${comments.length === 0 ? colors.gray : 'transparent'};
+          border-bottom: 1px solid ${userComments.length === 0  ? colors.gray : 'transparent'};
           transition: background .2s ease-in-out;
           cursor: pointer;
         }

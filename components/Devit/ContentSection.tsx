@@ -11,13 +11,13 @@ import { CommentForm } from '../Forms/CommentForm';
 import { ContentFooter } from './ContentFooter';
 import { RevitMenu } from './RevitMenu';
 import { QuoteDevitForm } from '../Forms/QuoteDevitForm';
-import { HeaderActionsMenu } from './HeaderActionsMenu';
 import { AppContext } from '../../context/AppContext';
 import { DeleteDevitToast } from '../Toast/DeleteDevitToast';
-
-import styles from './styles/ContentSectionStyles';
 import { ActionMenuMobile } from './ActionMenuMobile';
 import { ActionMenuDesktop } from './ActionMenuDesktop';
+
+import styles from './styles/ContentSectionStyles';
+
 
 interface IProps {
   id: string,
@@ -57,7 +57,6 @@ export const ContentSection = ({
       <div>
         <ContentHeader
           user={user}
-          username={'ivomiyashiro'}
           createdAt={createdAt}
           isComment={false}
           handleHeaderActionsMenu={setHeaderActionsMenuOpen}

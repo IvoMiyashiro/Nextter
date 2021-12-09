@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import User from '../../../models/User';
-import dbConnection from '../../../utils/database';
+import User from '../../../../models/User';
+import dbConnection from '../../../../utils/database';
 
 const getUser = async(req: NextApiRequest, res: NextApiResponse) => {
 

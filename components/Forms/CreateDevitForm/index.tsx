@@ -61,7 +61,6 @@ export const CreateDevitForm = () => {
             textAreaValue={textAreaValue}
             imageUrl={imageUrl.fileUrl}
             textAreaPlaceholder="What's happening?"
-            user={userState.name}
             isLoading={isLoading}
           />
         </div>

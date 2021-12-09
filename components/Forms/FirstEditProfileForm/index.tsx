@@ -1,4 +1,6 @@
-import { useContext, useEffect, useState } from 'react';
+import { FormEvent, useContext, useEffect, useState } from 'react';
+
+import { firstEditProfile } from '../../../actions/auth';
 
 import { AppContext } from '../../../context/AppContext';
 import { BioStep } from './Steps/BioStep';
@@ -12,11 +14,11 @@ import Logo from '../../Icons/Logo';
 import { colors } from '../../../styles/theme';
 import styles from './styles';
 
-
 export const FirstEditProfileForm = () => {
 
-  const {userState} = useContext(AppContext);
+  const {userState, userDispatch} = useContext(AppContext);
   const [formStep, setFormStep] = useState(0);
+  const [isLoading, setLoading] = useState(false);
   const [formValues, setFormValues] = useState({
     profilePicture: {
       file: '',
@@ -45,9 +47,19 @@ export const FirstEditProfileForm = () => {
     });
   }, [userState.username, userState.bio]);
 
+  const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    firstEditProfile(
+      userState.id,
+      formValues,
+      setLoading,
+      userDispatch,
+    );
+  };
+
   return (
     <>
-      <form>
+      <form onSubmit={handleFormSubmit}>
         <header>
           {
             formStep !== 0
@@ -105,8 +117,8 @@ export const FirstEditProfileForm = () => {
           formStep === 4
           &&
           <FinalStep 
-            handleStep={setFormStep}
-            handleFormValues={setFormValues}
+            formValues={formValues}
+            isLoading={isLoading}
           />
         }
       </form>
