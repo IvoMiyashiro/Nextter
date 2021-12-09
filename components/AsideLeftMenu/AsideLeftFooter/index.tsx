@@ -3,6 +3,7 @@ import Image from 'next/image';
 
 import { AppContext } from '../../../context/AppContext';
 import { LogoutMenu } from './LogoutMenu';
+import { Modal } from '../../Modal';
 
 import DotsIcon from '../../Icons/Dots';
 import { colors } from '../../../styles/theme';
@@ -29,12 +30,23 @@ export const AsideLeftFooter = () => {
           <p>@{userState.username}</p>
         </div>
         <div className="dots-container">
-          <DotsIcon 
+          <DotsIcon
             width="18px"
             color={colors.title}
             fill="currentColor"
           />
         </div>
+        {
+          isMenuOpen
+          &&
+          <Modal
+            isVisible={false}
+            isMobile={false}
+            isModalOpen={isMenuOpen}
+          >
+            <p></p>
+          </Modal>
+        }
         {
           isMenuOpen
           &&

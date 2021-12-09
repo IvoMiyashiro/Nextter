@@ -135,6 +135,7 @@ export const ContentSection = ({
             isModalOpen={isHeaderActionsMenuOpen}
             align="flex-end"
             isMobile={true}
+            isVisible={false}
           >
             <ActionMenuMobile
               devitUser={user}

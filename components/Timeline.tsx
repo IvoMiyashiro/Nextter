@@ -8,6 +8,7 @@ import { PrimaryButton } from './Buttons/PrimaryButton';
 
 import { colors } from '../styles/theme';
 import { Spinner } from './Spinner';
+import { breakpoints } from '../styles/breakpoints';
 
 export const Timeline = () => {
 
@@ -60,8 +61,8 @@ export const Timeline = () => {
         }
 
         span {
-          width: 350px;
-          height: 350px;
+          width: 250px;
+          height: 250px;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -69,8 +70,12 @@ export const Timeline = () => {
         }
 
         div {
-          width: 375px;
+          padding: 0 2em;
           margin: 2em auto;
+          text-align: center;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
         }
 
         h1 {
@@ -90,6 +95,25 @@ export const Timeline = () => {
           width: 135px;
           height: 52px;
           margin-top: 1.75em;
+        }
+
+        @media (min-width: ${breakpoints.tablet}) {
+          span {
+            width: 350px;
+            height: 350px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+          }
+
+          div {
+            display: block;
+            text-align: left;
+            width: 375px;
+            margin: 2em auto;
+            padding: 0;
+          }
         }
       `}</style>
     </>
