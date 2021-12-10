@@ -21,7 +21,12 @@ interface IProps {
   imageUrl: any
 }
 
-export const ImageSection = ({}) => {
+export const ImageSection = ({
+  handleStep,
+  stepComplete,
+  handleFormValues,
+  imageUrl
+}: IProps) => {
 
   
   const inputRef = useRef<HTMLInputElement>(null);
