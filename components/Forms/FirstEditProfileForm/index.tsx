@@ -1,19 +1,24 @@
-import { useState } from 'react';
+import { FormEvent, useContext, useEffect, useState } from 'react';
 
-import { BioStep } from './BioStep';
-import { CoverPictureStep } from './CoverPictureStep';
-import { FinalStep } from './FinalStep';
+import { firstEditProfile } from '../../../actions/auth';
+
+import { AppContext } from '../../../context/AppContext';
+import { BioStep } from './Steps/BioStep';
+import { CoverPictureStep } from './Steps/CoverPictureStep';
+import { FinalStep } from './Steps/FinalStep';
 import { ProfilePictureStep } from './ProfilePictureStep';
-import { UsernameStep } from './UsernameStep';
+import { UsernameStep } from './Steps/UsernameStep';
+import { PrevButton } from './PrevButton';
 
 import Logo from '../../Icons/Logo';
-import styles from './styles';
 import { colors } from '../../../styles/theme';
-import { PrevButton } from './PrevButton';
+import styles from './styles';
 
 export const FirstEditProfileForm = () => {
 
+  const {userState, userDispatch} = useContext(AppContext);
   const [formStep, setFormStep] = useState(0);
+  const [isLoading, setLoading] = useState(false);
   const [formValues, setFormValues] = useState({
     profilePicture: {
       file: '',
@@ -26,21 +31,50 @@ export const FirstEditProfileForm = () => {
     username: '',
     bio: '',
   });
+  
+  useEffect(() => {
+    setFormValues({
+      profilePicture: {
+        file: '',
+        fileUrl: ''
+      },
+      coverPicture:  {
+        file: '',
+        fileUrl: ''
+      },
+      username: userState.username,
+      bio: userState.bio,
+    });
+  }, [userState.username, userState.bio]);
+
+  const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    firstEditProfile(
+      userState.id,
+      formValues,
+      setLoading,
+      userDispatch,
+    );
+  };
 
   return (
     <>
-      <form>
+      <form onSubmit={handleFormSubmit}>
         <header>
           {
             formStep !== 0
             &&
             <PrevButton handleStep={() => setFormStep(prev => (prev - 1))} />
           }
-          <Logo 
-            width="44px"
-            color={colors.title}
-            fill="currentColor"
-          />
+          {
+            formStep !== 4
+            &&
+            <Logo 
+              width="44px"
+              color={colors.title}
+              fill="currentColor"
+            />
+          }
         </header>
         {
           formStep === 0
@@ -57,15 +91,17 @@ export const FirstEditProfileForm = () => {
           <CoverPictureStep 
             handleStep={setFormStep}
             handleFormValues={setFormValues}
-            imageUrl={formValues.profilePicture.fileUrl}
+            profilePicture={formValues.profilePicture.fileUrl}
+            coverPicture={formValues.coverPicture.fileUrl}
           />
         }
         {
           formStep === 2
           &&
-          <UsernameStep 
+          <UsernameStep
             handleStep={setFormStep}
             handleFormValues={setFormValues}
+            username={formValues.username}
           />
         }
         {
@@ -74,14 +110,15 @@ export const FirstEditProfileForm = () => {
           <BioStep 
             handleStep={setFormStep}
             handleFormValues={setFormValues}
+            bioValue={formValues.bio}
           />
         }
         {
           formStep === 4
           &&
           <FinalStep 
-            handleStep={setFormStep}
-            handleFormValues={setFormValues}
+            formValues={formValues}
+            isLoading={isLoading}
           />
         }
       </form>

@@ -18,7 +18,7 @@ export default css`
   footer:hover {
     background-color: ${colors.rgbaTitle};
   }
-
+  
   .image-container {
     border-radius: 50%;
     height: 40px;

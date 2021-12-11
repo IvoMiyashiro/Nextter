@@ -1,28 +1,23 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import User from '../../../models/User';
-import dbConnection from '../../../utils/database';
+import User from '../../../../models/User';
+import dbConnection from '../../../../utils/database';
 
 const getUser = async(req: NextApiRequest, res: NextApiResponse) => {
 
-  const { uid } = req.query;
+  const { query } = req.query;
 
   try {
     dbConnection();
 
-    const user = await User.findById(uid[0], [
-      'name',
-      'email',
-      'bio',
-      'profilePicture',
-      'coverPicture',
-      'birthDate',
-      'followers',
-      'followins',
-    ]);
+    let regEx = new RegExp(query as string, 'i');
+    const search = await User.find({$or: [
+      {username: regEx},
+      {name: regEx}
+    ]});
 
     return res.status(200).json({
       sucess: true,
-      user
+      search
     });
   } catch (error) {
     console.log(error);

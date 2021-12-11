@@ -9,6 +9,7 @@ interface IProps {
   align?: string
   justify?: string
   isMobile?: boolean
+  isVisible?: boolean
   handleOpenModal?: (value: boolean) => void | string
 }
 
@@ -16,8 +17,9 @@ export const Modal = ({
   children,
   isModalOpen,
   align,
-  justify='center',
-  isMobile=false,
+  justify = 'center',
+  isMobile = false,
+  isVisible = true,
   handleOpenModal,
 }: IProps) => {
 
@@ -25,8 +27,12 @@ export const Modal = ({
   const { uiDispatch } = useContext(AppContext);
 
   const handleModalOpen = (e: MouseEvent<HTMLDivElement>) => {
-    if (modalRef.current === e.target && handleOpenModal) {
-      handleOpenModal(false);
+    if ((modalRef.current === e.target) && handleOpenModal) {
+      return handleOpenModal(false);
+    } 
+    
+    if ((modalRef.current === e.target) && !handleOpenModal) {
+      return handleCloseCreateDevitForm(uiDispatch);
     }
   };
 
@@ -34,11 +40,7 @@ export const Modal = ({
     <>
       <div 
         ref={modalRef} 
-        onClick={
-          handleOpenModal !== undefined 
-            ? (e) => handleModalOpen(e)
-            : (e) => handleCloseCreateDevitForm(uiDispatch)
-        }
+        onClick={handleModalOpen}
       >
         {children}
       </div>
@@ -57,9 +59,9 @@ export const Modal = ({
           background: rgba(91, 112, 131, 0.2);
         }
         
-        @media (min-width: ${breakpoints.desktop}) {
+        @media (min-width: ${breakpoints.tablet}) {
           div {
-            display: ${isMobile ? 'none' : 'flex'}
+            background-color: ${!isVisible ? 'transparent' : 'rgba(91, 112, 131, 0.2)'}
           }
         }
       `}</style>

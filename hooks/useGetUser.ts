@@ -2,10 +2,11 @@ import { useEffect, useState } from 'react';
 import { fetchWithoutToken } from '../helpers/fetchWithoutToken';
 import { IUser } from '../interfaces';
 
-export const useGetUser = (uid: string) => {
+export const useGetUser = (query: string) => {
 
   const [user, setUser] = useState<IUser>({
     id: '',
+    username: '',
     name: '',
     email: '',
     bio: '',
@@ -13,17 +14,19 @@ export const useGetUser = (uid: string) => {
     coverPicture: '',
     birthDate: new Date(),
     followers: [],
-    followins: []
+    followins: [],
+    firstEditProfile: true,
   });
 
   useEffect(() => {
     const handleGetUser = async() => {
-      const resp = await fetchWithoutToken(`/user/${uid}`);
+      const resp = await fetchWithoutToken(`user/${query}`);
       const body = await resp.json(); 
+
       setUser(body.user);
     };
     handleGetUser();
-  },[uid]);
+  },[query]);
 
 
   return {

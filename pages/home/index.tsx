@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { NextPage } from 'next';
+import Head from 'next/head';
 
 import { Spinner } from '../../components/Spinner';
 import { HomePage } from '../../components/HomePage';
@@ -19,6 +20,9 @@ const Home: NextPage = () => {
   
   return(
     <>
+      <Head>
+        <title>Home / Develotter</title>
+      </Head>
       {
         isCheckingAuth
           ? <div><Spinner color="white" size="32px"/></div>

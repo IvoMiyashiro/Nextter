@@ -1,6 +1,5 @@
 import css from 'styled-jsx/css';
-import { colors } from '../../styles/theme';
-import { breakpoints } from '../../styles/breakpoints';
+import { colors } from '../../../styles/theme';
 
 export default css`
   header {
@@ -24,22 +23,31 @@ export default css`
   }
 
   h2 {
-    color: ${colors.title}
+    color: ${colors.title};
+    font-size: 1.25rem;
+  }
+
+  p {
+    font-size: 0.8rem;
+    color: ${colors.text};
   }
 
   button {
+    display: flex;
+    aling-items: center;
+    justify-content: center;
     position: relative;
-    height: 36px;
-    width: 36px;
+    height: 34px;
+    width: 34px;
     border-radius: 50%;
     padding: 0;
+    padding-top: .25em;
     overflow: hidden;
     display: block;
+    background: transparent;
   }
 
-  @media (min-width: ${breakpoints.tablet}) {
-    button {
-      display: none;
-    }
+  button:hover {
+    background: ${colors.rgbaTitle};
   }
 `;

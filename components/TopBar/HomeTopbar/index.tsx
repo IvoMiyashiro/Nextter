@@ -1,15 +1,17 @@
 import Image from 'next/image';
 
-import StarsIcon from '../Icons/Stars';
-import { colors } from '../../styles/theme';
+import StarsIcon from '../../Icons/Stars';
+import { colors } from '../../../styles/theme';
 import style from './styles';
-import { useState } from 'react';
-import { MobileAsideMenu } from '../MobileAsideMenu';
-import { Modal } from '../Modal';
+import { useContext, useState } from 'react';
+import { MobileAsideMenu } from '../../MobileAsideMenu';
+import { Modal } from '../../Modal';
+import { AppContext } from '../../../context/AppContext';
 
 export const TopBar = () => {
 
   const [isSidebarOpen, setSidebarOpen] = useState(false);
+  const {userState} = useContext(AppContext);
 
   return (
     <>
@@ -17,9 +19,10 @@ export const TopBar = () => {
         <section>
           <button onClick={() => setSidebarOpen(true)}>
             <Image
-              src="/yo.jpg"
-              alt="profile"
+              src={userState.profilePicture}
+              alt={userState.name}
               layout="fill"
+              objectFit="cover"
             />
           </button>
           <h2>Home</h2>
@@ -44,8 +47,8 @@ export const TopBar = () => {
             isVisible={isSidebarOpen}
           />  
         </Modal>
-        
       </header>
+      
       <style jsx>{style}</style>
     </>
   );

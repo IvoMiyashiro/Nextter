@@ -1,7 +1,5 @@
-import { useEffect, useRef } from 'react';
 import Link from 'next/link';
 
-import styles from '../styles';
 import { boxShadow, colors } from '../../../../styles/theme';
 
 interface IProps {
@@ -16,8 +14,7 @@ export const LogoutMenu = ({ username }: IProps) => {
         <ul>
           <li>
             <Link href="/logout" passHref>
-              <a>Log out @ivomiyashiro</a>
-              {/* <p>Log out {username}</p> */}
+              <a>Log out @{username}</a>
             </Link>
           </li>
         </ul>

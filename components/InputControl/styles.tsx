@@ -27,8 +27,10 @@ export default css`
     outline: 2px solid ${colors.primary};
   }
 
-  .input-error {
-    outline: 1px solid ${colors.red};
+  input:focus + label {
+    top: 1em;
+    font-size: 0.8rem;
+    transition: top .2s ease;
   }
 
   label {
@@ -39,23 +41,12 @@ export default css`
     transition: top .2s ease;
   }
 
-  .label-error {
-    color: ${colors.red};
-  }
-
-  .input-error:focus + .label-error {
-    color: ${colors.red};
+  .input-error {
+    outline: 2px solid ${colors.red};
   }
 
   .input-error:focus {
     outline: 2px solid ${colors.red};
-  }
-
-  input:focus + label{
-    color: ${colors.primary};
-    top: 16px;
-    font-size: 0.8rem;
-    transition: top .2s ease;
   }
 
   .active-input {
@@ -70,5 +61,4 @@ export default css`
     top: 65px;
     padding: 0 12px;
   }
-
 `;

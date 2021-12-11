@@ -20,7 +20,7 @@ import styles from './styles';
 
 export const AsideLeftMenuItems = () => {
 
-  const { uiDispatch } = useContext(AppContext);
+  const { userState, uiDispatch } = useContext(AppContext);
 
   return (
     <>
@@ -49,7 +49,7 @@ export const AsideLeftMenuItems = () => {
           <MenuItem
             icon={UserIcon}
             label="Profile"
-            href="/profile"
+            href={`/${userState.username}`}
           />
           <MenuItem
             icon={SettingsIcon}

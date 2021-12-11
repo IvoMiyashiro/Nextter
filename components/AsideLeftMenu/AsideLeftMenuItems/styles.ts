@@ -19,8 +19,11 @@ export default css`
   }
 
   li {
-    align-items: center;
     border-radius: 9999px;
+  }
+
+  a {
+    align-items: center;
     color: ${colors.title};
     cursor: pointer;
     display: flex;

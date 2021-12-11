@@ -17,7 +17,7 @@ export const Devit = ({ devit }: IProps) => {
   const [userComments, setUserComments] = useState<any>([]);
 
   useEffect(() => {
-    const commentArr = comments.map(comment => {
+    const commentArr = comments.filter(comment => {
       if (comment.uid === userState.id) {
         return comment;
       }
@@ -28,21 +28,19 @@ export const Devit = ({ devit }: IProps) => {
   return (
     <>
       <div>
-        <DevitCard devit={devit} />
+        <DevitCard devit={devit} userComments={userComments} />
         {
           userComments.length !== 0
           &&
           userComments.map((comment: IComment, i:number) => {
-            if (comment !== undefined) { 
-              return (
-                <CommentCard
-                  key={comment.id}
-                  devitId={id}
-                  comment={comment} 
-                  isLastComment={userComments.length === (i + 1)} 
-                />
-              );
-            };
+            return (
+              <CommentCard
+                key={comment.id}
+                devitId={id}
+                comment={comment} 
+                isLastComment={userComments.length === (i + 1)} 
+              />
+            );
           })
         }
       </div>

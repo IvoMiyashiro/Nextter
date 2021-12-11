@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { breakpoints } from '../../styles/breakpoints';
 
 import { colors } from '../../styles/theme';
 

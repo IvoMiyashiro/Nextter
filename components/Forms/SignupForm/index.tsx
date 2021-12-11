@@ -23,7 +23,7 @@ interface IProps {
 export const SignupForm = ({ setValue }: IProps) => {
 
   const regEx = {
-    name: /^[a-zA-Z0-9\_\-]{1,50}$/,
+    name: /^[a-z ,.'-]+$/i,
     email: /^\S+@\S+\.\S+$/,
     password: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/,
   };

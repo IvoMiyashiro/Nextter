@@ -1,7 +1,5 @@
 import { useState, useEffect, FormEvent, useContext } from 'react';
 
-import { handleCloseCreateDevitForm } from '../../../actions/ui';
-
 import { AppContext } from '../../../context/AppContext';
 import { createDevit } from '../../../actions/devits';
 
@@ -63,7 +61,6 @@ export const CreateDevitForm = () => {
             textAreaValue={textAreaValue}
             imageUrl={imageUrl.fileUrl}
             textAreaPlaceholder="What's happening?"
-            user={userState.name}
             isLoading={isLoading}
           />
         </div>

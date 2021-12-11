@@ -11,7 +11,6 @@ export type ActionType =
   | {type: 'UNFAV COMMENT', payload: {devitId: string, commentId: string, uid: string}};
 
 export const devitReducer = (state: IDevit[] = [], action: ActionType) => {
-
   switch (action.type) {
   case 'LOAD DEVITS':
     return [
@@ -63,13 +62,12 @@ export const devitReducer = (state: IDevit[] = [], action: ActionType) => {
     });
 
   case 'CREATE COMMENT':
-    const filteredDevitArr: IDevit[] = state.filter(devit => {
-      if (devit.id !== action.payload.id) return devit;
+    return state.map(devit => {
+      if (devit.id === action.payload.id) {
+        return action.payload;
+      };
+      return devit;
     });
-    return [
-      action.payload,
-      ...filteredDevitArr
-    ];
 
   case 'FAV COMMENT':
     return state.map(devit => {

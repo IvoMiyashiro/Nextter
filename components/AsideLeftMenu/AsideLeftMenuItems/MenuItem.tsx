@@ -17,16 +17,18 @@ export const MenuItem = ({
   return (
     <>
       <li>
-        <Link href={href} passHref>
-          <Icon
-            width="26px"
-            color={colors.title}
-            fill="currentColor"
-            stroke="currentColor"
-            stroke-width="0"
-          />
+        <Link href={href}>
+          <a>
+            <Icon
+              width="26px"
+              color={colors.title}
+              fill="currentColor"
+              stroke="currentColor"
+              stroke-width="0"
+            />
+            <h4>{label}</h4>
+          </a>
         </Link>
-        <h4>{label}</h4>
       </li>
 
       <style jsx>{styles}</style>

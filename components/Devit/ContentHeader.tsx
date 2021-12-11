@@ -11,7 +11,6 @@ import { HoverableButton } from '../Buttons/HoverableButton';
 
 interface IProps {
   user: IUser
-  username: string
   createdAt: Date
   isComment: boolean
   handleHeaderActionsMenu?: (value: boolean) => void
@@ -19,7 +18,6 @@ interface IProps {
 
 export const ContentHeader = ({
   user,
-  username,
   createdAt,
   isComment,
   handleHeaderActionsMenu
@@ -32,7 +30,7 @@ export const ContentHeader = ({
       <header>
         <section>
           <h2>{user.name}</h2>
-          <p>@{username}</p>
+          <p>@{user.username}</p>
           <p>· <ReactTimeAgo date={new Date(createdAt)} locale="en-US" timeStyle="twitter" /></p>
         </section>
         {

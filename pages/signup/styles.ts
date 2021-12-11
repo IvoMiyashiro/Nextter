@@ -42,7 +42,7 @@ export default css`
     align-self: center;
   }
 
-  @media (min-width: ${breakpoints.desktop}) {
+  @media (min-width: ${breakpoints.tablet}) {
 
     div {
       background: rgba(0, 0, 0, 0.2)

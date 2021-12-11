@@ -15,9 +15,8 @@ import { breakpoints } from '../styles/breakpoints';
 
 export const HomePage = () => {
 
-  const {uiState, userState} = useContext(AppContext);
-  const {isCreateDevitFormOpen} = uiState;
-  const { firstEditProfile } = userState;
+  const {userState} = useContext(AppContext);
+  const {firstEditProfile} = userState;
 
   return (
     <>
@@ -31,17 +30,6 @@ export const HomePage = () => {
           <DevitButton />
         </section>
         <Navbar />
-
-        {
-          isCreateDevitFormOpen
-          &&
-          <Modal
-            isModalOpen={isCreateDevitFormOpen}
-            align="center"
-          >
-            <CreateDevitForm />
-          </Modal>
-        }
         {
           !firstEditProfile
           &&

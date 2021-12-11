@@ -19,7 +19,7 @@ export const RevitCard = ({
   createdAt,
   img
 }: IProps) => {
-  console.log(name);
+
   return (
     <>
       <div>

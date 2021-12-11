@@ -39,8 +39,8 @@ export const CreateDevitHome = () => {
       imageUrl.file,
       userState.id,
       textAreaValue,
-      uiDispatch,
       devitDispatch,
+      uiDispatch,
       setLoading
     );
     setTextAreaValue('');
@@ -76,7 +76,7 @@ export const CreateDevitHome = () => {
     <>
       <div>
         <ProfileImage 
-          profileImage="/yo.jpg"
+          profileImage={userState.profilePicture}
           alt={userState.name}
         />
         <form onSubmit={handleSubmit}>

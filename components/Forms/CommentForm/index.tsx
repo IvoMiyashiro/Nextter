@@ -85,16 +85,15 @@ export const CommentForm = ({
           <section>
             <ContentHeader
               user={user}
-              username={'ivomiyashiro'}
               createdAt={createdAt}
-              isComment={false}
+              isComment={true}
             />
             <ContentMain 
               content={content}
               img={img}
             />
             <div className="reply">
-              <p>Reply to <span>@{'ivomiyashiro'}</span></p>
+              <p>Reply to <span>@{user.username}</span></p>
             </div>
           </section>
         </div>
@@ -105,7 +104,6 @@ export const CommentForm = ({
           textAreaValue={textAreaValue}
           imageUrl={imageUrl.fileUrl}
           textAreaPlaceholder="Devit your reply"
-          user={user.name}
           isLoading={isLoading}
         />
       </form>
