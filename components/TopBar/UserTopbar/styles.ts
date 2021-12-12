@@ -24,7 +24,7 @@ export default css`
 
   h2 {
     color: ${colors.title};
-    font-size: 1.25rem;
+    font-size: 1.15rem;
   }
 
   p {

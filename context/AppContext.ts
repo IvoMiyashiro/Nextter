@@ -23,7 +23,8 @@ export const USER_INIT_STATE: IUser = {
   birthDate: new Date(),
   followers: [],
   followins: [],
-  firstEditProfile: true
+  firstEditProfile: true,
+  createdAt: new Date(),
 };
 
 export const DEVIT_INIT_STATE: IDevit[] = [];

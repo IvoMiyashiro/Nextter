@@ -7,7 +7,7 @@ import { DevelotterLayout } from '../../components/DevelotterLayout';
 import { IDevit, IUser } from '../../interfaces';
 import { fetchUserData } from '../../services/fetchUserData';
 import { fetchUserDevits } from '../../services/fetchUserDevits';
-import { MainSection } from './MainSection';
+import { MainSection } from '../../components/PagesComponents/user/MainSection';
 
 export interface IProps {
   devits: IDevit[]
@@ -15,17 +15,17 @@ export interface IProps {
 }
 
 const User = ({devits, user}: IProps) => {
-  console.log(user);
+  
   return (
     <>
       <Head>
-        <title></title>
+        <title>{user.name} (@{user.username}) / Develotter</title>
       </Head>
 
       <DevelotterLayout>
         <AsideLeftMenu />
         <MainSection 
-          devits={devits }
+          devits={devits}
           user={user}
         />
         <AsideRightMenu />
