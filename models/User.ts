@@ -43,6 +43,18 @@ const UserSchema = new Schema({
     type: Array,
     default: []
   },
+  devits: {
+    type: Array,
+    default: []
+  },
+  revits: {
+    type: Array,
+    default: []
+  },
+  favs: {
+    type: Array,
+    default: []
+  },
   firstEditProfile: {
     type: Boolean,
     default: false

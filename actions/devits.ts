@@ -16,6 +16,7 @@ export const createDevit = async(
   uid: string,
   content: string,
   dispatch: Dispatch<any>,
+  userDispatch: Dispatch<any>,
   uiDispatch: Dispatch<any>,
   setLoading: (value: boolean) => void,
 ) => {
@@ -40,6 +41,11 @@ export const createDevit = async(
       type: 'CREATE DEVIT',
       payload: body.devit
     });
+
+    userDispatch({
+      type: 'ADD USER DEVITS',
+      payload: body.devit
+    });
     
     setLoading(false);
     
@@ -53,7 +59,8 @@ export const deleteDevit = async(
   devitId: string,
   uid: string,
   dispatch: Dispatch<any>,
-  setLoading: (value: boolean) => void
+  setLoading: (value: boolean) => void,
+  handleDeleteModalOpen: (value: boolean) => void
 ) => {
 
   setLoading(true);
@@ -72,6 +79,7 @@ export const deleteDevit = async(
     });
 
     setLoading(false);
+    handleDeleteModalOpen(false);
   } catch (error) {
     console.log(error);
   }

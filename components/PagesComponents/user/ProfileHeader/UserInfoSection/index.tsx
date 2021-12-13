@@ -1,9 +1,13 @@
-import { IProps } from '..';
 import { PrimaryButton } from '../../../../Buttons/PrimaryButton';
 import CalendarIcon from '../../../../Icons/Calendar';
 
 import { colors } from '../../../../../styles/theme';
 import styles from './styles';
+import { IUser } from '../../../../../interfaces';
+
+interface IProps {
+  user: IUser
+}
 
 export const UserInfoSection = ({user}: IProps) => {
 
@@ -25,6 +29,9 @@ export const UserInfoSection = ({user}: IProps) => {
         <div className="user-info-container">
           <h1>{user.name}</h1>
           <p>@{user.username}</p>
+        </div>
+        <div className="user-bio">
+          <h4>{user.bio}</h4>
         </div>
         <div className="user-joined-container">
           <CalendarIcon

@@ -164,6 +164,7 @@ export const ContentSection = ({
             <DeleteDevitToast
               id={id}
               userId={userState.id}
+              isLoading={isLoading}
               setLoading={setLoading}
               handleDeleteModalOpen={setDeleteModalOpen}
             />

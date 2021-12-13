@@ -7,10 +7,12 @@ import { PrimaryButton } from '../../Buttons/PrimaryButton';
 
 import { colors } from '../../../styles/theme';
 import styles from './styles';
+import { Spinner } from '../../Spinner';
 
 interface IProps {
   id: string
   userId: string
+  isLoading: boolean
   setLoading: (value: boolean) => void
   handleDeleteModalOpen: (value: boolean) => void
 }
@@ -18,14 +20,26 @@ interface IProps {
 export const DeleteDevitToast = ({
   id,
   userId,
+  isLoading,
   setLoading,
   handleDeleteModalOpen,
 }: IProps) => {
 
-  const {devitDispatch} = useContext(AppContext);
+  const {devitDispatch, userDispatch} = useContext(AppContext);
 
   const handleDeleteDevit = () => {
-    deleteDevit(id, userId, devitDispatch, setLoading);
+    deleteDevit(
+      id,
+      userId,
+      devitDispatch,
+      setLoading,
+      handleDeleteModalOpen
+    );
+
+    userDispatch({
+      type: 'DELETE USER DEVITS',
+      payload: id,
+    });
   };
 
   return (
@@ -44,7 +58,11 @@ export const DeleteDevitToast = ({
                 textColor={colors.title}
                 buttonColor={colors.red}
               >
-                Delete
+                {
+                  isLoading
+                    ? <Spinner color="white" size="18px"/>
+                    : 'Delete'
+                }
               </PrimaryButton>
             </section>
             <section className="button-container">

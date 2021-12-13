@@ -1,12 +1,7 @@
 import css from 'styled-jsx/css';
-import { colors } from '../../../../styles/theme';
+import { colors } from '../../../../../styles/theme';
 
 export default css`
-
-  .container {
-    border-bottom: 1px solid ${colors.gray};
-  }
-
   nav {
     margin-top: 0.5em;
   }
@@ -28,6 +23,7 @@ export default css`
     justify-content: center;
     height: 100%;
     transition: .2s ease;
+    cursor: pointer;
   }
 
   li:hover {
@@ -38,13 +34,14 @@ export default css`
   a {
     display: flex;
     align-items: center;
-    border-bottom: 4px solid ${colors.primary};
     height: 100%;
+    font-weight: 800;
     color: ${colors.text};
+    border-bottom: 4px solid transparent;
   }
 
   .active-path {
     color: ${colors.title};
+    border-bottom: 4px solid ${colors.primary};
   }
-
 `;

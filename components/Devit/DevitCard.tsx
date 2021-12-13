@@ -7,7 +7,7 @@ import { useGetUser } from '../../hooks/useGetUser';
 
 interface IProps {
   devit: IDevit
-  userComments: any
+  userComments?: any
 }
 
 export const DevitCard = ({ devit, userComments }: IProps) => {
@@ -35,7 +35,7 @@ export const DevitCard = ({ devit, userComments }: IProps) => {
             alt={user.name}
           />
           {
-            userComments.length !== 0
+            userComments?.length !== 0
             &&
             <section className="line"></section>
           }
@@ -66,7 +66,7 @@ export const DevitCard = ({ devit, userComments }: IProps) => {
           padding-top: 1em;
           padding-bottom: .5em;
           background: ${colors.background};
-          border-bottom: 1px solid ${userComments.length === 0  ? colors.gray : 'transparent'};
+          border-bottom: 1px solid ${userComments?.length === 0  ? colors.gray : 'transparent'};
           transition: background .2s ease-in-out;
           cursor: pointer;
         }

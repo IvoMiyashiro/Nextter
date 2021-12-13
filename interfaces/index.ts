@@ -14,6 +14,9 @@ export interface IUser {
   birthDate: Date
   followers: Array<any>
   followins: Array<any>
+  devits: IDevit[]
+  revits: any
+  likes: any
   firstEditProfile: boolean
   createdAt: Date
 }

@@ -3,6 +3,7 @@ import { jwtValidator } from '../../../../../helpers/jwtValidator';
 import { validateCreateDevitBody } from '../../../../../middlewares/validateCreateDevitBody';
 import { Types } from 'mongoose';
 import Devit from '../../../../../models/Devit';
+import User from '../../../../../models/User';
 import dbConnection from '../../../../../utils/database';
 
 const revit = async(req: NextApiRequest, res: NextApiResponse) => {
@@ -25,6 +26,7 @@ const revit = async(req: NextApiRequest, res: NextApiResponse) => {
     await validateCreateDevitBody(req, res);
 
     const devit = await Devit.findById(id);
+    const user = await User.findById(uid);
 
     if (!devit) {
       return res.status(404).json({
@@ -33,19 +35,28 @@ const revit = async(req: NextApiRequest, res: NextApiResponse) => {
       });
     }
 
+    const revit = {
+      id: (new Types.ObjectId()).toString(),
+      devitId: id,
+      uid,
+      content,
+      img,
+      favs: [],
+      comments: [],
+      createdAt: new Date()
+    };
+
     await devit.update(
       {$push:{
-        'revits': {
-          id: (new Types.ObjectId()).toString(),
-          devitId: id,
-          uid,
-          content,
-          img,
-          favs: [],
-          comments: [],
-          createdAt: new Date()
-        }
-      }}, {'new': true, 'safe': true, 'upsert': true});
+        'revits': revit
+      }}, {'new': true, 'safe': true, 'upsert': true}
+    );
+    
+    await user.update(
+      {$push: {
+        'revits': revit
+      }},{'new': true, 'safe': true, 'upsert': true}
+    );
 
     return res.status(200).json({
       sucess: true,

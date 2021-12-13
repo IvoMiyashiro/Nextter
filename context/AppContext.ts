@@ -23,11 +23,16 @@ export const USER_INIT_STATE: IUser = {
   birthDate: new Date(),
   followers: [],
   followins: [],
+  devits: [],
+  revits: [],
+  likes: [],
   firstEditProfile: true,
   createdAt: new Date(),
 };
 
 export const DEVIT_INIT_STATE: IDevit[] = [];
+
+export const USER_DEVITS_INIT_STATE: IDevit[] = [];
 
 export const UI_INIT_STATE = {
   isCreateDevitFormOpen: false,

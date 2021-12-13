@@ -52,7 +52,7 @@ export default css`
   }
 
   @media (min-width: ${breakpoints.desktop}) {
-      section {
+    section {
       max-width: auto;
     }
   }

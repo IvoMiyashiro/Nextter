@@ -36,6 +36,16 @@ export default css`
     font-size: 0.9rem;
   }
 
+  .user-bio {
+    margin-top: 1em;
+  }
+
+  h4 {
+    color: ${colors.title};
+    font-size: 0.9rem;
+    font-weight: 200;
+  }
+
   .user-joined-container {
     color: ${colors.text};
     display: flex;

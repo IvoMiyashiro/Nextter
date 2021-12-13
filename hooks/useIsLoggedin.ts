@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import { signin } from '../actions/auth';
+import { getUserDevits } from '../actions/auth';
 import { AppContext } from '../context/AppContext';
 import { fetchWithToken } from '../helpers/fetchWithToken';
 
@@ -21,7 +21,14 @@ export const useIsLoggedin = () => {
         if (!body.success) return setLoggedin(false);
 
         localStorage.setItem('token', newToken);
-        userDispatch(signin(user));
+
+        userDispatch({
+          type: 'UPDATE',
+          payload: user
+        });
+
+        getUserDevits(user.id, userDispatch);
+
       } catch (error) {
         console.log(error);
         return setLoggedin(false);

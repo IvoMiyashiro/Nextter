@@ -1,8 +1,6 @@
 import { FormEvent, useContext, useState } from 'react';
 import { useRouter } from 'next/router';
 
-import { IUser } from '../../../interfaces';
-import { fetchWithoutToken } from '../../../helpers/fetchWithoutToken';
 import { signin } from '../../../actions/auth';
 
 import { AppContext } from '../../../context/AppContext';
@@ -50,46 +48,19 @@ export const SigninForm = ({ setValue }: IProps) => {
 
   const handleSubmit = async(e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    setLoading(true);
-
-    try {
-      const resp = await fetchWithoutToken('auth/signin', {
-        email: emailInputState.value,
-        password: passwordInputState.value,
-      }, 'POST');
-      const body = await resp.json();
-      if (body.success) {
-        const user: IUser = body.user;
-        userDispatch(signin(user));
-        localStorage.setItem('token', body.token);
-        return router.push('./home');
-      }
-
-      setValue((prev: IState) => ({
-        ...prev,
-        isOpen: true,
-        msg: body.msg
-      }));
-  
-      setTimeout(() => {
-        setValue((prev: IState) => ({
-          ...prev,
-          isOpen: false,
-          msg: body.msg
-        }));
-      }, 4000);
-
-    } catch (error) {
-      console.log(error);
-    }
-
-    setLoading(false);
+    signin(
+      emailInputState.value,
+      passwordInputState.value,
+      userDispatch,
+      router,
+      setValue,
+      setLoading,
+    );
   };
 
   return (
     <>
-      <form onSubmit={(e) => handleSubmit(e)}>
+      <form onSubmit={handleSubmit}>
         <div>
           <h3>To get started enter your email or @username and password</h3>
           <section>
@@ -121,7 +92,7 @@ export const SigninForm = ({ setValue }: IProps) => {
           >
             {
               isLoading
-                ? <Spinner color={colors.background} size={'16px'} />
+                ? <Spinner color={colors.background} size={'18px'} />
                 : 'Sign in'
             }
           </button>

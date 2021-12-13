@@ -16,7 +16,7 @@ export default css`
   .profile-picture-container {
     position: absolute;
     bottom: -2.75em;
-    border: 4px solid ${colors.backgroundAlt};
+    border: 4px solid ${colors.background};
     border-radius: 50%;
     margin: 0 1em;
   }

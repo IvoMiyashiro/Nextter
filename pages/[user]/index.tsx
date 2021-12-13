@@ -24,7 +24,7 @@ const User = ({devits, user}: IProps) => {
 
       <DevelotterLayout>
         <AsideLeftMenu />
-        <MainSection 
+        <MainSection
           devits={devits}
           user={user}
         />

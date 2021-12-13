@@ -1,6 +1,11 @@
 import Image from 'next/image';
-import { IProps } from '..';
+import { IUser } from '../../../../../interfaces';
+
 import styles from './styles';
+
+interface IProps {
+  user: IUser
+}
 
 export const PicturesSection = ({user}: IProps) => {
   return (

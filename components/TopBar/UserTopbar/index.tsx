@@ -1,22 +1,21 @@
-import { useState } from 'react';
+import { useContext } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 
 import { useGetUser } from '../../../hooks/useGetUser';
+import { AppContext } from '../../../context/AppContext';
 
 import ArrowLeft from '../../Icons/ArrowLeft';
 import { colors } from '../../../styles/theme';
 import style from './styles';
 
-interface IProps {
-  devitsLength: number
-}
+export const UserTopbar = () => {
 
-export const UserTopbar = ({devitsLength}: IProps) => {
-
+  const {userState} = useContext(AppContext);
   const router = useRouter();
   const {user} = useGetUser(router.query.user as string);
   const {name} = user;
+  const devitsLength = userState.devits.length;
 
   return (
     <>

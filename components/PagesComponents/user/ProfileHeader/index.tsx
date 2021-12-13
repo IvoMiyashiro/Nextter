@@ -1,66 +1,50 @@
-import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { useContext } from 'react';
+import { AppContext } from '../../../../context/AppContext';
+import { IDevit, IUser } from '../../../../interfaces';
+import { colors } from '../../../../styles/theme';
+import { DevitCard } from '../../../Devit/DevitCard';
+import { UserLayout } from '../../../UserLayout';
 
-import { IUser } from '../../../../interfaces';
-import { PicturesSection } from './PicturesSection';
-import { UserInfoSection } from './UserInfoSection';
-
-import styles from './styles';
 
 export interface IProps {
   user: IUser
+  devits: IDevit[]
 }
 
 export const ProfileHeader = ({user}: IProps) => {
-
-  const router = useRouter();
-  const path = router.pathname;
-
+  const {userState} = useContext(AppContext);
   return (
     <>
-      <div className="container">
-        <PicturesSection user={user} />
-        <UserInfoSection user={user} />
-        <nav>
-          <ul>
-            <li>
-              <Link href={`/${user.username}`}>
-                <a className={
-                  path === '/[user]'
-                    ? 'active-path'
-                    : ''
-                }>
-                  Devit
-                </a>
-              </Link>
-            </li>
-            <li>
-              <Link href={`/${user.username}/revits`}>
-                <a className={
-                  path === '/[user]'
-                    ? 'active-path'
-                    : ''
-                }>
-                  Redevits
-                </a>
-              </Link>
-            </li>
-            <li>
-              <Link href={`/${user.username}/likes`}>
-                <a className={
-                  path === '/[user]'
-                    ? 'active-path'
-                    : ''
-                }>
-                  Likes
-                </a>
-              </Link>
-            </li>
-          </ul>
-        </nav>
-      </div>
+      <UserLayout user={user}>
+        {
+          userState.devits.length !== 0
+            ? (
+              userState.devits.map(devit => {
+                return (
+                  <DevitCard 
+                    key={devit.id} 
+                    devit={devit} 
+                    userComments={[]} 
+                  />
+                );
+              })
+            )
+            : <div><p>We can&apos;t find any devits yet.</p></div>
+        }
+      </UserLayout>
 
-      <style jsx>{styles}</style>
+      <style jsx>{`
+        div {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-top: 4em;
+        }
+
+        p {
+          color: ${colors.text}
+        }
+      `}</style>
     </>
   );
 };

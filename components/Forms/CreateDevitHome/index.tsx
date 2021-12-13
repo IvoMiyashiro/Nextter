@@ -11,7 +11,7 @@ import styles from './styles';
 
 export const CreateDevitHome = () => {
 
-  const {userState, devitDispatch, uiDispatch} = useContext(AppContext);
+  const {userState, devitDispatch, uiDispatch, userDispatch} = useContext(AppContext);
   const [dragState, setDragState] = useState(false);
   const [isSubmitButtonDisabled, setSubmitButtonDisabled] = useState(true);
   const [isLoading, setLoading] = useState(false);
@@ -40,8 +40,9 @@ export const CreateDevitHome = () => {
       userState.id,
       textAreaValue,
       devitDispatch,
+      userDispatch,
       uiDispatch,
-      setLoading
+      setLoading,
     );
     setTextAreaValue('');
     setImageUrl({file: '', fileUrl: ''});

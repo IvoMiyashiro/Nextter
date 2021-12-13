@@ -8,8 +8,8 @@ export const MainSection = ({ devits, user }: IProps) => {
   return (
     <>
       <div>
-        <UserTopbar devitsLength={devits.length} />
-        <ProfileHeader user={user}/>
+        <UserTopbar />
+        <ProfileHeader user={user} devits={devits} />
       </div>
 
       <style jsx>{styles}</style>

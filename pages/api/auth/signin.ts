@@ -10,8 +10,13 @@ const signin =  async(req: NextApiRequest, res: NextApiResponse) => {
 
   try {
     dbConnection();
+    
+    const user = await User.findOne({ email });
+    console.log(user);
+
     const {
       id,
+      username,
       name,
       password: userPassword,
       bio,
@@ -20,8 +25,12 @@ const signin =  async(req: NextApiRequest, res: NextApiResponse) => {
       birthDate,
       followers,
       followins,
+      devits,
+      revits,
+      likes,
       createdAt,
-    } = await User.findOne({ email });
+      firstEditProfile,
+    } = user;
 
     const validPassword = isValidPassword(userPassword, bodyPassword);
     if (!validPassword) {
@@ -30,21 +39,26 @@ const signin =  async(req: NextApiRequest, res: NextApiResponse) => {
         msg: 'Incorrect email or password.'
       });
     }
-
+    
     const token = await generateJWT(id, name);
 
     return res.status(200).json({
       success: true,
       user: {
-        id: id,
-        name: name,
-        bio: bio,
-        profilePicture: profilePicture,
-        coverPicture: coverPicture,
-        birthDate: birthDate,
-        followers: followers,
-        followins: followins,
-        createdAt: createdAt,
+        id,
+        username,
+        name,
+        bio,
+        profilePicture,
+        coverPicture,
+        birthDate,
+        followers,
+        followins,
+        devits,
+        revits,
+        likes,
+        firstEditProfile,
+        createdAt,
       },
       token,
     });

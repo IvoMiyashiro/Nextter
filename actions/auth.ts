@@ -2,6 +2,7 @@ import { fetchWithToken } from './../helpers/fetchWithToken';
 import { fileUpload } from './../helpers/fileUpload';
 import { Dispatch } from 'react';
 import { IUser } from './../interfaces/index';
+import { fetchWithoutToken } from '../helpers/fetchWithoutToken';
 
 interface IFormValues {
   profilePicture: {
@@ -16,11 +17,64 @@ interface IFormValues {
   bio: string
 }
 
-export const signin = (user: IUser) => {
-  return {
-    type: 'UPDATE',
-    payload: user
-  };
+interface IState {
+  isOpen: boolean,
+  error: boolean,
+  msg: string,
+}
+
+export const signin = async(
+  email: string,
+  password: string,
+  dispatch: Dispatch<any>,
+  router?: any,
+  setValue?: (value: IState | ((prev: IState) => IState )) => void,
+  setLoading?: (value: boolean) => void,
+) => {
+  
+  !!setLoading && setLoading(true);
+
+  try {
+
+    const resp = await fetchWithoutToken('auth/signin', {
+      email,
+      password,
+    }, 'POST');
+    const body = await resp.json();
+
+    if (!body.success) {
+      !!setValue && setValue((prev: IState) => ({
+        ...prev,
+        isOpen: true,
+        msg: body.msg
+      }));
+  
+      !!setValue && setTimeout(() => {
+        setValue((prev: IState) => ({
+          ...prev,
+          isOpen: false,
+          msg: body.msg
+        }));
+      }, 4000);
+      
+      return;
+    }
+    
+    const user: IUser = body.user;
+
+    dispatch({
+      type: 'UPDATE',
+      payload: user
+    });
+    
+    getUserDevits(user.id, dispatch);
+    
+    localStorage.setItem('token', body.token);
+    !!router && router.push('./home');
+  } catch (error) {
+    console.log(error);
+  }
+  !!setLoading && setLoading(false);
 };
 
 export const logOut = (dispatch: Dispatch<any>) => {
@@ -29,6 +83,24 @@ export const logOut = (dispatch: Dispatch<any>) => {
   return dispatch({
     type: 'LOG OUT',
   });
+};
+
+export const getUserDevits = async(
+  uid: string,
+  dispatch: Dispatch<any>,
+) => {
+  try {
+    const resp = await fetchWithToken(`/devits/${uid}`);
+    const body = await resp.json();
+    const { devits } = body;
+    
+    return dispatch({
+      type: 'LOAD USER DEVITS',
+      payload: devits
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const firstEditProfile = async(
@@ -77,3 +149,10 @@ export const firstEditProfile = async(
   }
 };
 
+export const userRevit = () => {
+  
+};
+
+export const userFavs = () => {
+  
+};

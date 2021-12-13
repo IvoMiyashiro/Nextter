@@ -6,7 +6,7 @@ const getUser = async(req: NextApiRequest, res: NextApiResponse) => {
 
   const { query } = req.query;
   dbConnection();
-  console.log(req.method);
+
   if (req.method === 'GET') {
     try {
       const user = await User.findOne({$or: [

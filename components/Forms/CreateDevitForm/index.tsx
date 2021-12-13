@@ -10,7 +10,7 @@ import styles from './styles';
 
 export const CreateDevitForm = () => {
 
-  const {userState, devitDispatch, uiDispatch} = useContext(AppContext);
+  const {userState, devitDispatch, uiDispatch, userDispatch} = useContext(AppContext);
   const [isSubmitButtonDisabled, setSubmitButtonDisabled] = useState(true);
   const [isLoading, setLoading] = useState(false);
   const [textAreaValue, setTextAreaValue] = useState('');
@@ -40,6 +40,7 @@ export const CreateDevitForm = () => {
       userState.id,
       textAreaValue,
       devitDispatch,
+      userDispatch,
       uiDispatch,
       setLoading,
     );
@@ -47,7 +48,7 @@ export const CreateDevitForm = () => {
 
   return (
     <>
-      <form onSubmit={(e) => handleSubmit(e)}>
+      <form onSubmit={handleSubmit}>
         <HeaderSection 
           isSubmitButtonDisabled={isSubmitButtonDisabled}
           isLoading={isLoading}
